@@ -8,7 +8,9 @@ int main(void)
     
 	for (;;)
 		loop();
-        
+
+	// IMPORTANT!!!!!!!!!!
+	// The Arduino main() must NEVER NEVER NEVER return
 	return 0;
 }
 
