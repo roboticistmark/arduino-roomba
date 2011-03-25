@@ -331,7 +331,7 @@ public:
     } Sensor;
 
     /// Pinouts on Create DB-25
-    typdef enum {
+    typedef enum {
       RXD = 1,
       /// 0-5V serial input to Create
       TXD = 2,
@@ -386,7 +386,7 @@ public:
       /// Create battery ground
     } CreateCargoBayPins;
     
-    typdef enum {
+    typedef enum {
       Vpwr1 = 1,
       // Create battery + (unregulated)
       Vpwr2 = 2,

@@ -1,5 +1,6 @@
 #include <WProgram.h>
 #include <stdlib.h>
+#include<ArduinoRoomba.h>
 
 extern "C" void __cxa_pure_virtual()
 {
