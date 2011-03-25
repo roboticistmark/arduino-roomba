@@ -25,15 +25,90 @@
 
 
 #ifndef ArduinoRoomba_h
-#define AruinoRoomba_h
+#define ArduinoRoomba_h
 
 #include "WProgram.h"
 
+namespace CreateConnector {
+/// Pinouts on Create DB-25
+typedef enum {
+	RXD = 1,
+	/// 0-5V serial input to Create
+	TXD = 2,
+	/// 0-5V serial output from Create
+	PowerControlToggle = 3,
+	/// Turns Create on or off on a low-to-high transition
+	AnalogInput = 4,
+	/// 0-5V analog input to Create
+	DigitalInput1 = 5,
+	/// 0-5V digital input to Create
+	DigitalInput3 = 6,
+	/// 0-5V digital input to Create
+	DigitalOutput1 = 7,
+	/// 0-5V, 20ma digital output from Create
+	Switched5V = 8,
+	/// Provides a regulated 5V 100mA supply and analog
+	///   reference voltage when Create is switched on
+	Vpwr = 9,
+	/// Create battery voltage (unregulated), 0.5A
+	SwitchedVpwr1 = 10,
+	/// Provides battery power @ 1.5A when Create is powered on
+	SwitchedVpwr2 = 11,
+	/// Provides battery power @ 1.5A when Create is powered on
+	SwitchedVpwr3 = 12,
+	/// Provides battery power @ 1.5A when Create is powered on
+	RobotCharging = 13,
+	/// When Create is charging, this pin is high (5V)
+	GND1 = 14,
+	/// Create battery ground
+	DeviceDetectNBaudRateChangePin = 15,
+	/// 0-5V digital input to Create which can also be used to
+	///   change the baud rate to 19200 (see below)
+	GND2 = 16,
+	/// Create battery ground
+	DigitalInput0 = 17,
+	/// 0-5V digital input to Create
+	DigitalInput2 = 18,
+	/// 0-5V digital input to Create
+	DigitalOutput0 = 19,
+	/// 0-5V, 20mA digital output from Create
+	DigitalOutput2 = 20,
+	/// 0-5V, 20mA digital output from Create
+	GND3 = 21,
+	/// Create battery ground
+	LowSideDriver0 = 22,
+	/// 0.5A low side driver from Create
+	LowSideDriver1 = 23,
+	/// 0.5A low side driver from Create
+	LowSideDriver2 = 24,
+	/// 1.5A low side driver from Create
+	GND4 = 25,
+	/// Create battery ground
+} CreateCargoBayPins;
+}
 
+namespace RoombaConnector {
+typedef enum {
+	Vpwr1 = 1,
+	// Create battery + (unregulated)
+	Vpwr2 = 2,
+	// Create battery + (unregulated)
+	RXD = 3,
+	// 0-5V Serial input to Create
+	TXD = 4,
+	// 0-5V Serial output from Create
+	BRC = 5,
+	// Baud Rate Change
+	GND1 = 6,
+	// Create battery ground
+	GND2 = 7,
+	// Create battery ground
+} RoombaMiniDIN;
+}
 
 
 /////////////////////////////////////////////////////////////////////
-/// \class Roomba Roomba.h <Roomba.h>
+/// \class Roomba ArduinoRoomba.h <ArduinoRoomba.h>
 /// \brief Support for iRobot Roomba and Create platforms via NewSoftSerial using the iRobot Open Interface (OI)
 /// protocol.
 ///
@@ -79,16 +154,16 @@
 class ArduinoRoomba
 {
 
-  typedef enum {
+  enum masks {
     /// Masks for LEDs in leds()
     led_none = 0x0,
     led_play = 0x2,
     led_advance = 0x8,
 
     /// Masks for digitalOut()
-    digital_out_0 = 0x1,
-    digital_out_1 = 0x2,
-    digital_out_2 = 0x4,
+    dout0 = 0x1,
+    dout1 = 0x2,
+    dout2 = 0x4,
 
     /// Masks for drivers()
     driver_0 = 0x1,
@@ -100,14 +175,14 @@ class ArduinoRoomba
     vacuum = 0x2,
     main_brush = 0x4,
 
-    /// Masks for bumps and wheedrops sensor packet id 7
+    /// Masks for bumps and wheeldrops sensor packet id 7
     bump_right = 0x1,
     bump_left = 0x2,
     wheeldrop_right = 0x4,
     wheeldrop_left = 0x8,
     wheeldrop_caster = 0x10,
 
-    /// Masks for driver overcurrents Packet ID 13
+    /// Masks for driver over-currents Packet ID 13
     // Roomba, use ROOMBA_MASK_SIDE_BRUSH,  ROOMBA_MASK_VACUUM, ROOMBA_MASK_MAIN_BRUSH
     ld1 = 0x1,
     ld0 = 0x2,
@@ -130,20 +205,22 @@ class ArduinoRoomba
     din1 = 0x2,
     din2 = 0x4,
     din3 = 0x8,
-    digital_in_device_detect = 0x10,
+    din_detect = 0x10,
 
     /// Masks for charging sources sensor packet ID 34
     internal_charger = 0x1,
     home_base = 0x2,
-  } masks;
+  };
 
 
-/// \def read_timeout
-/// Read timeout in milliseconds.
-/// If we have to wait more than this to read a char when we are expecting one, then something is wrong.
-  const int read_timeout = 200;
 
 public:
+  /// \def read_timeout
+  /// Read timeout in milliseconds.
+  /// If we have to wait more than this to read a char
+  /// when we are expecting one, then something is wrong.
+  static const int read_timeout = 200;
+
   
     /// \enum Baud
     /// Demo types to pass to Roomba::baud()
@@ -186,9 +263,7 @@ public:
     {
 	DriveStraight                = 0x8000,
 	DriveInPlaceClockwise        = 0xFFFF,
-	TurnRight                    = 0XFFFF,
 	DriveInPlaceCounterClockwise = 0x0001,
-	TurnLeft                     = 0x0001,
     } Drive;
   
     /// \enum StreamCommand
@@ -330,78 +405,6 @@ public:
 	SensorLeftVelocity             = 42,
     } Sensor;
 
-    /// Pinouts on Create DB-25
-    typedef enum {
-      RXD = 1,
-      /// 0-5V serial input to Create
-      TXD = 2,
-      /// 0-5V serial output from Create
-      PowerControlToggle = 3,
-      /// Turns Create on or off on a low-to-high transition
-      AnalogInput = 4,
-      /// 0-5V analog input to Create
-      DigitalInput1 = 5,
-      /// 0-5V digital input to Create
-      DigitalInput3 = 6,
-      /// 0-5V digital input to Create
-      DigitalOutput1 = 7,
-      /// 0-5V, 20ma digital output from Create
-      Switched5V = 8,
-      /// Provides a regulated 5V 100mA supply and analog
-      ///   reference voltage when Create is switched on
-      Vpwr = 9,
-      /// Create battery voltage (unregulated), 0.5A
-      SwitchedVpwr1 = 10,
-      /// Provides battery power @ 1.5A when Create is powered on
-      SwitchedVpwr2 = 11,
-      /// Provides battery power @ 1.5A when Create is powered on
-      SwitchedVpwr3 = 12,
-      /// Provides battery power @ 1.5A when Create is powered on
-      RobotCharging = 13,
-      /// When Create is charging, this pin is high (5V)
-      GND1 = 14,
-      /// Create battery ground
-      DeviceDetectNBaudRateChangePin = 15,
-      /// 0-5V digital input to Create which can also be used to
-      ///   change the baud rate to 19200 (see below)
-      GND2 = 16,
-      /// Create battery ground
-      DigitalInput0 = 17,
-      /// 0-5V digital input to Create
-      DigitalInput2 = 18,
-      /// 0-5V digital input to Create
-      DigitalOutput0 = 19,
-      /// 0-5V, 20mA digital output from Create
-      DigitalOutput2 = 20,
-      /// 0-5V, 20mA digital output from Create
-      GND3 = 21,
-      /// Create battery ground
-      LowSideDriver0 = 22,
-      /// 0.5A low side driver from Create
-      LowSideDriver0 = 23,
-      /// 0.5A low side driver from Create
-      LowSideDriver0 = 24,
-      /// 1.5A low side driver from Create
-      GND4 = 25,
-      /// Create battery ground
-    } CreateCargoBayPins;
-    
-    typedef enum {
-      Vpwr1 = 1,
-      // Create battery + (unregulated)
-      Vpwr2 = 2,
-      // Create battery + (unregulated)
-      RXD = 3,
-      // 0-5V Serial input to Create
-      TXD = 4,
-      // 0-5V Serial output from Create
-      BRC = 5,
-      // Baud Rate Change
-      GND1 = 6,
-      // Create battery ground
-      GND2 = 7,
-      // Create battery ground
-    }
     
     /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
     ArduinoRoomba();
