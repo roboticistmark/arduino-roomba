@@ -1,119 +1,114 @@
-// Roomba.h
-// $Id$
-// $HeadURL$
-/// by Joe Foley <foley@mit.edu>
-/// by Joe Foley <foley@ru.edu>
+/*!  \file ArduinoRoomba.h
+ 	$Id$
+	$HeadURL$
+	\author  Joe Foley <foley@mit.edu>, <foley@ru.edu>
+	Copyright (C) 2011 Joe Foley.  Use is subject to license conditions
 
-/// Derived heavily from code by
-/// Mike McCauley (mikem@open.com.au)
-// Copyright (C) 2010 Mike McCauley
-// $Id: Roomba.h,v 1.1 2010/09/27 21:58:32 mikem Exp mikem $
+	Inspired and Derived heavily from code by
+	Mike McCauley (mikem@open.com.au)
+ 	Based upon the Roomba library at
+ 	http://www.open.com.au/mikem/arduino/Roomba
 
-/// Based heavily upon the Roomba library at
-/// http://www.open.com.au/mikem/arduino/Roomba
-/// This software is Copyright (C) 2010 Mike McCauley. Use is subject to license
-/// conditions. 
-/// 
-/// \par Open Source Licensing GPL V2
-/// This is the appropriate option if you want to share the source code of your
-/// application with everyone you distribute it to, and you also want to give them
-/// the right to share who uses it. If you wish to use this software under Open
-/// Source Licensing, you must contribute all your source code to the open source
-/// community in accordance with the GPL Version 2 when your application is
-/// distributed. See http://www.gnu.org/copyleft/gpl.html
-/// \author  Joe Foley
 
+ 	\par Open Source Licensing GPL V2
+	This is the appropriate option if you want to share the source code of your
+	application with everyone you distribute it to, and you also want to give them
+	the right to share who uses it. If you wish to use this software under Open
+	Source Licensing, you must contribute all your source code to the open source
+	community in accordance with the GPL Version 2 when your application is
+	distributed. See http://www.gnu.org/copyleft/gpl.html
+*/
 
 #ifndef ArduinoRoomba_h
 #define ArduinoRoomba_h
 
 #include "WProgram.h"
 
-namespace CreateConnector {
-/// Pinouts on Create DB-25
-typedef enum {
-	RXD = 1,
-	/// 0-5V serial input to Create
-	TXD = 2,
-	/// 0-5V serial output from Create
-	PowerControlToggle = 3,
-	/// Turns Create on or off on a low-to-high transition
-	AnalogInput = 4,
-	/// 0-5V analog input to Create
-	DigitalInput1 = 5,
-	/// 0-5V digital input to Create
-	DigitalInput3 = 6,
-	/// 0-5V digital input to Create
-	DigitalOutput1 = 7,
-	/// 0-5V, 20ma digital output from Create
-	Switched5V = 8,
-	/// Provides a regulated 5V 100mA supply and analog
-	///   reference voltage when Create is switched on
-	Vpwr = 9,
-	/// Create battery voltage (unregulated), 0.5A
-	SwitchedVpwr1 = 10,
-	/// Provides battery power @ 1.5A when Create is powered on
-	SwitchedVpwr2 = 11,
-	/// Provides battery power @ 1.5A when Create is powered on
-	SwitchedVpwr3 = 12,
-	/// Provides battery power @ 1.5A when Create is powered on
-	RobotCharging = 13,
-	/// When Create is charging, this pin is high (5V)
-	GND1 = 14,
-	/// Create battery ground
-	DeviceDetectNBaudRateChangePin = 15,
-	/// 0-5V digital input to Create which can also be used to
-	///   change the baud rate to 19200 (see below)
-	GND2 = 16,
-	/// Create battery ground
-	DigitalInput0 = 17,
-	/// 0-5V digital input to Create
-	DigitalInput2 = 18,
-	/// 0-5V digital input to Create
-	DigitalOutput0 = 19,
-	/// 0-5V, 20mA digital output from Create
-	DigitalOutput2 = 20,
-	/// 0-5V, 20mA digital output from Create
-	GND3 = 21,
-	/// Create battery ground
-	LowSideDriver0 = 22,
-	/// 0.5A low side driver from Create
-	LowSideDriver1 = 23,
-	/// 0.5A low side driver from Create
-	LowSideDriver2 = 24,
-	/// 1.5A low side driver from Create
-	GND4 = 25,
-	/// Create battery ground
-} CreateCargoBayPins;
+namespace masks {
+//! Masks for LEDs on top of create and roomba
+enum {
+  led_none = 0x0,
+  led_play = 0x2,
+  led_advance = 0x8,
+};
+
+/// Masks for digitalOut()
+enum {
+  dout0 = 0x1,
+  dout1 = 0x2,
+  dout2 = 0x4,
+};
+
+/// Masks for drivers()
+enum {
+  driver_0 = 0x1,
+  driver_1 = 0x2,
+  driver_2 = 0x4,
+};
+
+/// Roomba Specific masks
+enum {
+  side_brush = 0x1,
+  vacuum = 0x2,
+  main_brush = 0x4,
+};
+
+/// Masks for bumps and wheeldrops sensor packet id 7
+enum {
+  bump_right = 0x1,
+  bump_left = 0x2,
+  wheeldrop_right = 0x4,
+  wheeldrop_left = 0x8,
+  wheeldrop_caster = 0x10,
+};
+
+/// Masks for driver over-currents Packet ID 13.  Roomba, use SIDE_BRUSH,  VACUUM, MAIN_BRUSH
+enum {
+  ld1 = 0x1,
+  ld0 = 0x2,
+  ld2 = 0x4,
+  right_wheel = 0x8,
+  left_wheel = 0x10,
+};
+
+/// Masks for buttons sensor packet ID 18
+enum {
+  /// Create
+  button_play = 0x1,
+  button_advance = 0x4,
+  /// Roomba
+  button_max = 0x1,
+  button_clean = 0x2,
+  button_spot = 0x4,
+  button_power = 0x8,
+};
+
+/// Masks for digital inputs sensor packet ID 32
+enum {
+  din0 = 0x1,
+  din1 = 0x2,
+  din2 = 0x4,
+  din3 = 0x8,
+  din_detect = 0x10,
+};
+
+/// Masks for charging sources sensor packet ID 34
+enum {
+  internal_charger = 0x1,
+  home_base = 0x2,
+};
+
 }
 
-namespace RoombaConnector {
-typedef enum {
-	Vpwr1 = 1,
-	// Create battery + (unregulated)
-	Vpwr2 = 2,
-	// Create battery + (unregulated)
-	RXD = 3,
-	// 0-5V Serial input to Create
-	TXD = 4,
-	// 0-5V Serial output from Create
-	BRC = 5,
-	// Baud Rate Change
-	GND1 = 6,
-	// Create battery ground
-	GND2 = 7,
-	// Create battery ground
-} RoombaMiniDIN;
-}
 
 
 /////////////////////////////////////////////////////////////////////
-/// \class Roomba ArduinoRoomba.h <ArduinoRoomba.h>
-/// \brief Support for iRobot Roomba and Create platforms via NewSoftSerial using the iRobot Open Interface (OI)
-/// protocol.
+/// \class ArduinoRoomba ArduinoRoomba.h <ArduinoRoomba.h>
 ///
-/// The iRobot Roomba and Create platforms support a serial port through which you can control and 
-/// interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the 
+//  \brief Support for iRobot Roomba and Create platforms via NewSoftSerial using the iRobot Open Interface (OI) protocol.
+//
+/// The iRobot Roomba and Create platforms support a serial port through which you can control and
+/// interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the
 /// iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are
 /// noted in the API
 ///
@@ -122,9 +117,9 @@ typedef enum {
 /// pins on the Cargo Bay Connector include the serial port, battery, digital inputs and
 /// outputs, and an analog input.
 ///
-/// In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its 
-/// instance methods to send commmands and receive sensor messages. You can also request continuous 
-/// streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its 
+/// In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its
+/// instance methods to send commmands and receive sensor messages. You can also request continuous
+/// streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its
 /// serial port from time to time as described below.
 ///
 /// \par Other Roomba messages
@@ -132,87 +127,29 @@ typedef enum {
 /// When iRobot Create powers up and after a reset, it sends a message like this on its serial port:
 /// \code
 /// bl-start
-/// 2006-09-12-1137-L   
+/// 2006-09-12-1137-L
 /// RDK by iRobot!
 /// MC9S12E128
-/// 2006-11-20-1731-L   
+/// 2006-11-20-1731-L
 /// battery-current-quiescent-raw 524  battery-current-zero 510
-/// 
-/// 2006-11-20-1731-L   
+///
+/// 2006-11-20-1731-L
 /// \endcode
 ///
 /// While charging it will send a message like this each second:
 /// \code
-/// bat:   min 3  sec 21  mV 15558  mA 1491  deg-C 24  
+/// bat:   min 3  sec 21  mV 15558  mA 1491  deg-C 24
 /// \endcode
 ///
-/// To enter the factory test menu for the IRobot Create, hold down the (>) and (>>|) 
-/// buttons then press and hold the Power button until the assending and descending tones play and then stop. 
+/// To enter the factory test menu for the IRobot Create, hold down the (>) and (>>|)
+/// buttons then press and hold the Power button until the assending and descending tones play and then stop.
 /// You wil see some messages emitted on teh serial port.
 /// Press the right-right arrow button to cycle through the tests.
 ///
+
+
 class ArduinoRoomba
 {
-
-  enum masks {
-    /// Masks for LEDs in leds()
-    led_none = 0x0,
-    led_play = 0x2,
-    led_advance = 0x8,
-
-    /// Masks for digitalOut()
-    dout0 = 0x1,
-    dout1 = 0x2,
-    dout2 = 0x4,
-
-    /// Masks for drivers()
-    driver_0 = 0x1,
-    driver_1 = 0x2,
-    driver_2 = 0x4,
-
-    /// Roomba only:
-    side_brush = 0x1,
-    vacuum = 0x2,
-    main_brush = 0x4,
-
-    /// Masks for bumps and wheeldrops sensor packet id 7
-    bump_right = 0x1,
-    bump_left = 0x2,
-    wheeldrop_right = 0x4,
-    wheeldrop_left = 0x8,
-    wheeldrop_caster = 0x10,
-
-    /// Masks for driver over-currents Packet ID 13
-    // Roomba, use ROOMBA_MASK_SIDE_BRUSH,  ROOMBA_MASK_VACUUM, ROOMBA_MASK_MAIN_BRUSH
-    ld1 = 0x1,
-    ld0 = 0x2,
-    ld2 = 0x4,
-    right_wheel = 0x8,
-    left_wheel = 0x10,
-
-    /// Masks for buttons sensor packet ID 18
-    /// Create
-    button_play = 0x1,
-    button_advance = 0x4,
-    /// Roomba
-    button_max = 0x1,
-    button_clean = 0x2,
-    button_spot = 0x4,
-    button_power = 0x8,
-
-    /// Masks for digital inputs sensor packet ID 32
-    din0 = 0x1,
-    din1 = 0x2,
-    din2 = 0x4,
-    din3 = 0x8,
-    din_detect = 0x10,
-
-    /// Masks for charging sources sensor packet ID 34
-    internal_charger = 0x1,
-    home_base = 0x2,
-  };
-
-
 
 public:
   /// \def read_timeout

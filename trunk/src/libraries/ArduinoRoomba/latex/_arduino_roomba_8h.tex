@@ -1,0 +1,85 @@
+\hypertarget{_arduino_roomba_8h}{
+\section{ArduinoRoomba.h File Reference}
+\label{_arduino_roomba_8h}\index{ArduinoRoomba.h@{ArduinoRoomba.h}}
+}
+{\ttfamily \#include \char`\"{}WProgram.h\char`\"{}}\par
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_arduino_roomba}{ArduinoRoomba}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ {\bfseries led\_\-none} =  0x0, 
+{\bfseries led\_\-play} =  0x2, 
+{\bfseries led\_\-advance} =  0x8
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for LEDs on top of create and roomba. \item\end{DoxyCompactList}\item 
+enum \{ {\bfseries dout0} =  0x1, 
+{\bfseries dout1} =  0x2, 
+{\bfseries dout2} =  0x4
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for digitalOut() \item\end{DoxyCompactList}\item 
+enum \{ {\bfseries driver\_\-0} =  0x1, 
+{\bfseries driver\_\-1} =  0x2, 
+{\bfseries driver\_\-2} =  0x4
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for drivers() \item\end{DoxyCompactList}\item 
+enum \{ {\bfseries side\_\-brush} =  0x1, 
+{\bfseries vacuum} =  0x2, 
+{\bfseries main\_\-brush} =  0x4
+ \}
+\begin{DoxyCompactList}\small\item\em Roomba Specific masks. \item\end{DoxyCompactList}\item 
+enum \{ \par
+{\bfseries bump\_\-right} =  0x1, 
+{\bfseries bump\_\-left} =  0x2, 
+{\bfseries wheeldrop\_\-right} =  0x4, 
+{\bfseries wheeldrop\_\-left} =  0x8, 
+\par
+{\bfseries wheeldrop\_\-caster} =  0x10
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for bumps and wheeldrops sensor packet id 7. \item\end{DoxyCompactList}\item 
+enum \{ \par
+{\bfseries ld1} =  0x1, 
+{\bfseries ld0} =  0x2, 
+{\bfseries ld2} =  0x4, 
+{\bfseries right\_\-wheel} =  0x8, 
+\par
+{\bfseries left\_\-wheel} =  0x10
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for driver over-\/currents Packet ID 13. Roomba, use SIDE\_\-BRUSH, VACUUM, MAIN\_\-BRUSH. \item\end{DoxyCompactList}\item 
+enum \{ \par
+\hyperlink{namespacemasks_a2e249b20dd2f2eb51f0c4db0446ec361ac0440aaa489e01aff712a991703b64b6}{masks::button\_\-play} =  0x1, 
+{\bfseries button\_\-advance} =  0x4, 
+\hyperlink{namespacemasks_a2e249b20dd2f2eb51f0c4db0446ec361ad7c6e4d35f069b98f08831fcfc006b18}{masks::button\_\-max} =  0x1, 
+{\bfseries button\_\-clean} =  0x2, 
+\par
+{\bfseries button\_\-spot} =  0x4, 
+{\bfseries button\_\-power} =  0x8
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for buttons sensor packet ID 18. \item\end{DoxyCompactList}\item 
+enum \{ \par
+{\bfseries din0} =  0x1, 
+{\bfseries din1} =  0x2, 
+{\bfseries din2} =  0x4, 
+{\bfseries din3} =  0x8, 
+\par
+{\bfseries din\_\-detect} =  0x10
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for digital inputs sensor packet ID 32. \item\end{DoxyCompactList}\item 
+enum \{ {\bfseries internal\_\-charger} =  0x1, 
+{\bfseries home\_\-base} =  0x2
+ \}
+\begin{DoxyCompactList}\small\item\em Masks for charging sources sensor packet ID 34. \item\end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\$Id\$ \$HeadURL\$ \begin{DoxyAuthor}{Author}
+Joe Foley $<$\href{mailto:foley@mit.edu}{\tt foley@mit.edu}$>$, $<$\href{mailto:foley@ru.edu}{\tt foley@ru.edu}$>$ Copyright (C) 2011 Joe Foley. Use is subject to license conditions
+\end{DoxyAuthor}
+Inspired and Derived heavily from code by Mike McCauley (\href{mailto:mikem@open.com.au}{\tt mikem@open.com.au}) Based upon the Roomba library at \href{http://www.open.com.au/mikem/arduino/Roomba}{\tt http://www.open.com.au/mikem/arduino/Roomba}
+
+\begin{DoxyParagraph}{Open Source Licensing GPL V2}
+This is the appropriate option if you want to share the source code of your application with everyone you distribute it to, and you also want to give them the right to share who uses it. If you wish to use this software under Open Source Licensing, you must contribute all your source code to the open source community in accordance with the GPL Version 2 when your application is distributed. See \href{http://www.gnu.org/copyleft/gpl.html}{\tt http://www.gnu.org/copyleft/gpl.html} 
+\end{DoxyParagraph}

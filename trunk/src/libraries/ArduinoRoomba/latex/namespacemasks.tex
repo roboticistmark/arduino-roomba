@@ -1,0 +1,152 @@
+\hypertarget{namespacemasks}{
+\section{masks Namespace Reference}
+\label{namespacemasks}\index{masks@{masks}}
+}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \{ \par
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca7e11cd5dade8d55df2d95be89583f07f}{led\_\-none} =  0x0, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca131d0fa980487e0a7480691d5037eb47}{led\_\-play} =  0x2, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca0c424fbe8bfa0fdb7aba5892155e5e50}{led\_\-advance} =  0x8, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3cafb9a30f23d392dd5eda6be119670114e}{dout0} =  0x1, 
+\par
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca66fa5ccc5bbadd69049481f460341868}{dout1} =  0x2, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca9eeb72a18c1343de3ecd29f2cf77e1d8}{dout2} =  0x4, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca3cd74e3a46449d2d575ebbaad909228c}{driver\_\-0} =  0x1, 
+{\bfseries driver\_\-1} =  0x2, 
+\par
+{\bfseries driver\_\-2} =  0x4, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca273e187aa5cc2dd0f2ef233d6d9febf4}{side\_\-brush} =  0x1, 
+{\bfseries vacuum} =  0x2, 
+{\bfseries main\_\-brush} =  0x4, 
+\par
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3cae181f5e31abd17a95e050feb13c17227}{bump\_\-right} =  0x1, 
+{\bfseries bump\_\-left} =  0x2, 
+{\bfseries wheeldrop\_\-right} =  0x4, 
+{\bfseries wheeldrop\_\-left} =  0x8, 
+\par
+{\bfseries wheeldrop\_\-caster} =  0x10, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca35e78aa3e8dbde629c2930b8626a1ea0}{ld1} =  0x1, 
+{\bfseries ld0} =  0x2, 
+{\bfseries ld2} =  0x4, 
+\par
+{\bfseries right\_\-wheel} =  0x8, 
+{\bfseries left\_\-wheel} =  0x10, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3cac0440aaa489e01aff712a991703b64b6}{button\_\-play} =  0x1, 
+{\bfseries button\_\-advance} =  0x4, 
+\par
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3cad7c6e4d35f069b98f08831fcfc006b18}{button\_\-max} =  0x1, 
+{\bfseries button\_\-clean} =  0x2, 
+{\bfseries button\_\-spot} =  0x4, 
+{\bfseries button\_\-power} =  0x8, 
+\par
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3cac916e1c4aab1503782956c120a807c6c}{din0} =  0x1, 
+{\bfseries din1} =  0x2, 
+{\bfseries din2} =  0x4, 
+{\bfseries din3} =  0x8, 
+\par
+{\bfseries din\_\-detect} =  0x10, 
+\hyperlink{namespacemasks_af347462787e0a87a423f606696c00f3ca8226dd177b71ac5b6a86bb8b2cd0f84c}{internal\_\-charger} =  0x1, 
+{\bfseries home\_\-base} =  0x2
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API
+
+The Roomba and Create is equipped with a min-\/din serial port socket, while the Create is also equipped with a 25-\/pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.
+
+In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below.
+
+\begin{DoxyParagraph}{Other Roomba messages}
+
+\end{DoxyParagraph}
+When iRobot Create powers up and after a reset, it sends a message like this on its serial port: 
+\begin{DoxyCode}
+ bl-start
+ 2006-09-12-1137-L
+ RDK by iRobot!
+ MC9S12E128
+ 2006-11-20-1731-L
+ battery-current-quiescent-raw 524  battery-current-zero 510
+
+ 2006-11-20-1731-L
+\end{DoxyCode}
+
+
+While charging it will send a message like this each second: 
+\begin{DoxyCode}
+ bat:   min 3  sec 21  mV 15558  mA 1491  deg-C 24
+\end{DoxyCode}
+
+
+To enter the factory test menu for the IRobot Create, hold down the ($>$) and ($>$$>$$|$) buttons then press and hold the Power button until the assending and descending tones play and then stop. You wil see some messages emitted on teh serial port. Press the right-\/right arrow button to cycle through the tests. 
+
+\subsection{Enumeration Type Documentation}
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3c}{
+\subsubsection[{"@0}]{\setlength{\rightskip}{0pt plus 5cm}anonymous enum}}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3c}
+\begin{Desc}
+\item[Enumerator: ]\par
+\begin{description}
+\index{led\_\-none@{led\_\-none}!masks@{masks}}\index{masks@{masks}!led\_\-none@{led\_\-none}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca7e11cd5dade8d55df2d95be89583f07f}{
+led\_\-none}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca7e11cd5dade8d55df2d95be89583f07f}
+}]Constants for the various sensor and output masks. No LEDs \index{led\_\-play@{led\_\-play}!masks@{masks}}\index{masks@{masks}!led\_\-play@{led\_\-play}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca131d0fa980487e0a7480691d5037eb47}{
+led\_\-play}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca131d0fa980487e0a7480691d5037eb47}
+}]LED over the play button. \index{led\_\-advance@{led\_\-advance}!masks@{masks}}\index{masks@{masks}!led\_\-advance@{led\_\-advance}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca0c424fbe8bfa0fdb7aba5892155e5e50}{
+led\_\-advance}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca0c424fbe8bfa0fdb7aba5892155e5e50}
+}]LED over the advance (fast forward) button. \index{dout0@{dout0}!masks@{masks}}\index{masks@{masks}!dout0@{dout0}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3cafb9a30f23d392dd5eda6be119670114e}{
+dout0}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3cafb9a30f23d392dd5eda6be119670114e}
+}]digitalOut() port 0 \index{dout1@{dout1}!masks@{masks}}\index{masks@{masks}!dout1@{dout1}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca66fa5ccc5bbadd69049481f460341868}{
+dout1}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca66fa5ccc5bbadd69049481f460341868}
+}]digitalOut() port 1 \index{dout2@{dout2}!masks@{masks}}\index{masks@{masks}!dout2@{dout2}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca9eeb72a18c1343de3ecd29f2cf77e1d8}{
+dout2}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca9eeb72a18c1343de3ecd29f2cf77e1d8}
+}]digitalOut() port 2 \index{driver\_\-0@{driver\_\-0}!masks@{masks}}\index{masks@{masks}!driver\_\-0@{driver\_\-0}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca3cd74e3a46449d2d575ebbaad909228c}{
+driver\_\-0}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca3cd74e3a46449d2d575ebbaad909228c}
+}]Masks for drivers() \index{side\_\-brush@{side\_\-brush}!masks@{masks}}\index{masks@{masks}!side\_\-brush@{side\_\-brush}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca273e187aa5cc2dd0f2ef233d6d9febf4}{
+side\_\-brush}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca273e187aa5cc2dd0f2ef233d6d9febf4}
+}]Roomba only: \index{bump\_\-right@{bump\_\-right}!masks@{masks}}\index{masks@{masks}!bump\_\-right@{bump\_\-right}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3cae181f5e31abd17a95e050feb13c17227}{
+bump\_\-right}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3cae181f5e31abd17a95e050feb13c17227}
+}]Masks for bumps and wheeldrops sensor packet id 7. \index{ld1@{ld1}!masks@{masks}}\index{masks@{masks}!ld1@{ld1}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca35e78aa3e8dbde629c2930b8626a1ea0}{
+ld1}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca35e78aa3e8dbde629c2930b8626a1ea0}
+}]Masks for driver over-\/currents Packet ID 13. \index{button\_\-play@{button\_\-play}!masks@{masks}}\index{masks@{masks}!button\_\-play@{button\_\-play}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3cac0440aaa489e01aff712a991703b64b6}{
+button\_\-play}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3cac0440aaa489e01aff712a991703b64b6}
+}]Masks for buttons sensor packet ID 18 Create \index{button\_\-max@{button\_\-max}!masks@{masks}}\index{masks@{masks}!button\_\-max@{button\_\-max}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3cad7c6e4d35f069b98f08831fcfc006b18}{
+button\_\-max}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3cad7c6e4d35f069b98f08831fcfc006b18}
+}]Roomba. \index{din0@{din0}!masks@{masks}}\index{masks@{masks}!din0@{din0}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3cac916e1c4aab1503782956c120a807c6c}{
+din0}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3cac916e1c4aab1503782956c120a807c6c}
+}]Masks for digital inputs sensor packet ID 32. \index{internal\_\-charger@{internal\_\-charger}!masks@{masks}}\index{masks@{masks}!internal\_\-charger@{internal\_\-charger}}\item[{\em 
+\hypertarget{namespacemasks_af347462787e0a87a423f606696c00f3ca8226dd177b71ac5b6a86bb8b2cd0f84c}{
+internal\_\-charger}
+\label{namespacemasks_af347462787e0a87a423f606696c00f3ca8226dd177b71ac5b6a86bb8b2cd0f84c}
+}]Masks for charging sources sensor packet ID 34. \end{description}
+\end{Desc}
+
