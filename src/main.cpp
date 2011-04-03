@@ -3,10 +3,13 @@
 #include<ArduinoRoomba.h>
 #include<virtualfunctionfix.h>
 
+/// ArduinoRoomb(rx,tx,dd)
+ArduinoRoomba roomba(3,4,5);
 void setup() {
   // initialize the digital pin as an output.
   // Pin 13 has an LED connected on most Arduino boards:
   pinMode(13, OUTPUT);
+  roomba.init();
 }
 
 void loop() {

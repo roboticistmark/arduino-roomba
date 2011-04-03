@@ -6,9 +6,16 @@
 
 	Inspired and Derived heavily from code by
 	Mike McCauley (mikem@open.com.au)
- 	Based upon the Roomba library at
+ 	Based upon the Roomba library (GPL2) at
  	http://www.open.com.au/mikem/arduino/Roomba
 
+	Also heavily derived from:
+	RoombaSerial.h - Commands to be sent to the Roomba Serial Interface
+  	Copyright 2009 Chris P. Gilmer.  All right reserved. (LGPL2)
+  	Which is based upon:
+  	RoombaBumpTurn code by Tod E. Kurt <tod@todbot.com>
+    http://hackingroomba.com/
+    Created 1 August 2006 (copyleft 2006)
 
  	\par Open Source Licensing GPL V2
 	This is the appropriate option if you want to share the source code of your
@@ -23,6 +30,7 @@
 #define ArduinoRoomba_h
 
 #include "WProgram.h"
+#include "NewSoftSerial.h"
 
 /////////////////////////////////////////////////////////////////////
 /// \class ArduinoRoomba ArduinoRoomba.h <ArduinoRoomba.h>
@@ -217,6 +225,8 @@ typedef enum
 
 /// \enum EventType
 /// Values to pass to Roomba::waitEvent()
+/// Note that you will need the unsigned inverse to get lack of event
+
 typedef enum
 {
 	EventTypeWheelDrop       = 1,
@@ -248,43 +258,43 @@ typedef enum
 typedef enum
 {
 	// Remote control:
-	IRCommandLeft                   = 129,
-	IRCommandForward                = 130,
-	IRCommandRight                  = 131,
-	IRCommandSpot                   = 132,
-	IRCommandMax                    = 133,
-	IRCommandSmall                  = 134,
-	IRCommandMedium                 = 135,
-	IRCommandLargeClean             = 136,
-	IRCommandPause                  = 137,
-	IRCommandPower                  = 138,
-	IRCommandArcForwardLeft         = 139,
-	IRCommandArcForwardRight        = 140,
-	IRCommandDriveStop              = 141,
+	IR_Left                   = 129,
+	IR_Forward                = 130,
+	IR_Right                  = 131,
+	IR_Spot                   = 132,
+	IR_Max                    = 133,
+	IR_Small                  = 134,
+	IR_Medium                 = 135,
+	IR_LargeClean             = 136,
+	IR_Pause                  = 137,
+	IR_Power                  = 138,
+	IR_ArcForwardLeft         = 139,
+	IR_ArcForwardRight        = 140,
+	IR_DriveStop              = 141,
 	// Scheduling Remote:
-	IRCommandSendAll                = 142,
-	IRCommandSeekDock               = 143,
+	IR_SendAll                = 142,
+	IR_SeekDock               = 143,
 	// Home Base:
-	IRCommandReserved1              = 240,
-	IRCommandRedBuoy                = 248,
-	IRCommandGreenBuoy              = 244,
-	IRCommandForceField             = 242,
-	IRCommandRedGreenBuoy           = 252,
-	IRCommandRedBuoyForceField      = 250,
-	IRCommandGreenBuoyForceField    = 246,
-	IRCommandRedGreenBuoyForceField = 254,
+	IR_Reserved1              = 240,
+	IR_RedBuoy                = 248,
+	IR_GreenBuoy              = 244,
+	IR_ForceField             = 242,
+	IR_RedGreenBuoy           = 252,
+	IR_RedBuoyForceField      = 250,
+	IR_GreenBuoyForceField    = 246,
+	IR_RedGreenBuoyForceField = 254,
 } IRCommand;
 
 /// \enum ChargeState
 /// Values for sensor packet ID 21
 typedef enum
 {
-	ChargeStateNotCharging            = 0,
-	ChargeStateReconditioningCharging = 1,
-	ChargeStateFullChanrging          = 2,
-	ChargeStateTrickleCharging        = 3,
-	ChargeStateWaiting                = 4,
-	ChargeStateFault                  = 5,
+	Charge_NotCharging            = 0,
+	Charge_ReconditioningCharging = 1,
+	Charge_FullChanrging          = 2,
+	Charge_TrickleCharging        = 3,
+	Charge_Waiting                = 4,
+	Charge_Fault                  = 5,
 } ChargeState;
 
 /// \enum Mode
@@ -345,17 +355,69 @@ typedef enum
 	SensorRightVelocity            = 41,
 	SensorLeftVelocity             = 42,
 } Sensor;
+}
 
+namespace roombaNotes {
+	/// we use some of the lilypond notation
+	enum {
+		// G0 49.0hz
+		g0 = 31, gis0,
+		a1, ais1, b1, c1, cis1,	d1,	dis1, e1, f1, fis1,	g1,	gis1,
+		a2, ais2, b2, c2, cis2,	d2,	dis2, e2, f2, fis2,	g2,	gis2,
+		a3, ais3, b3, c3, cis3,	d3,	dis3, e3, f3, fis3,	g3,	gis3,
+		a4, ais4, b4, c4, cis4,	d4,	dis4, e4, f4, fis4,	g4,	gis4,
+		a5, ais5, b5, c5, cis5,	d5,	dis5, e5, f5, fis5,	g5,	gis5,
+		a6, ais6, b6, c6, cis6,	d6,	dis6, e6, f6, fis6,	g6,	gis6,
+		a7, ais7, b7, c7, cis7,	d7,	dis7, e7, f7, fis7,	g7,	gis7,
+		a8, ais8, b8, c8, cis8,	d8,	dis8, e8, f8, fis8,	g8,
+		// G8 12543.9hz
+	};
+
+}
+
+namespace roombaCmd {
+	enum {
+		START = 128,
+		BAUD = 129,
+		CONTROL = 130,
+		SAFE = 131,
+		FULL = 132,
+		POWER = 133, // Create
+		MAX = 133, // Roomba
+		SPOT = 134,
+		COVER = 135,  // Create
+		CLEAN = 135,  // Roomba
+		DEMO = 136,
+		DRIVE = 137,
+		LOW_DRV = 138,
+		LEDS = 139,
+		SONG = 140,
+		PLAY_SONG = 141,
+		SENSORS = 142,
+		COVER_DOCK = 143,
+		PWM_LOW_DRV = 144,
+		DRIVE_DIRECT = 145,
+		DIGITAL_OUT = 147,
+		STREAM = 148,
+		QUERY_LIST = 149,
+		PAUSE_STREAM = 150,
+		RESUME_STREAM = 150,
+		SEND_IR = 151,
+		SCRIPT = 152,
+		PLAY_SCRIPT = 153,
+		SHOW_SCRIPT = 154,
+		WAIT_TIME = 155,
+		WAIT_DIST = 156,
+		WAIT_ANGLE = 157,
+		WAIT_EVENT = 158,
+
+	};
 
 }
 
 
-
-
-
 class ArduinoRoomba
 {
-
 public:
 
 	/// \def read_timeout
@@ -363,22 +425,86 @@ public:
 	/// If we have to wait more than this to read a char
 	/// when we are expecting one, then something is wrong.
 	static const int read_timeout = 200;
-    
-    /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
-    ArduinoRoomba();
 
-    //// Getting Started Commands
-    ///////////////////////////////////////
+    /// Software serial interface
+    /// USART is used for Arduino debugging serial console
+    NewSoftSerial sci;
+
+    /**
+     *  Safety parameter to ensure that we don't tell it
+     *  to go racing off
+     */
+    int16_t _velocityLimit;
+
+    /// Safety parameter to limit how tight we turn
+    int16_t _radiusLimit;
+    
+    /// Roomba sensor bytes cached from last read
+    //--- Roomba sensor bytes
+    char _sensorbytes_0[26];
+    char _sensorbytes_1[10];
+    char _sensorbytes_2[6];
+    char _sensorbytes_3[10];
+
+
+    /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
+    ArduinoRoomba(int rx, int tx, int dd);
+
+
+    /// NonOI support functions
+    ///////////////////////////////////////////////////////////////
+    /// Polls the serial input for data belonging to a sensor data stream previously requested with stream().
+    /// As sensor data is read it is appended to dest until at most len bytes are stored there.
+    /// When a complete sensor stream has been read with a correct checksum, returns true.
+    /// See the Open Interface manual for details on how the sensor data will be encoded in dest.
+    /// Discards characters that are not part of a stream, such as the messages the Roomba
+    /// sends at startup and while charging.
+    /// Create only. No equivalent on Roomba.
+    /// \param[out] dest Destination where the read data is stored. Must have at least len bytes available.
+    /// \param[in] len Max number of sensor data bytes to store to dest
+    /// \return true when a complete stream has been read, and the checksum is correct. The sensor data
+    /// (at most len bytes) will have been stored into dest, ready for the caller to decode.
+    bool pollSensors(uint8_t* dest, uint8_t len);
+
+    /// Resets the Roomba.
+    /// It will emit its startup message
+    /// Caution, this may take several seconds to complete
+    void reset();
+
+
+    /// Update the Sensor cache
+    void updateSensors(uint8_t sensorCode);
+
+
+    /** Calls the various start and other OI commands
+     *  to setup the interface.  Calls wake.
+     */
+    void init();
+
+    /**
+     *   Kick the thing awake.  Mostly relevant on things using SCI.
+     */
+    void wake();
 
     /// Starts the Open Interface and sets the mode to Passive. 
     /// You must send this before sending any other commands.
     /// Initialises the serial port to the baud rate given in the constructor
     void start();
+
+    /// Send a 16-bit integer over the SCI
+    void sendint16(int16_t outint);
     
     /// Converts the specified baud code into a baud rate in bits per second
     /// \param[in] baud Baud code, one of Roomba::Baud
     /// \return baud rate in bits per second
     uint32_t baudCodeToBaudRate(roombaConst::Baud baud);
+
+
+
+    ///////////////////////////////////////////
+    ////  Open Interface API
+    //// Getting Started Commands
+    ///////////////////////////////////////
 
     /// Changes the baud rate
     /// Baud is on of the Roomba::Baud enums
@@ -579,28 +705,6 @@ public:
     /// on reading any byte.
     bool getData(uint8_t* dest, uint8_t len);
 
-    /// NonOI support functions
-    ///////////////////////////////////////////////////////////////
-    /// Polls the serial input for data belonging to a sensor data stream previously requested with stream().
-    /// As sensor data is read it is appended to dest until at most len bytes are stored there. 
-    /// When a complete sensor stream has been read with a correct checksum, returns true. 
-    /// See the Open Interface manual for details on how the sensor data will be encoded in dest.
-    /// Discards characters that are not part of a stream, such as the messages the Roomba 
-    /// sends at startup and while charging.
-    /// Create only. No equivalent on Roomba.
-    /// \param[out] dest Destination where the read data is stored. Must have at least len bytes available.
-    /// \param[in] len Max number of sensor data bytes to store to dest
-    /// \return true when a complete stream has been read, and the checksum is correct. The sensor data
-    /// (at most len bytes) will have been stored into dest, ready for the caller to decode.
-    bool pollSensors(uint8_t* dest, uint8_t len);
-
-
-
-    /// Resets the Roomba. 
-    /// It will emit its startup message
-    /// Caution, this may take several seconds to complete
-    void reset();
-
 
     //// Roomba Only Commands
     /////////////////////////////////////////////////////////
@@ -617,27 +721,10 @@ public:
 	
 
 private:
-    /// \enum PollState
-    /// Values for _pollState
-    typedef enum
-    {
-	PollStateIdle         = 0,
-	PollStateWaitCount    = 1,
-	PollStateWaitBytes    = 2,
-	PollStateWaitChecksum = 3,
-    } PollState;
-
-    /// The baud rate to use for the serial port
-    uint32_t        _baud;
-	
-    /// The serial port to use to talk to the Roomba
-    HardwareSerial* _serial;
-    
-    /// Variables for keeping track of polling of data streams
-    uint8_t         _pollState; /// Current state of polling, one of Roomba::PollState
-    uint8_t         _pollSize;  /// Expected size of the data stream in bytes
-    uint8_t         _pollCount; /// Num of bytes read so far
-    uint8_t         _pollChecksum; /// Running checksum counter of data bytes + count
+    /// Pin assignment from Arduino to Roomba/Create
+    int _rxPin;
+    int _txPin;
+    int _ddPin;
 
 };
 
