@@ -2,186 +2,6 @@
 \section{ArduinoRoomba Class Reference}
 \label{class_arduino_roomba}\index{ArduinoRoomba@{ArduinoRoomba}}
 }
-
-
-{\ttfamily \#include $<$ArduinoRoomba.h$>$}
-
-\subsection*{Public Types}
-\begin{DoxyCompactItemize}
-\item 
-enum \hyperlink{class_arduino_roomba_af609a2cdb5613e540d5858dd94defc52}{Baud} \{ \par
-{\bfseries Baud300} =  0, 
-{\bfseries Baud600} =  1, 
-{\bfseries Baud1200} =  2, 
-{\bfseries Baud2400} =  3, 
-\par
-{\bfseries Baud4800} =  4, 
-{\bfseries Baud9600} =  5, 
-{\bfseries Baud14400} =  6, 
-{\bfseries Baud19200} =  7, 
-\par
-{\bfseries Baud28800} =  8, 
-{\bfseries Baud38400} =  9, 
-{\bfseries Baud57600} =  10, 
-{\bfseries Baud115200} =  11
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_a7c3cccf56b26a783de296211b9e6aa7a}{Demo} \{ \par
-{\bfseries DemoAbort} =  -\/1, 
-{\bfseries DemoCover} =  0, 
-{\bfseries DemoCoverAndDock} =  1, 
-{\bfseries DemoSpotCover} =  2, 
-\par
-{\bfseries DemoMouse} =  3, 
-{\bfseries DemoDriveFigureEight} =  4, 
-{\bfseries DemoWimp} =  5, 
-{\bfseries DemoHome} =  6, 
-\par
-{\bfseries DemoTag} =  7, 
-{\bfseries DemoPachelbel} =  8, 
-{\bfseries DemoBanjo} =  9
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_af4798542a2feebafa4247d935bb2fb29}{Drive} \{ {\bfseries DriveStraight} =  0x8000, 
-{\bfseries DriveInPlaceClockwise} =  0xFFFF, 
-{\bfseries DriveInPlaceCounterClockwise} =  0x0001
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_a80ef89fefa26336ed641673662ef4b6b}{StreamCommand} \{ {\bfseries StreamCommandPause} =  0, 
-{\bfseries StreamCommandResume} =  1
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_af76e2cc5c85104aae809b49a9af59a9c}{EventType} \{ \par
-{\bfseries EventTypeWheelDrop} =  1, 
-{\bfseries EventTypeFronWheelDrop} =  2, 
-{\bfseries EventTypeLeftWheelDrop} =  3, 
-{\bfseries EventTypeRightWheelDrop} =  4, 
-\par
-{\bfseries EventTypeBump} =  5, 
-{\bfseries EventTypeLeftBump} =  6, 
-{\bfseries EventTypeRightBump} =  7, 
-{\bfseries EventTypeVirtualWall} =  8, 
-\par
-{\bfseries EventTypeWall} =  9, 
-{\bfseries EventTypeCliff} =  10, 
-{\bfseries EventTypeLeftCliff} =  11, 
-{\bfseries EventTypeFrontLeftCliff} =  12, 
-\par
-{\bfseries EventTypeFrontRightCliff} =  13, 
-{\bfseries EventTypeRightCliff} =  14, 
-{\bfseries EventTypeHomeBase} =  15, 
-{\bfseries EventTypeAdvanceButton} =  16, 
-\par
-{\bfseries EventTypePlayButton} =  17, 
-{\bfseries EventTypeDigitalInput0} =  18, 
-{\bfseries EventTypeDigitalInput1} =  19, 
-{\bfseries EventTypeDigitalInput2} =  20, 
-\par
-{\bfseries EventTypeDigitalInput3} =  21, 
-{\bfseries EventTypeModePassive} =  22
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_a71fa7df913e00d7c92298f8802f9667c}{IRCommand} \{ \par
-{\bfseries IRCommandLeft} =  129, 
-{\bfseries IRCommandForward} =  130, 
-{\bfseries IRCommandRight} =  131, 
-{\bfseries IRCommandSpot} =  132, 
-\par
-{\bfseries IRCommandMax} =  133, 
-{\bfseries IRCommandSmall} =  134, 
-{\bfseries IRCommandMedium} =  135, 
-{\bfseries IRCommandLargeClean} =  136, 
-\par
-{\bfseries IRCommandPause} =  137, 
-{\bfseries IRCommandPower} =  138, 
-{\bfseries IRCommandArcForwardLeft} =  139, 
-{\bfseries IRCommandArcForwardRight} =  140, 
-\par
-{\bfseries IRCommandDriveStop} =  141, 
-{\bfseries IRCommandSendAll} =  142, 
-{\bfseries IRCommandSeekDock} =  143, 
-{\bfseries IRCommandReserved1} =  240, 
-\par
-{\bfseries IRCommandRedBuoy} =  248, 
-{\bfseries IRCommandGreenBuoy} =  244, 
-{\bfseries IRCommandForceField} =  242, 
-{\bfseries IRCommandRedGreenBuoy} =  252, 
-\par
-{\bfseries IRCommandRedBuoyForceField} =  250, 
-{\bfseries IRCommandGreenBuoyForceField} =  246, 
-{\bfseries IRCommandRedGreenBuoyForceField} =  254
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_a25509a441bf3c60281aebab8797620ef}{ChargeState} \{ \par
-{\bfseries ChargeStateNotCharging} =  0, 
-{\bfseries ChargeStateReconditioningCharging} =  1, 
-{\bfseries ChargeStateFullChanrging} =  2, 
-{\bfseries ChargeStateTrickleCharging} =  3, 
-\par
-{\bfseries ChargeStateWaiting} =  4, 
-{\bfseries ChargeStateFault} =  5
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_aeceb5ee5b7d1b544d70d6223e6e0345c}{Mode} \{ {\bfseries ModeOff} =  0, 
-{\bfseries ModePassive} =  1, 
-{\bfseries ModeSafe} =  2, 
-{\bfseries ModeFull} =  3
- \}
-\item 
-enum \hyperlink{class_arduino_roomba_afa21b9beadec65f3d9ef5e2f7a8fe469}{Sensor} \{ \par
-{\bfseries Sensors7to26} =  0, 
-{\bfseries Sensors7to16} =  1, 
-{\bfseries Sensors17to20} =  2, 
-{\bfseries Sensors21to26} =  3, 
-\par
-{\bfseries Sensors27to34} =  4, 
-{\bfseries Sensors35to42} =  5, 
-{\bfseries Sensors7to42} =  6, 
-{\bfseries SensorBumpsAndWheelDrops} =  7, 
-\par
-{\bfseries SensorWall} =  8, 
-{\bfseries SensorCliffLeft} =  9, 
-{\bfseries SensorCliffFrontLeft} =  10, 
-{\bfseries SensorCliffFrontRight} =  11, 
-\par
-{\bfseries SensorCliffRight} =  12, 
-{\bfseries SensorVirtualWall} =  13, 
-{\bfseries SensorOvercurrents} =  14, 
-{\bfseries SensorIRByte} =  17, 
-\par
-{\bfseries SensorButtons} =  18, 
-{\bfseries SensorDistance} =  19, 
-{\bfseries SensorAngle} =  20, 
-{\bfseries SensorChargingState} =  21, 
-\par
-{\bfseries SensorVoltage} =  22, 
-{\bfseries SensorCurrent} =  23, 
-{\bfseries SensorBatteryTemperature} =  24, 
-{\bfseries SensorBatteryCharge} =  25, 
-\par
-{\bfseries SensorBatteryCapacity} =  26, 
-{\bfseries SensorWallSignal} =  27, 
-{\bfseries SensorCliffLeftSignal} =  28, 
-{\bfseries SensorCliffFrontLeftSignal} =  29, 
-\par
-{\bfseries SensorCliffFrontRightSignal} =  30, 
-{\bfseries SensorCliffRightSignal} =  31, 
-{\bfseries SensorUserDigitalInputs} =  32, 
-{\bfseries SensorUserAnalogInput} =  33, 
-\par
-{\bfseries SensorChargingSourcesAvailable} =  34, 
-{\bfseries SensorOIMode} =  35, 
-{\bfseries SensorSongNumber} =  36, 
-{\bfseries SensorSongPlaying} =  37, 
-\par
-{\bfseries SensorNumberOfStreamPackets} =  38, 
-{\bfseries SensorVelocity} =  39, 
-{\bfseries SensorRadius} =  40, 
-{\bfseries SensorRightVelocity} =  41, 
-\par
-{\bfseries SensorLeftVelocity} =  42
- \}
-\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -192,15 +12,15 @@ enum \hyperlink{class_arduino_roomba_afa21b9beadec65f3d9ef5e2f7a8fe469}{Sensor} 
 \begin{DoxyCompactList}\small\item\em Constructor. You can have multiple simultaneous Roomba if that makes sense. \item\end{DoxyCompactList}\item 
 void \hyperlink{class_arduino_roomba_a6d5b8f94e27b55bd3a4e63590cf336e0}{start} ()
 \item 
-uint32\_\-t \hyperlink{class_arduino_roomba_aaa460766ddc8c809e6372a3489df9df0}{baudCodeToBaudRate} (\hyperlink{class_arduino_roomba_af609a2cdb5613e540d5858dd94defc52}{Baud} baud)
+uint32\_\-t \hyperlink{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}{baudCodeToBaudRate} (roombaConst::Baud baud)
 \item 
-void \hyperlink{class_arduino_roomba_a3ac15c917953118a2a4e6f68ed5649e9}{baud} (\hyperlink{class_arduino_roomba_af609a2cdb5613e540d5858dd94defc52}{Baud} baud)
+void \hyperlink{class_arduino_roomba_aadbbdc1dd1f0538e48bc21fa8d6467ae}{baud} (roombaConst::Baud baud)
 \item 
 void \hyperlink{class_arduino_roomba_ac8fb620b0926e6faa570509834434ddf}{safeMode} ()
 \begin{DoxyCompactList}\small\item\em MODES. \item\end{DoxyCompactList}\item 
 void \hyperlink{class_arduino_roomba_ac4c6eb5bb47c95b7adf712926fa43edb}{fullMode} ()
 \item 
-void \hyperlink{class_arduino_roomba_ae70e79632298dc573ad23cbce5f72941}{demo} (\hyperlink{class_arduino_roomba_a7c3cccf56b26a783de296211b9e6aa7a}{Demo} demo)
+void \hyperlink{class_arduino_roomba_a63640d010b0b37647f60040384bea428}{demo} (roombaConst::Demo demo)
 \begin{DoxyCompactList}\small\item\em Demo Commands. \item\end{DoxyCompactList}\item 
 void \hyperlink{class_arduino_roomba_acb2d35018865cc262ab638436b084362}{cover} ()
 \item 
@@ -232,7 +52,7 @@ bool \hyperlink{class_arduino_roomba_a44be486f377bec58f83bfebc4791f298}{queryLis
 \item 
 void \hyperlink{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{stream} (const uint8\_\-t $\ast$packetIDs, int len)
 \item 
-void \hyperlink{class_arduino_roomba_af44bde5a03e64a53cd4198be8035741e}{pauseResumeStream} (\hyperlink{class_arduino_roomba_a80ef89fefa26336ed641673662ef4b6b}{StreamCommand} command)
+void \hyperlink{class_arduino_roomba_a9563d94e22335c334cdc0791b4c5b1cf}{pauseResumeStream} (roombaConst::StreamCommand command)
 \item 
 void \hyperlink{class_arduino_roomba_a4d8122739d5e828f963f6e51ee4d101a}{script} (const uint8\_\-t $\ast$script, uint8\_\-t len)
 \begin{DoxyCompactList}\small\item\em Script Commands. \item\end{DoxyCompactList}\item 
@@ -246,7 +66,7 @@ void \hyperlink{class_arduino_roomba_a80daa425563387fab74ede7351981861}{waitDist
 \item 
 void \hyperlink{class_arduino_roomba_a5eecc857d2d010f7c3ebaa75044f6349}{waitAngle} (int16\_\-t degrees)
 \item 
-void \hyperlink{class_arduino_roomba_a857cfae908fbdc5c2dc87eecaf8e2b52}{waitEvent} (\hyperlink{class_arduino_roomba_af76e2cc5c85104aae809b49a9af59a9c}{EventType} type)
+void \hyperlink{class_arduino_roomba_a2a4f3f9a99d4102efef762745631f156}{waitEvent} (roombaConst::EventType type)
 \item 
 bool \hyperlink{class_arduino_roomba_a31c65b37a69092d98e86fbb8641d4c67}{getData} (uint8\_\-t $\ast$dest, uint8\_\-t len)
 \begin{DoxyCompactList}\small\item\em Low level Helper Functions. \item\end{DoxyCompactList}\item 
@@ -268,104 +88,25 @@ static const int {\bfseries read\_\-timeout} = 200}
 \end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API
-
-The Roomba and Create is equipped with a min-\/din serial port socket, while the Create is also equipped with a 25-\/pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.
-
-In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below.
-
-\begin{DoxyParagraph}{Other Roomba messages}
-
-\end{DoxyParagraph}
-When iRobot Create powers up and after a reset, it sends a message like this on its serial port: 
-\begin{DoxyCode}
- bl-start
- 2006-09-12-1137-L
- RDK by iRobot!
- MC9S12E128
- 2006-11-20-1731-L
- battery-current-quiescent-raw 524  battery-current-zero 510
-
- 2006-11-20-1731-L
-\end{DoxyCode}
-
-
-While charging it will send a message like this each second: 
-\begin{DoxyCode}
- bat:   min 3  sec 21  mV 15558  mA 1491  deg-C 24
-\end{DoxyCode}
-
-
-To enter the factory test menu for the IRobot Create, hold down the ($>$) and ($>$$>$$|$) buttons then press and hold the Power button until the assending and descending tones play and then stop. You wil see some messages emitted on teh serial port. Press the right-\/right arrow button to cycle through the tests. 
-
-\subsection{Member Enumeration Documentation}
-\hypertarget{class_arduino_roomba_af609a2cdb5613e540d5858dd94defc52}{
-\index{ArduinoRoomba@{ArduinoRoomba}!Baud@{Baud}}
-\index{Baud@{Baud}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{Baud}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::Baud}}}
-\label{class_arduino_roomba_af609a2cdb5613e540d5858dd94defc52}
-Demo types to pass to Roomba::baud() \hypertarget{class_arduino_roomba_a25509a441bf3c60281aebab8797620ef}{
-\index{ArduinoRoomba@{ArduinoRoomba}!ChargeState@{ChargeState}}
-\index{ChargeState@{ChargeState}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{ChargeState}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::ChargeState}}}
-\label{class_arduino_roomba_a25509a441bf3c60281aebab8797620ef}
-Values for sensor packet ID 21 \hypertarget{class_arduino_roomba_a7c3cccf56b26a783de296211b9e6aa7a}{
-\index{ArduinoRoomba@{ArduinoRoomba}!Demo@{Demo}}
-\index{Demo@{Demo}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{Demo}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::Demo}}}
-\label{class_arduino_roomba_a7c3cccf56b26a783de296211b9e6aa7a}
-Demo types to pass to Roomba::demo() \hypertarget{class_arduino_roomba_af4798542a2feebafa4247d935bb2fb29}{
-\index{ArduinoRoomba@{ArduinoRoomba}!Drive@{Drive}}
-\index{Drive@{Drive}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{Drive}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::Drive}}}
-\label{class_arduino_roomba_af4798542a2feebafa4247d935bb2fb29}
-Special values for radius in Roomba::drive() \hypertarget{class_arduino_roomba_af76e2cc5c85104aae809b49a9af59a9c}{
-\index{ArduinoRoomba@{ArduinoRoomba}!EventType@{EventType}}
-\index{EventType@{EventType}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{EventType}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::EventType}}}
-\label{class_arduino_roomba_af76e2cc5c85104aae809b49a9af59a9c}
-Values to pass to Roomba::waitEvent() \hypertarget{class_arduino_roomba_a71fa7df913e00d7c92298f8802f9667c}{
-\index{ArduinoRoomba@{ArduinoRoomba}!IRCommand@{IRCommand}}
-\index{IRCommand@{IRCommand}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{IRCommand}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::IRCommand}}}
-\label{class_arduino_roomba_a71fa7df913e00d7c92298f8802f9667c}
-Values for sensor packet ID 27 \hypertarget{class_arduino_roomba_aeceb5ee5b7d1b544d70d6223e6e0345c}{
-\index{ArduinoRoomba@{ArduinoRoomba}!Mode@{Mode}}
-\index{Mode@{Mode}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{Mode}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::Mode}}}
-\label{class_arduino_roomba_aeceb5ee5b7d1b544d70d6223e6e0345c}
-Values for sensor packet ID 35 \hypertarget{class_arduino_roomba_afa21b9beadec65f3d9ef5e2f7a8fe469}{
-\index{ArduinoRoomba@{ArduinoRoomba}!Sensor@{Sensor}}
-\index{Sensor@{Sensor}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{Sensor}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::Sensor}}}
-\label{class_arduino_roomba_afa21b9beadec65f3d9ef5e2f7a8fe469}
-Values for sensor packet IDs to pass to getSensors() and getSensorsList() \hypertarget{class_arduino_roomba_a80ef89fefa26336ed641673662ef4b6b}{
-\index{ArduinoRoomba@{ArduinoRoomba}!StreamCommand@{StreamCommand}}
-\index{StreamCommand@{StreamCommand}!ArduinoRoomba@{ArduinoRoomba}}
-\subsubsection[{StreamCommand}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf ArduinoRoomba::StreamCommand}}}
-\label{class_arduino_roomba_a80ef89fefa26336ed641673662ef4b6b}
-Values to pass to Roomba::streamCommand() 
-
 \subsection{Member Function Documentation}
-\hypertarget{class_arduino_roomba_a3ac15c917953118a2a4e6f68ed5649e9}{
+\hypertarget{class_arduino_roomba_aadbbdc1dd1f0538e48bc21fa8d6467ae}{
 \index{ArduinoRoomba@{ArduinoRoomba}!baud@{baud}}
 \index{baud@{baud}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{baud}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::baud (
 \begin{DoxyParamCaption}
-\item[{{\bf Baud}}]{baud}
+\item[{roombaConst::Baud}]{baud}
 \end{DoxyParamCaption}
 )}}
-\label{class_arduino_roomba_a3ac15c917953118a2a4e6f68ed5649e9}
-Changes the baud rate Baud is on of the Roomba::Baud enums \hypertarget{class_arduino_roomba_aaa460766ddc8c809e6372a3489df9df0}{
+\label{class_arduino_roomba_aadbbdc1dd1f0538e48bc21fa8d6467ae}
+Changes the baud rate Baud is on of the Roomba::Baud enums \hypertarget{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}{
 \index{ArduinoRoomba@{ArduinoRoomba}!baudCodeToBaudRate@{baudCodeToBaudRate}}
 \index{baudCodeToBaudRate@{baudCodeToBaudRate}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{baudCodeToBaudRate}]{\setlength{\rightskip}{0pt plus 5cm}uint32\_\-t ArduinoRoomba::baudCodeToBaudRate (
 \begin{DoxyParamCaption}
-\item[{{\bf Baud}}]{baud}
+\item[{roombaConst::Baud}]{baud}
 \end{DoxyParamCaption}
 )}}
-\label{class_arduino_roomba_aaa460766ddc8c809e6372a3489df9df0}
+\label{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}
 Converts the specified baud code into a baud rate in bits per second 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em baud} & Baud code, one of Roomba::Baud \\
@@ -392,15 +133,15 @@ Starts the Cover demo Changes mode to Passive \hypertarget{class_arduino_roomba_
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_ab64590ea5cdd54a15eb62e96f61839b6}
-Starts the Cover and Dock demo Changes mode to Passive \hypertarget{class_arduino_roomba_ae70e79632298dc573ad23cbce5f72941}{
+Starts the Cover and Dock demo Changes mode to Passive \hypertarget{class_arduino_roomba_a63640d010b0b37647f60040384bea428}{
 \index{ArduinoRoomba@{ArduinoRoomba}!demo@{demo}}
 \index{demo@{demo}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{demo}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::demo (
 \begin{DoxyParamCaption}
-\item[{{\bf Demo}}]{demo}
+\item[{roombaConst::Demo}]{demo}
 \end{DoxyParamCaption}
 )}}
-\label{class_arduino_roomba_ae70e79632298dc573ad23cbce5f72941}
+\label{class_arduino_roomba_a63640d010b0b37647f60040384bea428}
 
 
 Demo Commands. 
@@ -538,15 +279,15 @@ Sets the low side drivers on or off. On the Romba, these control the 3 motors.
 \mbox{\tt in}  & {\em out} & Bitmask of putputs to enable. ORed value ROOMBA\_\-MASK\_\-DRIVER\_\-$\ast$ \\
 \hline
 \end{DoxyParams}
-\hypertarget{class_arduino_roomba_af44bde5a03e64a53cd4198be8035741e}{
+\hypertarget{class_arduino_roomba_a9563d94e22335c334cdc0791b4c5b1cf}{
 \index{ArduinoRoomba@{ArduinoRoomba}!pauseResumeStream@{pauseResumeStream}}
 \index{pauseResumeStream@{pauseResumeStream}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{pauseResumeStream}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::pauseResumeStream (
 \begin{DoxyParamCaption}
-\item[{{\bf StreamCommand}}]{command}
+\item[{roombaConst::StreamCommand}]{command}
 \end{DoxyParamCaption}
 )}}
-\label{class_arduino_roomba_af44bde5a03e64a53cd4198be8035741e}
+\label{class_arduino_roomba_a9563d94e22335c334cdc0791b4c5b1cf}
 Pause or resume a stream of sensor data packets previously requested by \hyperlink{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{stream()} Create only. No equivalent on Roomba. 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em command} & One of Roomba::StreamCommand \\
@@ -796,7 +537,13 @@ Starts the Spot Cover demo Changes mode to Passive \hypertarget{class_arduino_ro
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_a6d5b8f94e27b55bd3a4e63590cf336e0}
-Starts the Open Interface and sets the mode to Passive. You must send this before sending any other commands. Initialises the serial port to the baud rate given in the constructor \hypertarget{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{
+Starts the Open Interface and sets the mode to Passive. You must send this before sending any other commands. Initialises the serial port to the baud rate given in the constructor
+
+The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API
+
+The Roomba and Create is equipped with a min-\/din serial port socket, while the Create is also equipped with a 25-\/pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.
+
+In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below. \hypertarget{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{
 \index{ArduinoRoomba@{ArduinoRoomba}!stream@{stream}}
 \index{stream@{stream}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{stream}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::stream (
@@ -841,15 +588,15 @@ Causes Roomba to wait until it has travelled the distance specified. Roomba will
 \mbox{\tt in}  & {\em mm} & Distance to wait for in mm \\
 \hline
 \end{DoxyParams}
-\hypertarget{class_arduino_roomba_a857cfae908fbdc5c2dc87eecaf8e2b52}{
+\hypertarget{class_arduino_roomba_a2a4f3f9a99d4102efef762745631f156}{
 \index{ArduinoRoomba@{ArduinoRoomba}!waitEvent@{waitEvent}}
 \index{waitEvent@{waitEvent}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{waitEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::waitEvent (
 \begin{DoxyParamCaption}
-\item[{{\bf EventType}}]{type}
+\item[{roombaConst::EventType}]{type}
 \end{DoxyParamCaption}
 )}}
-\label{class_arduino_roomba_a857cfae908fbdc5c2dc87eecaf8e2b52}
+\label{class_arduino_roomba_a2a4f3f9a99d4102efef762745631f156}
 Cause the Create to wait for a specified event. Roomba will not react to any inputs until the wait has completed. Note that this does not cause the host arduino to wait, it only sends the wait comman to the Roomba Create only. No equivalent on Roomba. 
 \begin{DoxyParams}[1]{Parameters}
 \mbox{\tt in}  & {\em type} & Event type to wait for. One of Roomba::EventType \\
@@ -875,6 +622,7 @@ Tells the Roomba to wait for a specified time. This command is intended for use 
 \end{DoxyParams}
 
 
-The documentation for this class was generated from the following file:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
 \item 
-\hyperlink{_arduino_roomba_8h}{ArduinoRoomba.h}\end{DoxyCompactItemize}
+\hyperlink{_arduino_roomba_8h}{ArduinoRoomba.h}\item 
+\hyperlink{_arduino_roomba_8cpp}{ArduinoRoomba.cpp}\end{DoxyCompactItemize}

@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="header">
   <div class="summary">
-<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle">
@@ -55,195 +54,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div>
 <div class="contents">
 <!-- doxytag: class="ArduinoRoomba" -->
-<p><code>#include &lt;<a class="el" href="_arduino_roomba_8h_source.html">ArduinoRoomba.h</a>&gt;</code></p>
-
 <p><a href="class_arduino_roomba-members.html">List of all members.</a></p>
 <table class="memberdecls">
-<tr><td colspan="2"><h2><a name="pub-types"></a>
-Public Types</h2></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#af609a2cdb5613e540d5858dd94defc52">Baud</a> { <br/>
-&#160;&#160;<b>Baud300</b> =  0, 
-<b>Baud600</b> =  1, 
-<b>Baud1200</b> =  2, 
-<b>Baud2400</b> =  3, 
-<br/>
-&#160;&#160;<b>Baud4800</b> =  4, 
-<b>Baud9600</b> =  5, 
-<b>Baud14400</b> =  6, 
-<b>Baud19200</b> =  7, 
-<br/>
-&#160;&#160;<b>Baud28800</b> =  8, 
-<b>Baud38400</b> =  9, 
-<b>Baud57600</b> =  10, 
-<b>Baud115200</b> =  11
-<br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a7c3cccf56b26a783de296211b9e6aa7a">Demo</a> { <br/>
-&#160;&#160;<b>DemoAbort</b> =  -1, 
-<b>DemoCover</b> =  0, 
-<b>DemoCoverAndDock</b> =  1, 
-<b>DemoSpotCover</b> =  2, 
-<br/>
-&#160;&#160;<b>DemoMouse</b> =  3, 
-<b>DemoDriveFigureEight</b> =  4, 
-<b>DemoWimp</b> =  5, 
-<b>DemoHome</b> =  6, 
-<br/>
-&#160;&#160;<b>DemoTag</b> =  7, 
-<b>DemoPachelbel</b> =  8, 
-<b>DemoBanjo</b> =  9
-<br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#af4798542a2feebafa4247d935bb2fb29">Drive</a> { <b>DriveStraight</b> =  0x8000, 
-<b>DriveInPlaceClockwise</b> =  0xFFFF, 
-<b>DriveInPlaceCounterClockwise</b> =  0x0001
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a80ef89fefa26336ed641673662ef4b6b">StreamCommand</a> { <b>StreamCommandPause</b> =  0, 
-<b>StreamCommandResume</b> =  1
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#af76e2cc5c85104aae809b49a9af59a9c">EventType</a> { <br/>
-&#160;&#160;<b>EventTypeWheelDrop</b> =  1, 
-<b>EventTypeFronWheelDrop</b> =  2, 
-<b>EventTypeLeftWheelDrop</b> =  3, 
-<b>EventTypeRightWheelDrop</b> =  4, 
-<br/>
-&#160;&#160;<b>EventTypeBump</b> =  5, 
-<b>EventTypeLeftBump</b> =  6, 
-<b>EventTypeRightBump</b> =  7, 
-<b>EventTypeVirtualWall</b> =  8, 
-<br/>
-&#160;&#160;<b>EventTypeWall</b> =  9, 
-<b>EventTypeCliff</b> =  10, 
-<b>EventTypeLeftCliff</b> =  11, 
-<b>EventTypeFrontLeftCliff</b> =  12, 
-<br/>
-&#160;&#160;<b>EventTypeFrontRightCliff</b> =  13, 
-<b>EventTypeRightCliff</b> =  14, 
-<b>EventTypeHomeBase</b> =  15, 
-<b>EventTypeAdvanceButton</b> =  16, 
-<br/>
-&#160;&#160;<b>EventTypePlayButton</b> =  17, 
-<b>EventTypeDigitalInput0</b> =  18, 
-<b>EventTypeDigitalInput1</b> =  19, 
-<b>EventTypeDigitalInput2</b> =  20, 
-<br/>
-&#160;&#160;<b>EventTypeDigitalInput3</b> =  21, 
-<b>EventTypeModePassive</b> =  22
-<br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a71fa7df913e00d7c92298f8802f9667c">IRCommand</a> { <br/>
-&#160;&#160;<b>IRCommandLeft</b> =  129, 
-<b>IRCommandForward</b> =  130, 
-<b>IRCommandRight</b> =  131, 
-<b>IRCommandSpot</b> =  132, 
-<br/>
-&#160;&#160;<b>IRCommandMax</b> =  133, 
-<b>IRCommandSmall</b> =  134, 
-<b>IRCommandMedium</b> =  135, 
-<b>IRCommandLargeClean</b> =  136, 
-<br/>
-&#160;&#160;<b>IRCommandPause</b> =  137, 
-<b>IRCommandPower</b> =  138, 
-<b>IRCommandArcForwardLeft</b> =  139, 
-<b>IRCommandArcForwardRight</b> =  140, 
-<br/>
-&#160;&#160;<b>IRCommandDriveStop</b> =  141, 
-<b>IRCommandSendAll</b> =  142, 
-<b>IRCommandSeekDock</b> =  143, 
-<b>IRCommandReserved1</b> =  240, 
-<br/>
-&#160;&#160;<b>IRCommandRedBuoy</b> =  248, 
-<b>IRCommandGreenBuoy</b> =  244, 
-<b>IRCommandForceField</b> =  242, 
-<b>IRCommandRedGreenBuoy</b> =  252, 
-<br/>
-&#160;&#160;<b>IRCommandRedBuoyForceField</b> =  250, 
-<b>IRCommandGreenBuoyForceField</b> =  246, 
-<b>IRCommandRedGreenBuoyForceField</b> =  254
-<br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a25509a441bf3c60281aebab8797620ef">ChargeState</a> { <br/>
-&#160;&#160;<b>ChargeStateNotCharging</b> =  0, 
-<b>ChargeStateReconditioningCharging</b> =  1, 
-<b>ChargeStateFullChanrging</b> =  2, 
-<b>ChargeStateTrickleCharging</b> =  3, 
-<br/>
-&#160;&#160;<b>ChargeStateWaiting</b> =  4, 
-<b>ChargeStateFault</b> =  5
-<br/>
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#aeceb5ee5b7d1b544d70d6223e6e0345c">Mode</a> { <b>ModeOff</b> =  0, 
-<b>ModePassive</b> =  1, 
-<b>ModeSafe</b> =  2, 
-<b>ModeFull</b> =  3
- }</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#afa21b9beadec65f3d9ef5e2f7a8fe469">Sensor</a> { <br/>
-&#160;&#160;<b>Sensors7to26</b> =  0, 
-<b>Sensors7to16</b> =  1, 
-<b>Sensors17to20</b> =  2, 
-<b>Sensors21to26</b> =  3, 
-<br/>
-&#160;&#160;<b>Sensors27to34</b> =  4, 
-<b>Sensors35to42</b> =  5, 
-<b>Sensors7to42</b> =  6, 
-<b>SensorBumpsAndWheelDrops</b> =  7, 
-<br/>
-&#160;&#160;<b>SensorWall</b> =  8, 
-<b>SensorCliffLeft</b> =  9, 
-<b>SensorCliffFrontLeft</b> =  10, 
-<b>SensorCliffFrontRight</b> =  11, 
-<br/>
-&#160;&#160;<b>SensorCliffRight</b> =  12, 
-<b>SensorVirtualWall</b> =  13, 
-<b>SensorOvercurrents</b> =  14, 
-<b>SensorIRByte</b> =  17, 
-<br/>
-&#160;&#160;<b>SensorButtons</b> =  18, 
-<b>SensorDistance</b> =  19, 
-<b>SensorAngle</b> =  20, 
-<b>SensorChargingState</b> =  21, 
-<br/>
-&#160;&#160;<b>SensorVoltage</b> =  22, 
-<b>SensorCurrent</b> =  23, 
-<b>SensorBatteryTemperature</b> =  24, 
-<b>SensorBatteryCharge</b> =  25, 
-<br/>
-&#160;&#160;<b>SensorBatteryCapacity</b> =  26, 
-<b>SensorWallSignal</b> =  27, 
-<b>SensorCliffLeftSignal</b> =  28, 
-<b>SensorCliffFrontLeftSignal</b> =  29, 
-<br/>
-&#160;&#160;<b>SensorCliffFrontRightSignal</b> =  30, 
-<b>SensorCliffRightSignal</b> =  31, 
-<b>SensorUserDigitalInputs</b> =  32, 
-<b>SensorUserAnalogInput</b> =  33, 
-<br/>
-&#160;&#160;<b>SensorChargingSourcesAvailable</b> =  34, 
-<b>SensorOIMode</b> =  35, 
-<b>SensorSongNumber</b> =  36, 
-<b>SensorSongPlaying</b> =  37, 
-<br/>
-&#160;&#160;<b>SensorNumberOfStreamPackets</b> =  38, 
-<b>SensorVelocity</b> =  39, 
-<b>SensorRadius</b> =  40, 
-<b>SensorRightVelocity</b> =  41, 
-<br/>
-&#160;&#160;<b>SensorLeftVelocity</b> =  42
-<br/>
- }</td></tr>
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af7d106ebf18714863cea529689689180"></a><!-- doxytag: member="ArduinoRoomba::ArduinoRoomba" ref="af7d106ebf18714863cea529689689180" args="()" -->
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#af7d106ebf18714863cea529689689180">ArduinoRoomba</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. You can have multiple simultaneous Roomba if that makes sense. <br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a6d5b8f94e27b55bd3a4e63590cf336e0">start</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#aaa460766ddc8c809e6372a3489df9df0">baudCodeToBaudRate</a> (<a class="el" href="class_arduino_roomba.html#af609a2cdb5613e540d5858dd94defc52">Baud</a> baud)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a3ac15c917953118a2a4e6f68ed5649e9">baud</a> (<a class="el" href="class_arduino_roomba.html#af609a2cdb5613e540d5858dd94defc52">Baud</a> baud)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ab69e5496dcb1cb782f85fd61fb0e5e14">baudCodeToBaudRate</a> (roombaConst::Baud baud)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#aadbbdc1dd1f0538e48bc21fa8d6467ae">baud</a> (roombaConst::Baud baud)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ac8fb620b0926e6faa570509834434ddf">safeMode</a> ()</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">MODES.  <a href="#ac8fb620b0926e6faa570509834434ddf"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ac4c6eb5bb47c95b7adf712926fa43edb">fullMode</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ae70e79632298dc573ad23cbce5f72941">demo</a> (<a class="el" href="class_arduino_roomba.html#a7c3cccf56b26a783de296211b9e6aa7a">Demo</a> demo)</td></tr>
-<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Demo Commands.  <a href="#ae70e79632298dc573ad23cbce5f72941"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a63640d010b0b37647f60040384bea428">demo</a> (roombaConst::Demo demo)</td></tr>
+<tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Demo Commands.  <a href="#a63640d010b0b37647f60040384bea428"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#acb2d35018865cc262ab638436b084362">cover</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ab64590ea5cdd54a15eb62e96f61839b6">coverAndSeekDock</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ad4cee03aee250ec956a178e0ca95b297">spot</a> ()</td></tr>
@@ -261,7 +86,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Input Commands.  <a href="#a4f4e7139b7cd0ec2ddbb09d18e8a8f08"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a44be486f377bec58f83bfebc4791f298">queryList</a> (uint8_t *packetIDs, uint8_t numPacketIDs, uint8_t *dest, uint8_t len)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a687c72eb69928dba45aa53aa39af2f1f">stream</a> (const uint8_t *packetIDs, int len)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#af44bde5a03e64a53cd4198be8035741e">pauseResumeStream</a> (<a class="el" href="class_arduino_roomba.html#a80ef89fefa26336ed641673662ef4b6b">StreamCommand</a> command)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a9563d94e22335c334cdc0791b4c5b1cf">pauseResumeStream</a> (roombaConst::StreamCommand command)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a4d8122739d5e828f963f6e51ee4d101a">script</a> (const uint8_t *script, uint8_t len)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Script Commands.  <a href="#a4d8122739d5e828f963f6e51ee4d101a"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a8f5bd40d2d4c26a314f2ee649d7605ae">playScript</a> ()</td></tr>
@@ -270,7 +95,7 @@ Public Member Functions</h2></td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Wait Commands.  <a href="#a6ddfe1cb8fee12458d00e80b9ef68a19"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a80daa425563387fab74ede7351981861">waitDistance</a> (int16_t mm)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a5eecc857d2d010f7c3ebaa75044f6349">waitAngle</a> (int16_t degrees)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a857cfae908fbdc5c2dc87eecaf8e2b52">waitEvent</a> (<a class="el" href="class_arduino_roomba.html#af76e2cc5c85104aae809b49a9af59a9c">EventType</a> type)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a2a4f3f9a99d4102efef762745631f156">waitEvent</a> (roombaConst::EventType type)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#a31c65b37a69092d98e86fbb8641d4c67">getData</a> (uint8_t *dest, uint8_t len)</td></tr>
 <tr><td class="mdescLeft">&#160;</td><td class="mdescRight">Low level Helper Functions.  <a href="#a31c65b37a69092d98e86fbb8641d4c67"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_arduino_roomba.html#ac534f7f31042a034873264b6c0ebf0ad">pollSensors</a> (uint8_t *dest, uint8_t len)</td></tr>
@@ -283,159 +108,15 @@ Static Public Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a42cc468013c3068764805c59b29e9ad1"></a><!-- doxytag: member="ArduinoRoomba::read_timeout" ref="a42cc468013c3068764805c59b29e9ad1" args="" -->
 static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_timeout</b> = 200</td></tr>
 </table>
-<hr/><a name="_details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API</p>
-<p>The Roomba and Create is equipped with a min-din serial port socket, while the Create is also equipped with a 25-pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.</p>
-<p>In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below.</p>
-<dl class="user"><dt><b>Other Roomba messages</b></dt><dd></dd></dl>
-<p>When iRobot Create powers up and after a reset, it sends a message like this on its serial port: </p>
-<div class="fragment"><pre class="fragment"> bl-<a class="code" href="class_arduino_roomba.html#a6d5b8f94e27b55bd3a4e63590cf336e0">start</a>
- 2006-09-12-1137-L
- RDK by iRobot!
- MC9S12E128
- 2006-11-20-1731-L
- battery-current-quiescent-raw 524  battery-current-zero 510
-
- 2006-11-20-1731-L
-</pre></div><p>While charging it will send a message like this each second: </p>
-<div class="fragment"><pre class="fragment"> bat:   min 3  sec 21  mV 15558  mA 1491  deg-C 24
-</pre></div><p>To enter the factory test menu for the IRobot Create, hold down the (&gt;) and (&gt;&gt;|) buttons then press and hold the Power button until the assending and descending tones play and then stop. You wil see some messages emitted on teh serial port. Press the right-right arrow button to cycle through the tests. </p>
-</div><hr/><h2>Member Enumeration Documentation</h2>
-<a class="anchor" id="af609a2cdb5613e540d5858dd94defc52"></a><!-- doxytag: member="ArduinoRoomba::Baud" ref="af609a2cdb5613e540d5858dd94defc52" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#af609a2cdb5613e540d5858dd94defc52">ArduinoRoomba::Baud</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Demo types to pass to Roomba::baud() </p>
-
-</div>
-</div>
-<a class="anchor" id="a25509a441bf3c60281aebab8797620ef"></a><!-- doxytag: member="ArduinoRoomba::ChargeState" ref="a25509a441bf3c60281aebab8797620ef" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#a25509a441bf3c60281aebab8797620ef">ArduinoRoomba::ChargeState</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Values for sensor packet ID 21 </p>
-
-</div>
-</div>
-<a class="anchor" id="a7c3cccf56b26a783de296211b9e6aa7a"></a><!-- doxytag: member="ArduinoRoomba::Demo" ref="a7c3cccf56b26a783de296211b9e6aa7a" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#a7c3cccf56b26a783de296211b9e6aa7a">ArduinoRoomba::Demo</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Demo types to pass to Roomba::demo() </p>
-
-</div>
-</div>
-<a class="anchor" id="af4798542a2feebafa4247d935bb2fb29"></a><!-- doxytag: member="ArduinoRoomba::Drive" ref="af4798542a2feebafa4247d935bb2fb29" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#af4798542a2feebafa4247d935bb2fb29">ArduinoRoomba::Drive</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Special values for radius in Roomba::drive() </p>
-
-</div>
-</div>
-<a class="anchor" id="af76e2cc5c85104aae809b49a9af59a9c"></a><!-- doxytag: member="ArduinoRoomba::EventType" ref="af76e2cc5c85104aae809b49a9af59a9c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#af76e2cc5c85104aae809b49a9af59a9c">ArduinoRoomba::EventType</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Values to pass to Roomba::waitEvent() </p>
-
-</div>
-</div>
-<a class="anchor" id="a71fa7df913e00d7c92298f8802f9667c"></a><!-- doxytag: member="ArduinoRoomba::IRCommand" ref="a71fa7df913e00d7c92298f8802f9667c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#a71fa7df913e00d7c92298f8802f9667c">ArduinoRoomba::IRCommand</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Values for sensor packet ID 27 </p>
-
-</div>
-</div>
-<a class="anchor" id="aeceb5ee5b7d1b544d70d6223e6e0345c"></a><!-- doxytag: member="ArduinoRoomba::Mode" ref="aeceb5ee5b7d1b544d70d6223e6e0345c" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#aeceb5ee5b7d1b544d70d6223e6e0345c">ArduinoRoomba::Mode</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Values for sensor packet ID 35 </p>
-
-</div>
-</div>
-<a class="anchor" id="afa21b9beadec65f3d9ef5e2f7a8fe469"></a><!-- doxytag: member="ArduinoRoomba::Sensor" ref="afa21b9beadec65f3d9ef5e2f7a8fe469" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#afa21b9beadec65f3d9ef5e2f7a8fe469">ArduinoRoomba::Sensor</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Values for sensor packet IDs to pass to getSensors() and getSensorsList() </p>
-
-</div>
-</div>
-<a class="anchor" id="a80ef89fefa26336ed641673662ef4b6b"></a><!-- doxytag: member="ArduinoRoomba::StreamCommand" ref="a80ef89fefa26336ed641673662ef4b6b" args="" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">enum <a class="el" href="class_arduino_roomba.html#a80ef89fefa26336ed641673662ef4b6b">ArduinoRoomba::StreamCommand</a></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-<p>Values to pass to Roomba::streamCommand() </p>
-
-</div>
-</div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a3ac15c917953118a2a4e6f68ed5649e9"></a><!-- doxytag: member="ArduinoRoomba::baud" ref="a3ac15c917953118a2a4e6f68ed5649e9" args="(Baud baud)" -->
+<a class="anchor" id="aadbbdc1dd1f0538e48bc21fa8d6467ae"></a><!-- doxytag: member="ArduinoRoomba::baud" ref="aadbbdc1dd1f0538e48bc21fa8d6467ae" args="(roombaConst::Baud baud)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ArduinoRoomba::baud </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_arduino_roomba.html#af609a2cdb5613e540d5858dd94defc52">Baud</a>&#160;</td>
+          <td class="paramtype">roombaConst::Baud&#160;</td>
           <td class="paramname"><em>baud</em></td><td>)</td>
           <td></td>
         </tr>
@@ -446,14 +127,14 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
 
 </div>
 </div>
-<a class="anchor" id="aaa460766ddc8c809e6372a3489df9df0"></a><!-- doxytag: member="ArduinoRoomba::baudCodeToBaudRate" ref="aaa460766ddc8c809e6372a3489df9df0" args="(Baud baud)" -->
+<a class="anchor" id="ab69e5496dcb1cb782f85fd61fb0e5e14"></a><!-- doxytag: member="ArduinoRoomba::baudCodeToBaudRate" ref="ab69e5496dcb1cb782f85fd61fb0e5e14" args="(roombaConst::Baud baud)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">uint32_t ArduinoRoomba::baudCodeToBaudRate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_arduino_roomba.html#af609a2cdb5613e540d5858dd94defc52">Baud</a>&#160;</td>
+          <td class="paramtype">roombaConst::Baud&#160;</td>
           <td class="paramname"><em>baud</em></td><td>)</td>
           <td></td>
         </tr>
@@ -505,14 +186,14 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
 
 </div>
 </div>
-<a class="anchor" id="ae70e79632298dc573ad23cbce5f72941"></a><!-- doxytag: member="ArduinoRoomba::demo" ref="ae70e79632298dc573ad23cbce5f72941" args="(Demo demo)" -->
+<a class="anchor" id="a63640d010b0b37647f60040384bea428"></a><!-- doxytag: member="ArduinoRoomba::demo" ref="a63640d010b0b37647f60040384bea428" args="(roombaConst::Demo demo)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ArduinoRoomba::demo </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_arduino_roomba.html#a7c3cccf56b26a783de296211b9e6aa7a">Demo</a>&#160;</td>
+          <td class="paramtype">roombaConst::Demo&#160;</td>
           <td class="paramname"><em>demo</em></td><td>)</td>
           <td></td>
         </tr>
@@ -765,14 +446,14 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
 
 </div>
 </div>
-<a class="anchor" id="af44bde5a03e64a53cd4198be8035741e"></a><!-- doxytag: member="ArduinoRoomba::pauseResumeStream" ref="af44bde5a03e64a53cd4198be8035741e" args="(StreamCommand command)" -->
+<a class="anchor" id="a9563d94e22335c334cdc0791b4c5b1cf"></a><!-- doxytag: member="ArduinoRoomba::pauseResumeStream" ref="a9563d94e22335c334cdc0791b4c5b1cf" args="(roombaConst::StreamCommand command)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ArduinoRoomba::pauseResumeStream </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_arduino_roomba.html#a80ef89fefa26336ed641673662ef4b6b">StreamCommand</a>&#160;</td>
+          <td class="paramtype">roombaConst::StreamCommand&#160;</td>
           <td class="paramname"><em>command</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1227,7 +908,10 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
       </table>
 </div>
 <div class="memdoc">
-<p>Starts the Open Interface and sets the mode to Passive. You must send this before sending any other commands. Initialises the serial port to the baud rate given in the constructor </p>
+<p>Starts the Open Interface and sets the mode to Passive. You must send this before sending any other commands. Initialises the serial port to the baud rate given in the constructor</p>
+<p>The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API</p>
+<p>The Roomba and Create is equipped with a min-din serial port socket, while the Create is also equipped with a 25-pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.</p>
+<p>In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below. </p>
 
 </div>
 </div>
@@ -1314,14 +998,14 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
 
 </div>
 </div>
-<a class="anchor" id="a857cfae908fbdc5c2dc87eecaf8e2b52"></a><!-- doxytag: member="ArduinoRoomba::waitEvent" ref="a857cfae908fbdc5c2dc87eecaf8e2b52" args="(EventType type)" -->
+<a class="anchor" id="a2a4f3f9a99d4102efef762745631f156"></a><!-- doxytag: member="ArduinoRoomba::waitEvent" ref="a2a4f3f9a99d4102efef762745631f156" args="(roombaConst::EventType type)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">void ArduinoRoomba::waitEvent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_arduino_roomba.html#af76e2cc5c85104aae809b49a9af59a9c">EventType</a>&#160;</td>
+          <td class="paramtype">roombaConst::EventType&#160;</td>
           <td class="paramname"><em>type</em></td><td>)</td>
           <td></td>
         </tr>
@@ -1364,8 +1048,9 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="_arduino_roomba_8h_source.html">ArduinoRoomba.h</a></li>
+<li><a class="el" href="_arduino_roomba_8cpp.html">ArduinoRoomba.cpp</a></li>
 </ul>
 </div>
 <!--- window showing the filter options -->
@@ -1373,7 +1058,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Enumerations</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -1382,7 +1067,7 @@ static const int&#160;</td><td class="memItemRight" valign="bottom"><b>read_time
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sat Apr 2 2011 23:09:36 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Sun Apr 3 2011 01:16:28 by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>

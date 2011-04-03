@@ -1,4 +1,4 @@
-/*!  \file ArduinoRoomba.cpp
+/*!  \file LibraryTest.cpp
  	$Id$
 	$HeadURL$
 	\author  Joe Foley <foley@mit.edu>, <foley@ru.edu>
@@ -15,11 +15,12 @@
 
 #include "ArduinoRoomba.h"
 
+
 /*! \def test(a,b)
  * 	\brief Testing function in the library
  */
 int test(int a, int b) {
-	return(masks::led_none);
+	return(roombaConst::Baud300);
 
 }
 
