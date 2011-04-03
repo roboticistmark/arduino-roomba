@@ -24,84 +24,6 @@
 
 #include "WProgram.h"
 
-namespace masks {
-//! Masks for LEDs on top of create and roomba
-enum {
-  led_none = 0x0,
-  led_play = 0x2,
-  led_advance = 0x8,
-};
-
-/// Masks for digitalOut()
-enum {
-  dout0 = 0x1,
-  dout1 = 0x2,
-  dout2 = 0x4,
-};
-
-/// Masks for drivers()
-enum {
-  driver_0 = 0x1,
-  driver_1 = 0x2,
-  driver_2 = 0x4,
-};
-
-/// Roomba Specific masks
-enum {
-  side_brush = 0x1,
-  vacuum = 0x2,
-  main_brush = 0x4,
-};
-
-/// Masks for bumps and wheeldrops sensor packet id 7
-enum {
-  bump_right = 0x1,
-  bump_left = 0x2,
-  wheeldrop_right = 0x4,
-  wheeldrop_left = 0x8,
-  wheeldrop_caster = 0x10,
-};
-
-/// Masks for driver over-currents Packet ID 13.  Roomba, use SIDE_BRUSH,  VACUUM, MAIN_BRUSH
-enum {
-  ld1 = 0x1,
-  ld0 = 0x2,
-  ld2 = 0x4,
-  right_wheel = 0x8,
-  left_wheel = 0x10,
-};
-
-/// Masks for buttons sensor packet ID 18
-enum {
-  /// Create
-  button_play = 0x1,
-  button_advance = 0x4,
-  /// Roomba
-  button_max = 0x1,
-  button_clean = 0x2,
-  button_spot = 0x4,
-  button_power = 0x8,
-};
-
-/// Masks for digital inputs sensor packet ID 32
-enum {
-  din0 = 0x1,
-  din1 = 0x2,
-  din2 = 0x4,
-  din3 = 0x8,
-  din_detect = 0x10,
-};
-
-/// Masks for charging sources sensor packet ID 34
-enum {
-  internal_charger = 0x1,
-  home_base = 0x2,
-};
-
-}
-
-
-
 /////////////////////////////////////////////////////////////////////
 /// \class ArduinoRoomba ArduinoRoomba.h <ArduinoRoomba.h>
 ///
@@ -146,23 +68,105 @@ enum {
 /// You wil see some messages emitted on teh serial port.
 /// Press the right-right arrow button to cycle through the tests.
 ///
+/*!  \file roombaConst.h
+ 	$Id$
+	$HeadURL$
+	\author  Joe Foley <foley@mit.edu>, <foley@ru.edu>
+	Copyright (C) 2011 Joe Foley.  Use is subject to license conditions
 
+ 	\par Open Source Licensing GPL V2
+	This is the appropriate option if you want to share the source code of your
+	application with everyone you distribute it to, and you also want to give them
+	the right to share who uses it. If you wish to use this software under Open
+	Source Licensing, you must contribute all your source code to the open source
+	community in accordance with the GPL Version 2 when your application is
+	distributed. See http://www.gnu.org/copyleft/gpl.html
 
-class ArduinoRoomba
+	\brief Constants for roomba
+ */
+
+namespace roombaMask {
+//! \enum Masks for LEDs on top of create and roomba
+enum {
+	led_none = 0x0,
+	led_play = 0x2,
+	led_advance = 0x8,
+};
+
+/// Masks for digitalOut
+enum {
+	dout0 = 0x1,
+	dout1 = 0x2,
+	dout2 = 0x4,
+};
+
+/// Masks for drivers
+enum {
+	driver_0 = 0x1,
+	driver_1 = 0x2,
+	driver_2 = 0x4,
+};
+
+/// Roomba-specific masks
+enum {
+	side_brush = 0x1,
+	vacuum = 0x2,
+	main_brush = 0x4,
+};
+
+/// Masks for bumps and wheel-drop sensor packet id 7
+enum {
+	bump_right = 0x1,
+	bump_left = 0x2,
+	drop_right = 0x4,
+	drop_left = 0x8,
+	drop_caster = 0x10,
+};
+
+/**
+ * Masks for driver over-currents Packet ID 13.  Roomba, use SIDE_BRUSH,  VACUUM, MAIN_BRUSH
+ */
+enum {
+	ld1 = 0x1,
+	ld0 = 0x2,
+	ld2 = 0x4,
+	right_wheel = 0x8,
+	left_wheel = 0x10,
+};
+
+/// Masks for buttons sensor packet ID 18
+enum {
+	/// Create
+	button_play = 0x1,
+	button_advance = 0x4,
+	/// Roomba
+	button_max = 0x1,
+	button_clean = 0x2,
+	button_spot = 0x4,
+	button_power = 0x8,
+};
+
+/// Masks for digital inputs sensor packet ID 32
+enum {
+	din0 = 0x1,
+	din1 = 0x2,
+	din2 = 0x4,
+	din3 = 0x8,
+	din_detect = 0x10,
+};
+
+/// Masks for charging sources sensor packet ID 34
+enum {
+	internal_charger = 0x1,
+	home_base = 0x2,
+};
+}
+
+namespace roombaConst {
+/// \enum Baud
+/// Demo types to pass to Roomba::baud()
+typedef enum
 {
-
-public:
-  /// \def read_timeout
-  /// Read timeout in milliseconds.
-  /// If we have to wait more than this to read a char
-  /// when we are expecting one, then something is wrong.
-  static const int read_timeout = 200;
-
-  
-    /// \enum Baud
-    /// Demo types to pass to Roomba::baud()
-    typedef enum
-    {
 	Baud300    = 0,
 	Baud600    = 1,
 	Baud1200   = 2,
@@ -175,12 +179,12 @@ public:
 	Baud38400  = 9,
 	Baud57600  = 10,
 	Baud115200 = 11,
-    } Baud;
-    
-    /// \enum Demo
-    /// Demo types to pass to Roomba::demo()
-    typedef enum
-    {
+} Baud;
+
+/// \enum Demo
+/// Demo types to pass to Roomba::demo()
+typedef enum
+{
 	DemoAbort = -1,
 	DemoCover = 0,
 	DemoCoverAndDock = 1,
@@ -192,29 +196,29 @@ public:
 	DemoTag = 7,
 	DemoPachelbel = 8,
 	DemoBanjo = 9,
-    } Demo;
-    
-    /// \enum Drive
-    /// Special values for radius in Roomba::drive()
-    typedef enum
-    {
+} Demo;
+
+/// \enum Drive
+/// Special values for radius in Roomba::drive()
+typedef enum
+{
 	DriveStraight                = 0x8000,
 	DriveInPlaceClockwise        = 0xFFFF,
 	DriveInPlaceCounterClockwise = 0x0001,
-    } Drive;
-  
-    /// \enum StreamCommand
-    /// Values to pass to Roomba::streamCommand()
-    typedef enum
-    {
-	StreamCommandPause  = 0,  
+} Drive;
+
+/// \enum StreamCommand
+/// Values to pass to Roomba::streamCommand()
+typedef enum
+{
+	StreamCommandPause  = 0,
 	StreamCommandResume = 1,
-    } StreamCommand;
-  
-    /// \enum EventType
-    /// Values to pass to Roomba::waitEvent()
-    typedef enum
-    {
+} StreamCommand;
+
+/// \enum EventType
+/// Values to pass to Roomba::waitEvent()
+typedef enum
+{
 	EventTypeWheelDrop       = 1,
 	EventTypeFronWheelDrop   = 2,
 	EventTypeLeftWheelDrop   = 3,
@@ -234,15 +238,15 @@ public:
 	EventTypePlayButton      = 17,
 	EventTypeDigitalInput0   = 18,
 	EventTypeDigitalInput1   = 19,
-	EventTypeDigitalInput2   = 20,  
+	EventTypeDigitalInput2   = 20,
 	EventTypeDigitalInput3   = 21,
 	EventTypeModePassive     = 22,
-    } EventType;
-  
-    /// \enum IRCommand
-    /// Values for sensor packet ID 27
-    typedef enum
-    {
+} EventType;
+
+/// \enum IRCommand
+/// Values for sensor packet ID 27
+typedef enum
+{
 	// Remote control:
 	IRCommandLeft                   = 129,
 	IRCommandForward                = 130,
@@ -263,40 +267,40 @@ public:
 	// Home Base:
 	IRCommandReserved1              = 240,
 	IRCommandRedBuoy                = 248,
-	IRCommandGreenBuoy              = 244, 
+	IRCommandGreenBuoy              = 244,
 	IRCommandForceField             = 242,
 	IRCommandRedGreenBuoy           = 252,
 	IRCommandRedBuoyForceField      = 250,
 	IRCommandGreenBuoyForceField    = 246,
 	IRCommandRedGreenBuoyForceField = 254,
-    } IRCommand;
-  
-    /// \enum ChargeState
-    /// Values for sensor packet ID 21
-    typedef enum
-    {
+} IRCommand;
+
+/// \enum ChargeState
+/// Values for sensor packet ID 21
+typedef enum
+{
 	ChargeStateNotCharging            = 0,
 	ChargeStateReconditioningCharging = 1,
 	ChargeStateFullChanrging          = 2,
 	ChargeStateTrickleCharging        = 3,
 	ChargeStateWaiting                = 4,
 	ChargeStateFault                  = 5,
-    } ChargeState;
-  
-    /// \enum Mode
-    /// Values for sensor packet ID 35
-    typedef enum
-    {
+} ChargeState;
+
+/// \enum Mode
+/// Values for sensor packet ID 35
+typedef enum
+{
 	ModeOff     = 0,
 	ModePassive = 1,
 	ModeSafe    = 2,
 	ModeFull    = 3,
-    } Mode;
-  
-    /// \enum Sensor
-    /// Values for sensor packet IDs to pass to getSensors() and getSensorsList()
-    typedef enum
-    {
+} Mode;
+
+/// \enum Sensor
+/// Values for sensor packet IDs to pass to getSensors() and getSensorsList()
+typedef enum
+{
 	Sensors7to26                   = 0,
 	Sensors7to16                   = 1,
 	Sensors17to20                  = 2,
@@ -312,8 +316,8 @@ public:
 	SensorCliffRight               = 12,
 	SensorVirtualWall              = 13,
 	SensorOvercurrents             = 14,
-//	SensorUnused1                  = 15,
-//	SensorUnused2                  = 16,
+	//	SensorUnused1                  = 15,
+	//	SensorUnused2                  = 16,
 	SensorIRByte                   = 17,
 	SensorButtons                  = 18,
 	SensorDistance                 = 19,
@@ -340,8 +344,25 @@ public:
 	SensorRadius                   = 40,
 	SensorRightVelocity            = 41,
 	SensorLeftVelocity             = 42,
-    } Sensor;
+} Sensor;
 
+
+}
+
+
+
+
+
+class ArduinoRoomba
+{
+
+public:
+
+	/// \def read_timeout
+	/// Read timeout in milliseconds.
+	/// If we have to wait more than this to read a char
+	/// when we are expecting one, then something is wrong.
+	static const int read_timeout = 200;
     
     /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
     ArduinoRoomba();
@@ -357,11 +378,11 @@ public:
     /// Converts the specified baud code into a baud rate in bits per second
     /// \param[in] baud Baud code, one of Roomba::Baud
     /// \return baud rate in bits per second
-    uint32_t baudCodeToBaudRate(Baud baud);
+    uint32_t baudCodeToBaudRate(roombaConst::Baud baud);
 
     /// Changes the baud rate
     /// Baud is on of the Roomba::Baud enums
-    void baud(Baud baud);
+    void baud(roombaConst::Baud baud);
 
     /// MODES
     //////////////////////////////////////
@@ -378,7 +399,7 @@ public:
     //////////////////////////////////////
     /// Starts the requirested built-in demo
     /// \param[in] demo The demo number. One of Roomba::Demo
-    void demo(Demo demo);
+    void demo(roombaConst::Demo demo);
 
     /// Starts the Cover demo
     /// Changes mode to Passive
@@ -488,7 +509,7 @@ public:
     /// Pause or resume a stream of sensor data packets previously requested by stream()
     /// Create only. No equivalent on Roomba.
     /// \param[in] command One of Roomba::StreamCommand
-    void pauseResumeStream(StreamCommand command);
+    void pauseResumeStream(roombaConst::StreamCommand command);
 
 
     /// Script Commands
@@ -545,7 +566,7 @@ public:
     /// Note that this does not cause the host arduino to wait, it only sends the wait comman to the Roomba
     /// Create only. No equivalent on Roomba.
     /// \param[in] type Event type to wait for. One of Roomba::EventType
-    void waitEvent(EventType type);
+    void waitEvent(roombaConst::EventType type);
 
 
     /// Low level Helper Functions
