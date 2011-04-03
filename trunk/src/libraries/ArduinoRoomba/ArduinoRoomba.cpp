@@ -47,13 +47,151 @@ namespace roombaConst { }
 
 
 
-void ArduinoRoomba::start() {
 
-	int a;
-	int b;
-	a = roombaMask::bump_right;
-	b = roombaConst::Baud300;
-	a = a + 1;
-	b = b + 1;
+ArduinoRoomba::ArduinoRoomba(int rxPin, int txPin, int ddPin):
+		sci(rxPin,txPin)
+{
+	/// setup instance variables to remember which pins used
+	this->_rxPin = rxPin;
+	this->_txPin = txPin;
+	this->_ddPin = ddPin;
+
+	// Set dd as output so we can use it to wake Roomba.
+	// sciSerial has already setup rx and tx pins
+	pinMode(ddPin, OUTPUT);
 }
+
+/// Send an int, useful if the int is more than 8 bits
+void ArduinoRoomba::sendint16(int16_t outint)
+{
+	this->sci.print((outint & 0xff00) >> 8);
+	this->sci.print(outint & 0xff);
+}
+
+
+void ArduinoRoomba::init()
+{
+	// RoombaSerial puts manual delays between instructions
+	// we can do better.
+
+	/// Roomba/Create is at 56K baud by default
+	this->sci.begin(57600);
+
+	/// Wake up
+	this->wake();
+
+	/// Tell it to prepare to receive commands
+	//this->start();
+
+	/// Take control
+	//this->control();
+}
+
+void ArduinoRoomba::wake()
+{
+	/// The wake code is only needed on the SCI interface, really
+	/// This will take it out of standby
+	/// Harmess on a robot that is awake
+	 digitalWrite(this->_ddPin, HIGH);
+	 delay(100);
+	 digitalWrite(this->_ddPin, LOW);
+	 delay(500);
+	 digitalWrite(this->_ddPin, HIGH);
+	  delay(2000);
+}
+
+
+void ArduinoRoomba::start(void)
+{
+	this->sci.print(roombaCmd::START);
+}
+
+void ArduinoRoomba::baud(roombaConst::Baud baud)
+{
+	this->sci.print(roombaCmd::BAUD);
+	this->sci.print(baud, BYTE);
+}
+
+void ArduinoRoomba::safeMode(void)
+{
+	this->sci.print(roombaCmd::SAFE);
+}
+
+void ArduinoRoomba::fullMode(void)
+{
+	this->sci.print(roombaCmd::FULL);
+}
+
+void ArduinoRoomba::power(void)
+{
+	this->sci.print(roombaCmd::POWER);
+}
+
+void ArduinoRoomba::spot(void)
+{
+	this->sci.print(roombaCmd::SPOT);
+}
+
+void ArduinoRoomba::demo(roombaConst::Demo demo)
+{
+	this->sci.print(roombaCmd::DEMO);
+	this->sci.print(demo, BYTE);
+}
+
+
+// now routines for getting data
+
+/** Reads at most len bytes and stores them to dest
+ * If successful, returns true.
+ * If there is a timeout, returns false
+ * Blocks until all bytes are read
+ * Caller must ensure there is sufficient space in dest
+ */
+bool ArduinoRoomba::getData(uint8_t* dest, uint8_t len)
+{
+  while (len-- > 0)
+  {
+    unsigned long startTime = millis();
+    while (this->sci.available())
+    {
+      // Look for a timeout
+      if (millis() > startTime + read_timeout)
+        return false; // Timed out
+    }
+    *dest++ = this->sci.read();
+  }
+  return true;
+}
+
+void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
+
+  //--- Safe the sensor values
+  if(sensorCode > 3) {
+    sensorCode = 3;
+  }
+
+  this->sci.print(roombaCmd::SENSORS, BYTE);
+  this->sci.print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
+
+  delay(100); // wait for sensors
+
+  int i = 0;
+  while(this->sci.available()) {
+    int c = this->sci.read();
+
+    if(sensorCode == 0){
+      this->_sensorbytes_0[i++] = c;
+    }
+    if(sensorCode == 1){
+      this->_sensorbytes_1[i++] = c;
+    }
+    if(sensorCode == 2){
+      this->_sensorbytes_2[i++] = c;
+    }
+    if(sensorCode == 3){
+      this->_sensorbytes_3[i++] = c;
+    }
+  }
+}
+
 
