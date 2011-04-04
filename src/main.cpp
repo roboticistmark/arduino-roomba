@@ -6,17 +6,20 @@
 /// ArduinoRoomb(rx,tx,dd)
 ArduinoRoomba roomba(3,4,5);
 void setup() {
+	Serial.begin(9600);
   // initialize the digital pin as an output.
   // Pin 13 has an LED connected on most Arduino boards:
+
   pinMode(13, OUTPUT);
   roomba.init();
+  //roomba.grabSerial();
 }
 
 void loop() {
-  digitalWrite(13, HIGH);   // set the LED on
-  delay(200);              // wait for a second
-  digitalWrite(13, LOW);    // set the LED off
-  delay(2000);              // wait for a second
+	Serial.print("Sensors:");
+	roomba.updateSensors(3);
+	//Serial.println(roomba.sensorbytes_3[0]);
+	Serial.println(roomba.getSensorDirect(7));
 }
 
 int main(void)

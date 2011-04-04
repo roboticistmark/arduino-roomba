@@ -441,10 +441,10 @@ public:
     
     /// Roomba sensor bytes cached from last read
     //--- Roomba sensor bytes
-    char _sensorbytes_0[26];
-    char _sensorbytes_1[10];
-    char _sensorbytes_2[6];
-    char _sensorbytes_3[10];
+    char sensorbytes_0[26];
+    char sensorbytes_1[10];
+    char sensorbytes_2[6];
+    char sensorbytes_3[10];
 
 
     /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
@@ -481,6 +481,13 @@ public:
      */
     void init();
 
+    /// Getting data directly by index
+    int getSensorData(uint8_t sensorCode, uint8_t index);
+
+    /// Access sensor data directly
+    int getSensorDirect(uint8_t packetCode);
+
+
     /**
      *   Kick the thing awake.  Mostly relevant on things using SCI.
      */
@@ -499,7 +506,11 @@ public:
     /// \return baud rate in bits per second
     uint32_t baudCodeToBaudRate(roombaConst::Baud baud);
 
+    /// Debug routine to just see what the roomba sends
+    void grabSerial();
 
+    /// Has the right bumper been pressed?
+    bool bumpRight(void);
 
     ///////////////////////////////////////////
     ////  Open Interface API
@@ -509,6 +520,9 @@ public:
     /// Changes the baud rate
     /// Baud is on of the Roomba::Baud enums
     void baud(roombaConst::Baud baud);
+
+    /// not quite sure why this is necessary
+    void control();
 
     /// MODES
     //////////////////////////////////////
