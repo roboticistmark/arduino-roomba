@@ -426,9 +426,14 @@ public:
 	/// when we are expecting one, then something is wrong.
 	static const int read_timeout = 200;
 
+#if defined(UBRR1H)
+    /// Hardware interface (mostly for Mega)
+    HardwareSerial* sci;
+#else
     /// Software serial interface
     /// USART is used for Arduino debugging serial console
-    NewSoftSerial sci;
+    NewSoftSerial* sci;
+#endif
 
     /**
      *  Safety parameter to ensure that we don't tell it
@@ -717,8 +722,8 @@ public:
     /// \param[in] len Number of bytes to read
     /// \return true if all len bytes were successfully read. Returns false in the case of a timeout 
     /// on reading any byte.
-    bool getData(uint8_t* dest, uint8_t len);
-
+    //bool getData(uint8_t* dest, uint8_t len);
+    bool getData(char* dest, uint8_t len);
 
     //// Roomba Only Commands
     /////////////////////////////////////////////////////////

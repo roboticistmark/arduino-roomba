@@ -46,12 +46,16 @@
 /// streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its
 /// serial port from time to time as described below.
 
-
-
-
-ArduinoRoomba::ArduinoRoomba(int rxPin, int txPin, int ddPin):
-		sci(rxPin,txPin)
+ArduinoRoomba::ArduinoRoomba(int rxPin, int txPin, int ddPin)
 {
+#if defined(UBRR1H)
+	/// if defined, we have a hardware Serial1
+	this->sci = &Serial1;
+#else
+	// setup the NewSoftSerial port
+	this->sci = sci(rxPin,txPin);
+#endif
+
 	/// setup instance variables to remember which pins used
 	this->_rxPin = rxPin;
 	this->_txPin = txPin;
@@ -62,6 +66,7 @@ ArduinoRoomba::ArduinoRoomba(int rxPin, int txPin, int ddPin):
 	pinMode(ddPin, OUTPUT);
 }
 
+
 void ArduinoRoomba::grabSerial()
 {
 	// Just listen on the serial port
@@ -69,14 +74,14 @@ void ArduinoRoomba::grabSerial()
 	const int bufsize = 5;
 	char buffer[bufsize];
 	PString mystring(buffer, sizeof(buffer));
-	this->sci.begin(57600);
+	this->sci->begin(57600);
 	Serial.begin(57600);
 	Serial.println("Grabbing serial.");
 	char c;
 	int i = 0;
 	while(true) {
-		if(this->sci.available()) {
-			c = this->sci.read();
+		if(this->sci->available()) {
+			c = this->sci->read();
 			mystring.print(c);
 			i++;
 		}
@@ -94,8 +99,8 @@ void ArduinoRoomba::grabSerial()
 /// Send an int, useful if the int is more than 8 bits
 void ArduinoRoomba::sendint16(int16_t outint)
 {
-	this->sci.print((outint & 0xff00) >> 8);
-	this->sci.print(outint & 0xff);
+	this->sci->print((outint & 0xff00) >> 8);
+	this->sci->print(outint & 0xff);
 }
 
 
@@ -105,48 +110,32 @@ void ArduinoRoomba::init()
 	// we can do better.
 
 	/// Roomba/Create is at 56K baud by default
-	this->sci.begin(57600);
+	this->sci->begin(57600);
 
 	/// Wake up if off
 	//this->wake();
 
 	/// Tell it to prepare to receive commands
 	this->start();
+	/// We must wait for the tone to play before continuing
 	delay(500);
-	/// Take control
-	//this->control();
-	//delay(500);
-
 }
 
 int ArduinoRoomba::getSensorData(uint8_t sensorCode, uint8_t index)
 {
-  if(sensorCode == 0){
-    return this->sensorbytes_0[index];
-  }
-  if(sensorCode == 1){
-    return this->sensorbytes_1[index];
-  }
-  if(sensorCode == 2){
-    return this->sensorbytes_2[index];
-  }
-  else { // 3 or greater
-    return this->sensorbytes_3[index];
-  }
+  if(sensorCode == 0){ return this->sensorbytes_0[index]; }
+  if(sensorCode == 1){ return this->sensorbytes_1[index]; }
+  if(sensorCode == 2){ return this->sensorbytes_2[index]; }
+  else { return this->sensorbytes_3[index]; } // 3 or greater
 }
 
 int ArduinoRoomba::getSensorDirect(uint8_t packetCode) {
   // call for individual addressed packets instead of using groupings
-  this->sci.print(142, BYTE);
-  this->sci.print(packetCode, BYTE);  // sensor packet 1, 10 bytes
-
-  //delay(100); // wait for sensors
-
-  char i = 0;
-  while(! this->sci.available()) {
-    // don't do anything
-  }
-  return(this->sci.read());
+  this->sci->print(142, BYTE);
+  this->sci->print(packetCode, BYTE);  // sensor packet 1, 10 bytes
+  // don't do anything until we see data
+  while(! this->sci->available()) {}
+  return(this->sci->read());
 }
 
 void ArduinoRoomba::wake()
@@ -165,44 +154,44 @@ void ArduinoRoomba::wake()
 
 void ArduinoRoomba::start(void)
 {
-	this->sci.print(roombaCmd::START, BYTE);
+	this->sci->print(roombaCmd::START, BYTE);
 }
 
 void ArduinoRoomba::baud(roombaConst::Baud baud)
 {
-	this->sci.print(roombaCmd::BAUD, BYTE);
-	this->sci.print(baud, BYTE);
+	this->sci->print(roombaCmd::BAUD, BYTE);
+	this->sci->print(baud, BYTE);
 }
 
 void ArduinoRoomba::control(void)
 {
-	this->sci.print(roombaCmd::CONTROL, BYTE);
+	this->sci->print(roombaCmd::CONTROL, BYTE);
 }
 
 void ArduinoRoomba::safeMode(void)
 {
-	this->sci.print(roombaCmd::SAFE, BYTE);
+	this->sci->print(roombaCmd::SAFE, BYTE);
 }
 
 void ArduinoRoomba::fullMode(void)
 {
-	this->sci.print(roombaCmd::FULL, BYTE);
+	this->sci->print(roombaCmd::FULL, BYTE);
 }
 
 void ArduinoRoomba::power(void)
 {
-	this->sci.print(roombaCmd::POWER, BYTE);
+	this->sci->print(roombaCmd::POWER, BYTE);
 }
 
 void ArduinoRoomba::spot(void)
 {
-	this->sci.print(roombaCmd::SPOT, BYTE);
+	this->sci->print(roombaCmd::SPOT, BYTE);
 }
 
 void ArduinoRoomba::demo(roombaConst::Demo demo)
 {
-	this->sci.print(roombaCmd::DEMO, BYTE);
-	this->sci.print(demo, BYTE);
+	this->sci->print(roombaCmd::DEMO, BYTE);
+	this->sci->print(demo, BYTE);
 }
 
 
@@ -214,51 +203,58 @@ void ArduinoRoomba::demo(roombaConst::Demo demo)
  * Blocks until all bytes are read
  * Caller must ensure there is sufficient space in dest
  */
-bool ArduinoRoomba::getData(uint8_t* dest, uint8_t len)
+bool ArduinoRoomba::getData(char* dest, uint8_t len)
 {
   while (len-- > 0)
   {
     unsigned long startTime = millis();
-    while (this->sci.available())
+    while (this->sci->available())
     {
       // Look for a timeout
       if (millis() > startTime + read_timeout)
         return false; // Timed out
     }
-    *dest++ = this->sci.read();
+    *dest++ = this->sci->read();
   }
   return true;
 }
 
+//void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
+//
+//  //--- Safe the sensor values
+//  if(sensorCode > 3) {
+//    sensorCode = 3;
+//  }
+//
+//  //this->sci.print(roombaCmd::SENSORS, BYTE);
+//  this->sci.print(142, BYTE);
+//  this->sci.print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
+//
+//  if(! this->sci.available()) { }
+//  int i = 0;
+//  while(this->sci.available()) {
+//    int c = this->sci.read();
+//
+//    if(sensorCode == 0){
+//      this->sensorbytes_0[i++] = c;
+//    }
+//    if(sensorCode == 1){
+//      this->sensorbytes_1[i++] = c;
+//    }
+//    if(sensorCode == 2){
+//      this->sensorbytes_2[i++] = c;
+//    }
+//    if(sensorCode == 3){
+//      this->sensorbytes_3[i++] = c;
+//    }
+//  }
+//}
+
 void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
-
-  //--- Safe the sensor values
-  if(sensorCode > 3) {
-    sensorCode = 3;
-  }
-
-  this->sci.print(roombaCmd::SENSORS, BYTE);
-  this->sci.print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
-
-  delay(100); // wait for sensors
-
-  int i = 0;
-  while(this->sci.available()) {
-    int c = this->sci.read();
-
-    if(sensorCode == 0){
-      this->sensorbytes_0[i++] = c;
-    }
-    if(sensorCode == 1){
-      this->sensorbytes_1[i++] = c;
-    }
-    if(sensorCode == 2){
-      this->sensorbytes_2[i++] = c;
-    }
-    if(sensorCode == 3){
-      this->sensorbytes_3[i++] = c;
-    }
-  }
+  //this->sci.print(roombaCmd::SENSORS, BYTE);
+  this->sci->print(142, BYTE);
+  this->sci->print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
+  this->getData(this->sensorbytes_1, 10);
 }
 
 bool ArduinoRoomba::bumpRight(void) {

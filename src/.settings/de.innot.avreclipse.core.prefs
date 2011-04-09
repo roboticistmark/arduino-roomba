@@ -1,8 +1,8 @@
-#Thu Mar 24 22:54:22 GMT 2011
+#Sat Apr 09 18:45:47 GMT 2011
 avrtarget/ClockFrequency=16000000
 avrtarget/ExtRAMSize=0
 avrtarget/ExtendedRAM=false
-avrtarget/MCUType=atmega328p
+avrtarget/MCUType=atmega2560
 avrtarget/UseEEPROM=false
 avrtarget/UseExtendedRAMforHeap=true
 avrtarget/avrdude/BitBangDelay=
@@ -20,6 +20,12 @@ avrtarget/avrdude/ProgrammerID=programmerconfig.2
 avrtarget/avrdude/UseCounter=false
 avrtarget/avrdude/WriteEEPROM=false
 avrtarget/avrdude/WriteFlash=true
+avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067.1411693520/ClockFrequency=16000000
+avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067.1411693520/ExtRAMSize=0
+avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067.1411693520/ExtendedRAM=false
+avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067.1411693520/MCUType=atmega2560
+avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067.1411693520/UseEEPROM=false
+avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067.1411693520/UseExtendedRAMforHeap=true
 avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067/ClockFrequency=16000000
 avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067/ExtRAMSize=0
 avrtarget/de.innot.avreclipse.configuration.app.debug.2015065067/ExtendedRAM=false
