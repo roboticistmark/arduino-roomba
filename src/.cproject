@@ -2290,6 +2290,33 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.1718237515" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug"/>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="de.innot.avreclipse.configuration.app.debug.2015065067.1411693520.289827399" name="/" resourcePath="Mega">
+						<toolChain id="de.innot.avreclipse.toolchain.winavr.app.debug.1502865434" name="AVR-GCC Toolchain" superClass="de.innot.avreclipse.toolchain.winavr.app.debug" unusedChildren="">
+							<option id="de.innot.avreclipse.toolchain.options.toolchain.objcopy.flash.app.debug.330668593.1925599714" name="Generate HEX file for Flash memory" superClass="de.innot.avreclipse.toolchain.options.toolchain.objcopy.flash.app.debug.330668593"/>
+							<option id="de.innot.avreclipse.toolchain.options.toolchain.objcopy.eeprom.app.debug.959243323.1911531556" name="Generate HEX file for EEPROM" superClass="de.innot.avreclipse.toolchain.options.toolchain.objcopy.eeprom.app.debug.959243323"/>
+							<option id="de.innot.avreclipse.toolchain.options.toolchain.objdump.app.debug.415943203.2004094020" name="Generate Extended Listing (Source + generated Assembler)" superClass="de.innot.avreclipse.toolchain.options.toolchain.objdump.app.debug.415943203"/>
+							<option id="de.innot.avreclipse.toolchain.options.toolchain.size.app.debug.246430389.603692981" name="Print Size" superClass="de.innot.avreclipse.toolchain.options.toolchain.size.app.debug.246430389"/>
+							<option id="de.innot.avreclipse.toolchain.options.toolchain.avrdude.app.debug.427804157.1922501136" name="AVRDude" superClass="de.innot.avreclipse.toolchain.options.toolchain.avrdude.app.debug.427804157"/>
+							<targetPlatform id="de.innot.avreclipse.targetplatform.winavr.app.debug" name="AVR Cross-Target" superClass="de.innot.avreclipse.targetplatform.winavr.app.debug"/>
+							<tool id="de.innot.avreclipse.tool.assembler.winavr.app.debug.921899832" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.app.debug.908059236">
+								<inputType id="de.innot.avreclipse.tool.assembler.input.124823503" superClass="de.innot.avreclipse.tool.assembler.input"/>
+							</tool>
+							<tool id="de.innot.avreclipse.tool.compiler.winavr.app.debug.1068616352" name="AVR Compiler" superClass="de.innot.avreclipse.tool.compiler.winavr.app.debug.1239055643">
+								<inputType id="de.innot.avreclipse.compiler.winavr.input.934865018" name="C Source Files" superClass="de.innot.avreclipse.compiler.winavr.input"/>
+							</tool>
+							<tool id="de.innot.avreclipse.tool.cppcompiler.app.debug.1849692265" name="AVR C++ Compiler" superClass="de.innot.avreclipse.tool.cppcompiler.app.debug.184704141">
+								<inputType id="de.innot.avreclipse.cppcompiler.input.1974756179" superClass="de.innot.avreclipse.cppcompiler.input"/>
+							</tool>
+							<tool id="de.innot.avreclipse.tool.linker.winavr.app.debug.862948219" name="AVR C Linker" superClass="de.innot.avreclipse.tool.linker.winavr.app.debug.1195894534"/>
+							<tool id="de.innot.avreclipse.tool.cpplinker.app.debug.1668289479" name="AVR C++ Linker" superClass="de.innot.avreclipse.tool.cpplinker.app.debug.1116698264"/>
+							<tool id="de.innot.avreclipse.tool.archiver.winavr.base.393322447" name="AVR Archiver" superClass="de.innot.avreclipse.tool.archiver.winavr.base.938618192"/>
+							<tool id="de.innot.avreclipse.tool.objdump.winavr.app.debug.1650560642" name="AVR Create Extended Listing" superClass="de.innot.avreclipse.tool.objdump.winavr.app.debug.1598348606"/>
+							<tool id="de.innot.avreclipse.tool.objcopy.flash.winavr.app.debug.1243179051" name="AVR Create Flash image" superClass="de.innot.avreclipse.tool.objcopy.flash.winavr.app.debug.1042788467"/>
+							<tool id="de.innot.avreclipse.tool.objcopy.eeprom.winavr.app.debug.1255434889" name="AVR Create EEPROM image" superClass="de.innot.avreclipse.tool.objcopy.eeprom.winavr.app.debug.1852096778"/>
+							<tool id="de.innot.avreclipse.tool.size.winavr.app.debug.540929789" name="Print Size" superClass="de.innot.avreclipse.tool.size.winavr.app.debug.1451724570"/>
+							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.1380363004" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug.1718237515"/>
+						</toolChain>
+					</folderInfo>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
