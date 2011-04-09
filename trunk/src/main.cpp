@@ -12,14 +12,13 @@ void setup() {
 
   pinMode(13, OUTPUT);
   roomba.init();
-  //roomba.grabSerial();
 }
 
 void loop() {
 	Serial.print("Sensors:");
-	roomba.updateSensors(3);
-	//Serial.println(roomba.sensorbytes_3[0]);
+	roomba.updateSensors(1);
 	Serial.println(roomba.getSensorDirect(7));
+	Serial.println(roomba.getSensorData(1,0));
 }
 
 int main(void)
