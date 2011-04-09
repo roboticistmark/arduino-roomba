@@ -6,7 +6,7 @@
 /// ArduinoRoomb(rx,tx,dd)
 ArduinoRoomba roomba(3,4,5);
 void setup() {
-	Serial.begin(9600);
+	Serial.begin(57600);
   // initialize the digital pin as an output.
   // Pin 13 has an LED connected on most Arduino boards:
 
