@@ -21,6 +21,7 @@
 
 #include "WProgram.h"
 #include "ArduinoRoomba.h"
+#include "NewSoftSerial.h"
 #include "PString.h"
 
 //namespace roombaMask { }
@@ -46,14 +47,16 @@
 /// streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its
 /// serial port from time to time as described below.
 
-ArduinoRoomba::ArduinoRoomba(int rxPin, int txPin, int ddPin)
+ArduinoRoomba::ArduinoRoomba(uint8_t rxPin, uint8_t txPin, uint8_t ddPin)
 {
 #if defined(UBRR1H)
 	/// if defined, we have a hardware Serial1
+	/// TODO: fix the pointer vs. struct problem so that both versions are compatible
 	this->sci = &Serial1;
 #else
 	// setup the NewSoftSerial port
-	this->sci = sci(rxPin,txPin);
+	// this is probably wrong.  Fix it later
+	this->sci = new NewSoftSerial::NewSoftSerial(rxPin, txPin);
 #endif
 
 	/// setup instance variables to remember which pins used
@@ -65,7 +68,6 @@ ArduinoRoomba::ArduinoRoomba(int rxPin, int txPin, int ddPin)
 	// sciSerial has already setup rx and tx pins
 	pinMode(ddPin, OUTPUT);
 }
-
 
 void ArduinoRoomba::grabSerial()
 {
@@ -119,6 +121,9 @@ void ArduinoRoomba::init()
 	this->start();
 	/// We must wait for the tone to play before continuing
 	delay(500);
+
+	/// Now we must slow down or the UNO can't keep up
+	this->baud(roombaConst::Baud38400);
 }
 
 int ArduinoRoomba::getSensorData(uint8_t sensorCode, uint8_t index)
@@ -157,10 +162,12 @@ void ArduinoRoomba::start(void)
 	this->sci->print(roombaCmd::START, BYTE);
 }
 
+/// Change the OI interface speed.  Particularly important for NewSoftSerial usage
 void ArduinoRoomba::baud(roombaConst::Baud baud)
 {
 	this->sci->print(roombaCmd::BAUD, BYTE);
 	this->sci->print(baud, BYTE);
+	delay(100); /// OI specification says to wait 100ms before continuing
 }
 
 void ArduinoRoomba::control(void)

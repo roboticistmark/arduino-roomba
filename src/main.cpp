@@ -11,14 +11,15 @@ void setup() {
   // Pin 13 has an LED connected on most Arduino boards:
 
   pinMode(13, OUTPUT);
+  Serial.println("Sending init commands");
   roomba.init();
 }
 
 void loop() {
 	Serial.print("Sensors:");
-	roomba.updateSensors(1);
+	//roomba.updateSensors(1);
 	Serial.println(roomba.getSensorDirect(7));
-	Serial.println(roomba.getSensorData(1,0));
+	//Serial.println(roomba.getSensorData(1,0));
 }
 
 int main(void)
