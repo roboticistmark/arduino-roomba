@@ -73,6 +73,9 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.1109259134" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="libraries/ArduinoRoomba/LibraryTest.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -1172,6 +1175,9 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.release.953775408" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.release"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="libraries/ArduinoRoomba/LibraryTest.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
@@ -2317,6 +2323,9 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.debug.1380363004" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.debug.1718237515"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry excluding="libraries/ArduinoRoomba/LibraryTest.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

@@ -5,41 +5,18 @@
  *      Author: foley
  */
 
-#ifndef VIRTUAFUNCTIONFIX_H_
-#define VIRTUAFUNCTIONFIX_H_
+#ifndef VIRTUALFUNCTIONFIX_H_
+#define VIRTUALFUNCTIONFIX_H_
+#include <inttypes.h>
+#include <WProgram.h>
 
-extern "C" void __cxa_pure_virtual()
-{
-  cli();
-  for (;;);
-}
-
+extern "C" void __cxa_pure_virtual();
 __extension__ typedef int __guard __attribute__((mode (__DI__)));
-
-void * operator new(size_t size)
-{
-  return malloc(size);
-}
-
-void operator delete(void * ptr)
-{
-  free(ptr);
-}
-
-void * operator new[](size_t size)
-{
-    return malloc(size);
-}
-
-void operator delete[](void * ptr)
-{
-	if (ptr)
-		free(ptr);
-}
-
-int __cxa_guard_acquire(__guard *g) {return !*(char *)(g);}
-void __cxa_guard_release (__guard *g) {*(char *)g = 1;}
-void __cxa_guard_abort (__guard *) {}
-
-
-#endif /* VIRTUAFUNCTIONFIX_H_ */
+void * operator new(size_t size);
+void operator delete(void * ptr);
+void * operator new[](size_t size);
+void operator delete[](void * ptr);
+int __cxa_guard_acquire(__guard *g);
+void __cxa_guard_release (__guard *g);
+void __cxa_guard_abort (__guard *);
+#endif /* VIRTUALFUNCTIONFIX_H_ */

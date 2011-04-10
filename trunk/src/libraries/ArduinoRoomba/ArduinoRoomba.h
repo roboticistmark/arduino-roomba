@@ -31,7 +31,7 @@
 
 #include "WProgram.h"
 #include "NewSoftSerial.h"
-
+#include "virtualfunctionfix.h"
 /////////////////////////////////////////////////////////////////////
 /// \class ArduinoRoomba ArduinoRoomba.h <ArduinoRoomba.h>
 ///
@@ -426,14 +426,6 @@ public:
 	/// when we are expecting one, then something is wrong.
 	static const int read_timeout = 200;
 
-#if defined(UBRR1H)
-    /// Hardware interface (mostly for Mega)
-    HardwareSerial* sci;
-#else
-    /// Software serial interface
-    /// USART is used for Arduino debugging serial console
-    NewSoftSerial* sci;
-#endif
 
     /**
      *  Safety parameter to ensure that we don't tell it
@@ -453,7 +445,7 @@ public:
 
 
     /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
-    ArduinoRoomba(int rx, int tx, int dd);
+    ArduinoRoomba(uint8_t rx, uint8_t tx, uint8_t dd);
 
 
     /// NonOI support functions
@@ -744,6 +736,16 @@ private:
     int _rxPin;
     int _txPin;
     int _ddPin;
+
+#if defined(UBRR1H)
+    /// Hardware interface (mostly for Mega)
+    HardwareSerial* sci;
+#else
+    /// Software serial interface
+    /// USART is used for Arduino debugging serial console
+    NewSoftSerial* sci;
+#endif
+
 
 };
 
