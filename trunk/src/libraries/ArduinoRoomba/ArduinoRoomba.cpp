@@ -113,34 +113,46 @@ void ArduinoRoomba::init()
 
 	/// Roomba/Create is at 56K baud by default
 	this->sci->begin(57600);
+	/// Wait one second for the startup message to go blasting through if it does
+	delay(1000);
+	this->sci->flush();
 
 	/// Wake up if off
 	//this->wake();
 
 	/// Tell it to prepare to receive commands
 	this->start();
-	/// We must wait for the tone to play before continuing
-	delay(500);
 
 	/// Now we must slow down or the UNO can't keep up
 	this->baud(roombaConst::Baud38400);
+	this->sci->begin(38400);
 }
 
 int ArduinoRoomba::getSensorData(uint8_t sensorCode, uint8_t index)
 {
-  if(sensorCode == 0){ return this->sensorbytes_0[index]; }
-  if(sensorCode == 1){ return this->sensorbytes_1[index]; }
-  if(sensorCode == 2){ return this->sensorbytes_2[index]; }
-  else { return this->sensorbytes_3[index]; } // 3 or greater
+  if(sensorCode == 0){ return this->_sensorbytes_0[index]; }
+  if(sensorCode == 1){ return this->_sensorbytes_1[index]; }
+  if(sensorCode == 2){ return this->_sensorbytes_2[index]; }
+  else { return this->_sensorbytes_3[index]; } // 3 or greater
 }
 
-int ArduinoRoomba::getSensorDirect(uint8_t packetCode) {
+uint8_t ArduinoRoomba::getSensorDirect(uint8_t packetCode) {
   // call for individual addressed packets instead of using groupings
   this->sci->print(142, BYTE);
   this->sci->print(packetCode, BYTE);  // sensor packet 1, 10 bytes
   // don't do anything until we see data
-  while(! this->sci->available()) {}
-  return(this->sci->read());
+  unsigned long endTime = millis() + _readTimeout;
+  while (! this->sci->available())
+    {
+      // Look for a timeout
+      if (millis() > endTime) {
+        Serial.println("(TIMEOUT)");
+        return(-1); // Timed out
+      }
+    }
+  	  /// needed if we're going multiple packets
+    //endTime = millis() + _readTimeout;
+    return(sci->read());
 }
 
 void ArduinoRoomba::wake()
@@ -160,6 +172,7 @@ void ArduinoRoomba::wake()
 void ArduinoRoomba::start(void)
 {
 	this->sci->print(roombaCmd::START, BYTE);
+	delay(100);
 }
 
 /// Change the OI interface speed.  Particularly important for NewSoftSerial usage
@@ -218,7 +231,7 @@ bool ArduinoRoomba::getData(char* dest, uint8_t len)
     while (this->sci->available())
     {
       // Look for a timeout
-      if (millis() > startTime + read_timeout)
+      if (millis() > startTime + _readTimeout)
         return false; // Timed out
     }
     *dest++ = this->sci->read();
@@ -226,46 +239,86 @@ bool ArduinoRoomba::getData(char* dest, uint8_t len)
   return true;
 }
 
-//void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
-//
-//  //--- Safe the sensor values
-//  if(sensorCode > 3) {
-//    sensorCode = 3;
-//  }
-//
-//  //this->sci.print(roombaCmd::SENSORS, BYTE);
-//  this->sci.print(142, BYTE);
-//  this->sci.print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
-//
-//  if(! this->sci.available()) { }
-//  int i = 0;
-//  while(this->sci.available()) {
-//    int c = this->sci.read();
-//
-//    if(sensorCode == 0){
-//      this->sensorbytes_0[i++] = c;
-//    }
-//    if(sensorCode == 1){
-//      this->sensorbytes_1[i++] = c;
-//    }
-//    if(sensorCode == 2){
-//      this->sensorbytes_2[i++] = c;
-//    }
-//    if(sensorCode == 3){
-//      this->sensorbytes_3[i++] = c;
-//    }
-//  }
-//}
+/// Grab data off the port.  We also return how many bytes we read.
+int8_t ArduinoRoomba::updateSensors(uint8_t sensorCode) {
+	// Update the best we can, remember to allow for timeouts
+  if(sensorCode > 6) {
+    sensorCode = 6;
+  }
 
-void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
+  this->sci->print(roombaCmd::SENSORS, BYTE);
+  this->sci->print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
+
+  // now we care about packet length and which array
+  char* array_p;
+  uint8_t length;
+  switch(sensorCode) {
+
+  /// is this a pointer assignment or a copy?  I hate c++.
+  case 0:
+	  array_p = this->_sensorbytes_0;
+	  length = 26;
+	  break;
+  case 1:
+	  array_p = this->_sensorbytes_1;
+	  length = 10;
+	  break;
+  case 2:
+	  array_p = this->_sensorbytes_2;
+	  length = 6;
+	  break;
+  case 3:
+	  array_p = this->_sensorbytes_3;
+	  length = 10;
+	  break;
+  case 4:
+	  /// Unimplemented due to storage restrictions
+//	  array_p = this->_sensorbytes_4;
+//	  length = 14;
+  case 5:
+//	  array_p = this->_sensorbytes_5;
+//	  length = 12;
+  case 6:
+//	  array_p = this->_sensorbytes_6;
+//	  length = 52;
+  default:
+	  /// something is wrong, we should never end up here
+	  /// perhaps an exception?  Too expensive.
+	  return(-1);
+  }
+  unsigned long endTime = millis() + _readTimeout;
+  {  /// scoping for exit code
+	int i = 0;
+    for (; i < length; i++){
+	  while (! this->sci->available())
+	  {
+		  // Look for a timeout
+		  if (millis() > endTime) {
+			  Serial.print("(SensorsUpdate:TIMEOUT at ");
+			  Serial.print(i);
+			  Serial.println(")");
+			  return(i);
+		  }
+	  }
+  	  /// needed if we're going multiple packets
+	  array_p[i] = sci->read();
+	  endTime = millis() + _readTimeout;
+  }
+  /// Hopefully all went well!
+  return(i);
+  }
+}
+
+/*void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
   //this->sci.print(roombaCmd::SENSORS, BYTE);
   this->sci->print(142, BYTE);
   this->sci->print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
   this->getData(this->sensorbytes_1, 10);
 }
+*/
 
 bool ArduinoRoomba::bumpRight(void) {
-  if(this->sensorbytes_1[0] & 0x01){
+  if(this->_sensorbytes_1[0] & 0x01){
     return true;
   }
   return false;
