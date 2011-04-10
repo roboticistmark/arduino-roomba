@@ -424,7 +424,7 @@ public:
 	/// Read timeout in milliseconds.
 	/// If we have to wait more than this to read a char
 	/// when we are expecting one, then something is wrong.
-	static const int read_timeout = 200;
+	static const int _readTimeout = 200;
 
 
     /**
@@ -438,10 +438,14 @@ public:
     
     /// Roomba sensor bytes cached from last read
     //--- Roomba sensor bytes
-    char sensorbytes_0[26];
-    char sensorbytes_1[10];
-    char sensorbytes_2[6];
-    char sensorbytes_3[10];
+    char _sensorbytes_0[26];
+    char _sensorbytes_1[10];
+    char _sensorbytes_2[6];
+    char _sensorbytes_3[10];
+    /// Unimplemented due to storage restrictions
+    //char _sensorbytes_4[14];
+    //char _sensorbytes_5[12];
+    //char _sensorbytes_6[52];
 
 
     /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
@@ -470,7 +474,7 @@ public:
 
 
     /// Update the Sensor cache
-    void updateSensors(uint8_t sensorCode);
+    int8_t updateSensors(uint8_t sensorCode);
 
 
     /** Calls the various start and other OI commands
@@ -482,7 +486,7 @@ public:
     int getSensorData(uint8_t sensorCode, uint8_t index);
 
     /// Access sensor data directly
-    int getSensorDirect(uint8_t packetCode);
+    uint8_t getSensorDirect(uint8_t packetCode);
 
 
     /**

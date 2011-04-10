@@ -13,13 +13,19 @@ void setup() {
   pinMode(13, OUTPUT);
   Serial.println("Sending init commands");
   roomba.init();
+  roomba.safeMode();
 }
 
 void loop() {
-	Serial.print("Sensors:");
-	//roomba.updateSensors(1);
-	Serial.println(roomba.getSensorDirect(7));
-	//Serial.println(roomba.getSensorData(1,0));
+	Serial.print("Sensors(");
+	Serial.print(roomba.updateSensors(1));
+	Serial.println("):");
+	//Serial.println(roomba.getSensorDirect(7), DEC);
+	for (int i = 0; i < 10; i++) {
+	Serial.print(roomba.getSensorData(1,i));
+	}
+	Serial.println();
+	delay(500);
 }
 
 int main(void)
