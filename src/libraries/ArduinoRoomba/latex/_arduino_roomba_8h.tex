@@ -3,253 +3,19 @@
 \label{_arduino_roomba_8h}\index{ArduinoRoomba.h@{ArduinoRoomba.h}}
 }
 {\ttfamily \#include \char`\"{}WProgram.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}NewSoftSerial.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}virtualfunctionfix.h\char`\"{}}\par
+{\ttfamily \#include \char`\"{}RoombaConst.h\char`\"{}}\par
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \hyperlink{class_arduino_roomba}{ArduinoRoomba}
 \end{DoxyCompactItemize}
-\subsection*{Enumerations}
-\begin{DoxyCompactItemize}
-\item 
-enum \{ {\bfseries led\_\-none} =  0x0, 
-{\bfseries led\_\-play} =  0x2, 
-{\bfseries led\_\-advance} =  0x8
- \}
-\item 
-enum \{ {\bfseries dout0} =  0x1, 
-{\bfseries dout1} =  0x2, 
-{\bfseries dout2} =  0x4
- \}
-\begin{DoxyCompactList}\small\item\em Masks for digitalOut. \item\end{DoxyCompactList}\item 
-enum \{ {\bfseries driver\_\-0} =  0x1, 
-{\bfseries driver\_\-1} =  0x2, 
-{\bfseries driver\_\-2} =  0x4
- \}
-\begin{DoxyCompactList}\small\item\em Masks for drivers. \item\end{DoxyCompactList}\item 
-enum \{ {\bfseries side\_\-brush} =  0x1, 
-{\bfseries vacuum} =  0x2, 
-{\bfseries main\_\-brush} =  0x4
- \}
-\begin{DoxyCompactList}\small\item\em Roomba-\/specific masks. \item\end{DoxyCompactList}\item 
-enum \{ \par
-{\bfseries bump\_\-right} =  0x1, 
-{\bfseries bump\_\-left} =  0x2, 
-{\bfseries drop\_\-right} =  0x4, 
-{\bfseries drop\_\-left} =  0x8, 
-\par
-{\bfseries drop\_\-caster} =  0x10
- \}
-\begin{DoxyCompactList}\small\item\em Masks for bumps and wheel-\/drop sensor packet id 7. \item\end{DoxyCompactList}\item 
-enum \{ \par
-{\bfseries ld1} =  0x1, 
-{\bfseries ld0} =  0x2, 
-{\bfseries ld2} =  0x4, 
-{\bfseries right\_\-wheel} =  0x8, 
-\par
-{\bfseries left\_\-wheel} =  0x10
- \}
-\item 
-enum \{ \par
-\hyperlink{namespaceroomba_mask_a43160cab017320e59060937b41a7efd7a9ea577d37ecb6b9f5b8fa469ade6adcd}{roombaMask::button\_\-play} =  0x1, 
-{\bfseries button\_\-advance} =  0x4, 
-\hyperlink{namespaceroomba_mask_a43160cab017320e59060937b41a7efd7a3743e424dd7db3548407f42867773e0c}{roombaMask::button\_\-max} =  0x1, 
-{\bfseries button\_\-clean} =  0x2, 
-\par
-{\bfseries button\_\-spot} =  0x4, 
-{\bfseries button\_\-power} =  0x8
- \}
-\begin{DoxyCompactList}\small\item\em Masks for buttons sensor packet ID 18. \item\end{DoxyCompactList}\item 
-enum \{ \par
-{\bfseries din0} =  0x1, 
-{\bfseries din1} =  0x2, 
-{\bfseries din2} =  0x4, 
-{\bfseries din3} =  0x8, 
-\par
-{\bfseries din\_\-detect} =  0x10
- \}
-\begin{DoxyCompactList}\small\item\em Masks for digital inputs sensor packet ID 32. \item\end{DoxyCompactList}\item 
-enum \{ {\bfseries internal\_\-charger} =  0x1, 
-{\bfseries home\_\-base} =  0x2
- \}
-\begin{DoxyCompactList}\small\item\em Masks for charging sources sensor packet ID 34. \item\end{DoxyCompactList}\item 
-enum {\bfseries Baud} \{ \par
-{\bfseries Baud300} =  0, 
-{\bfseries Baud600} =  1, 
-{\bfseries Baud1200} =  2, 
-{\bfseries Baud2400} =  3, 
-\par
-{\bfseries Baud4800} =  4, 
-{\bfseries Baud9600} =  5, 
-{\bfseries Baud14400} =  6, 
-{\bfseries Baud19200} =  7, 
-\par
-{\bfseries Baud28800} =  8, 
-{\bfseries Baud38400} =  9, 
-{\bfseries Baud57600} =  10, 
-{\bfseries Baud115200} =  11
- \}
-\item 
-enum {\bfseries Demo} \{ \par
-{\bfseries DemoAbort} =  -\/1, 
-{\bfseries DemoCover} =  0, 
-{\bfseries DemoCoverAndDock} =  1, 
-{\bfseries DemoSpotCover} =  2, 
-\par
-{\bfseries DemoMouse} =  3, 
-{\bfseries DemoDriveFigureEight} =  4, 
-{\bfseries DemoWimp} =  5, 
-{\bfseries DemoHome} =  6, 
-\par
-{\bfseries DemoTag} =  7, 
-{\bfseries DemoPachelbel} =  8, 
-{\bfseries DemoBanjo} =  9
- \}
-\item 
-enum {\bfseries Drive} \{ {\bfseries DriveStraight} =  0x8000, 
-{\bfseries DriveInPlaceClockwise} =  0xFFFF, 
-{\bfseries DriveInPlaceCounterClockwise} =  0x0001
- \}
-\item 
-enum {\bfseries StreamCommand} \{ {\bfseries StreamCommandPause} =  0, 
-{\bfseries StreamCommandResume} =  1
- \}
-\item 
-enum {\bfseries EventType} \{ \par
-{\bfseries EventTypeWheelDrop} =  1, 
-{\bfseries EventTypeFronWheelDrop} =  2, 
-{\bfseries EventTypeLeftWheelDrop} =  3, 
-{\bfseries EventTypeRightWheelDrop} =  4, 
-\par
-{\bfseries EventTypeBump} =  5, 
-{\bfseries EventTypeLeftBump} =  6, 
-{\bfseries EventTypeRightBump} =  7, 
-{\bfseries EventTypeVirtualWall} =  8, 
-\par
-{\bfseries EventTypeWall} =  9, 
-{\bfseries EventTypeCliff} =  10, 
-{\bfseries EventTypeLeftCliff} =  11, 
-{\bfseries EventTypeFrontLeftCliff} =  12, 
-\par
-{\bfseries EventTypeFrontRightCliff} =  13, 
-{\bfseries EventTypeRightCliff} =  14, 
-{\bfseries EventTypeHomeBase} =  15, 
-{\bfseries EventTypeAdvanceButton} =  16, 
-\par
-{\bfseries EventTypePlayButton} =  17, 
-{\bfseries EventTypeDigitalInput0} =  18, 
-{\bfseries EventTypeDigitalInput1} =  19, 
-{\bfseries EventTypeDigitalInput2} =  20, 
-\par
-{\bfseries EventTypeDigitalInput3} =  21, 
-{\bfseries EventTypeModePassive} =  22
- \}
-\item 
-enum {\bfseries IRCommand} \{ \par
-{\bfseries IRCommandLeft} =  129, 
-{\bfseries IRCommandForward} =  130, 
-{\bfseries IRCommandRight} =  131, 
-{\bfseries IRCommandSpot} =  132, 
-\par
-{\bfseries IRCommandMax} =  133, 
-{\bfseries IRCommandSmall} =  134, 
-{\bfseries IRCommandMedium} =  135, 
-{\bfseries IRCommandLargeClean} =  136, 
-\par
-{\bfseries IRCommandPause} =  137, 
-{\bfseries IRCommandPower} =  138, 
-{\bfseries IRCommandArcForwardLeft} =  139, 
-{\bfseries IRCommandArcForwardRight} =  140, 
-\par
-{\bfseries IRCommandDriveStop} =  141, 
-{\bfseries IRCommandSendAll} =  142, 
-{\bfseries IRCommandSeekDock} =  143, 
-{\bfseries IRCommandReserved1} =  240, 
-\par
-{\bfseries IRCommandRedBuoy} =  248, 
-{\bfseries IRCommandGreenBuoy} =  244, 
-{\bfseries IRCommandForceField} =  242, 
-{\bfseries IRCommandRedGreenBuoy} =  252, 
-\par
-{\bfseries IRCommandRedBuoyForceField} =  250, 
-{\bfseries IRCommandGreenBuoyForceField} =  246, 
-{\bfseries IRCommandRedGreenBuoyForceField} =  254
- \}
-\item 
-enum {\bfseries ChargeState} \{ \par
-{\bfseries ChargeStateNotCharging} =  0, 
-{\bfseries ChargeStateReconditioningCharging} =  1, 
-{\bfseries ChargeStateFullChanrging} =  2, 
-{\bfseries ChargeStateTrickleCharging} =  3, 
-\par
-{\bfseries ChargeStateWaiting} =  4, 
-{\bfseries ChargeStateFault} =  5
- \}
-\item 
-enum {\bfseries Mode} \{ {\bfseries ModeOff} =  0, 
-{\bfseries ModePassive} =  1, 
-{\bfseries ModeSafe} =  2, 
-{\bfseries ModeFull} =  3
- \}
-\item 
-enum {\bfseries Sensor} \{ \par
-{\bfseries Sensors7to26} =  0, 
-{\bfseries Sensors7to16} =  1, 
-{\bfseries Sensors17to20} =  2, 
-{\bfseries Sensors21to26} =  3, 
-\par
-{\bfseries Sensors27to34} =  4, 
-{\bfseries Sensors35to42} =  5, 
-{\bfseries Sensors7to42} =  6, 
-{\bfseries SensorBumpsAndWheelDrops} =  7, 
-\par
-{\bfseries SensorWall} =  8, 
-{\bfseries SensorCliffLeft} =  9, 
-{\bfseries SensorCliffFrontLeft} =  10, 
-{\bfseries SensorCliffFrontRight} =  11, 
-\par
-{\bfseries SensorCliffRight} =  12, 
-{\bfseries SensorVirtualWall} =  13, 
-{\bfseries SensorOvercurrents} =  14, 
-{\bfseries SensorIRByte} =  17, 
-\par
-{\bfseries SensorButtons} =  18, 
-{\bfseries SensorDistance} =  19, 
-{\bfseries SensorAngle} =  20, 
-{\bfseries SensorChargingState} =  21, 
-\par
-{\bfseries SensorVoltage} =  22, 
-{\bfseries SensorCurrent} =  23, 
-{\bfseries SensorBatteryTemperature} =  24, 
-{\bfseries SensorBatteryCharge} =  25, 
-\par
-{\bfseries SensorBatteryCapacity} =  26, 
-{\bfseries SensorWallSignal} =  27, 
-{\bfseries SensorCliffLeftSignal} =  28, 
-{\bfseries SensorCliffFrontLeftSignal} =  29, 
-\par
-{\bfseries SensorCliffFrontRightSignal} =  30, 
-{\bfseries SensorCliffRightSignal} =  31, 
-{\bfseries SensorUserDigitalInputs} =  32, 
-{\bfseries SensorUserAnalogInput} =  33, 
-\par
-{\bfseries SensorChargingSourcesAvailable} =  34, 
-{\bfseries SensorOIMode} =  35, 
-{\bfseries SensorSongNumber} =  36, 
-{\bfseries SensorSongPlaying} =  37, 
-\par
-{\bfseries SensorNumberOfStreamPackets} =  38, 
-{\bfseries SensorVelocity} =  39, 
-{\bfseries SensorRadius} =  40, 
-{\bfseries SensorRightVelocity} =  41, 
-\par
-{\bfseries SensorLeftVelocity} =  42
- \}
-\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 \begin{DoxyParagraph}{Id:}
-\hyperlink{_arduino_roomba_8h}{ArduinoRoomba.h} 15 2011-\/04-\/02 23:14:50Z \href{mailto:joe.foley@gmail.com}{\tt joe.foley@gmail.com} 
+\hyperlink{_arduino_roomba_8h}{ArduinoRoomba.h} 22 2011-\/04-\/10 14:34:27Z \href{mailto:joe.foley@gmail.com}{\tt joe.foley@gmail.com} 
 \end{DoxyParagraph}
 \begin{DoxyParagraph}{HeadURL:}
 \href{https://arduino-roomba.googlecode.com/svn/trunk/src/libraries/ArduinoRoomba/ArduinoRoomba.h}{\tt https://arduino-\/roomba.googlecode.com/svn/trunk/src/libraries/ArduinoRoomba/ArduinoRoomba.h} 
@@ -257,8 +23,14 @@ enum {\bfseries Sensor} \{ \par
 \begin{DoxyAuthor}{Author}
 Joe Foley $<$\href{mailto:foley@mit.edu}{\tt foley@mit.edu}$>$, $<$\href{mailto:foley@ru.edu}{\tt foley@ru.edu}$>$ Copyright (C) 2011 Joe Foley. Use is subject to license conditions
 \end{DoxyAuthor}
-Inspired and Derived heavily from code by Mike McCauley (\href{mailto:mikem@open.com.au}{\tt mikem@open.com.au}) Based upon the Roomba library at \href{http://www.open.com.au/mikem/arduino/Roomba}{\tt http://www.open.com.au/mikem/arduino/Roomba}
+Inspired and Derived heavily from code by Mike McCauley (\href{mailto:mikem@open.com.au}{\tt mikem@open.com.au}) Based upon the Roomba library (GPL2) at \href{http://www.open.com.au/mikem/arduino/Roomba}{\tt http://www.open.com.au/mikem/arduino/Roomba}
+
+Also heavily derived from: RoombaSerial.h -\/ Commands to be sent to the Roomba Serial Interface Copyright 2009 Chris P. Gilmer. All right reserved. (LGPL2) Which is based upon: RoombaBumpTurn code by Tod E. Kurt $<$\href{mailto:tod@todbot.com}{\tt tod@todbot.com}$>$ \href{http://hackingroomba.com/}{\tt http://hackingroomba.com/} Created 1 August 2006 (copyleft 2006)
 
 \begin{DoxyParagraph}{Open Source Licensing GPL V2}
 This is the appropriate option if you want to share the source code of your application with everyone you distribute it to, and you also want to give them the right to share who uses it. If you wish to use this software under Open Source Licensing, you must contribute all your source code to the open source community in accordance with the GPL Version 2 when your application is distributed. See \href{http://www.gnu.org/copyleft/gpl.html}{\tt http://www.gnu.org/copyleft/gpl.html} 
 \end{DoxyParagraph}
+
+
+Definition in file \hyperlink{_arduino_roomba_8h_source}{ArduinoRoomba.h}.
+

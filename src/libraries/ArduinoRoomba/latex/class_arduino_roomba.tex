@@ -2,25 +2,48 @@
 \section{ArduinoRoomba Class Reference}
 \label{class_arduino_roomba}\index{ArduinoRoomba@{ArduinoRoomba}}
 }
+
+
+{\ttfamily \#include $<$ArduinoRoomba.h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_arduino_roomba_af7d106ebf18714863cea529689689180}{
-\hyperlink{class_arduino_roomba_af7d106ebf18714863cea529689689180}{ArduinoRoomba} ()}
-\label{class_arduino_roomba_af7d106ebf18714863cea529689689180}
-
-\begin{DoxyCompactList}\small\item\em Constructor. You can have multiple simultaneous Roomba if that makes sense. \item\end{DoxyCompactList}\item 
+\hyperlink{class_arduino_roomba_a1d2d90be27636ee06a71e3668b823963}{ArduinoRoomba} (uint8\_\-t rx, uint8\_\-t tx, uint8\_\-t dd)
+\begin{DoxyCompactList}\small\item\em Unimplemented due to storage restrictions. \item\end{DoxyCompactList}\item 
+bool \hyperlink{class_arduino_roomba_ac534f7f31042a034873264b6c0ebf0ad}{pollSensors} (uint8\_\-t $\ast$dest, uint8\_\-t len)
+\begin{DoxyCompactList}\small\item\em NonOI support functions. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_arduino_roomba_a03f560265530b2dde866f111c547a271}{reset} ()
+\item 
+int8\_\-t \hyperlink{class_arduino_roomba_ad8e8719dd8ad39d5901a0420843fdd59}{updateSensors} (uint8\_\-t sensorCode)
+\begin{DoxyCompactList}\small\item\em Update the Sensor cache. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_arduino_roomba_aadba64a13567fb15be83d7b610944bfc}{init} ()
+\item 
+int \hyperlink{class_arduino_roomba_a75096725ea2a9849a541f953b12c7a22}{getSensorData} (uint8\_\-t sensorCode, uint8\_\-t index)
+\begin{DoxyCompactList}\small\item\em Getting data directly by index. \item\end{DoxyCompactList}\item 
+uint8\_\-t \hyperlink{class_arduino_roomba_a89d39a2383fa4b668b2090a6184b70d7}{getSensorDirect} (uint8\_\-t packetCode)
+\begin{DoxyCompactList}\small\item\em Access sensor data directly. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_arduino_roomba_a10f21f4adec3dda853deeab78d31aa5e}{wake} ()
+\item 
 void \hyperlink{class_arduino_roomba_a6d5b8f94e27b55bd3a4e63590cf336e0}{start} ()
 \item 
-uint32\_\-t \hyperlink{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}{baudCodeToBaudRate} (roombaConst::Baud baud)
+void \hyperlink{class_arduino_roomba_a197b59263c28d18d9cb237d43b8cbfbb}{sendint16} (int16\_\-t outint)
+\begin{DoxyCompactList}\small\item\em Send a 16-\/bit integer over the SCI. \item\end{DoxyCompactList}\item 
+uint32\_\-t \hyperlink{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}{baudCodeToBaudRate} (\hyperlink{namespaceroomba_const_ad1b59bdcff436a657b39206dffaf5caa}{roombaConst::Baud} baud)
 \item 
-void \hyperlink{class_arduino_roomba_aadbbdc1dd1f0538e48bc21fa8d6467ae}{baud} (roombaConst::Baud baud)
-\item 
+void \hyperlink{class_arduino_roomba_a7e24f9f126babedce4a00f4b925b9821}{grabSerial} ()
+\begin{DoxyCompactList}\small\item\em Debug routine to just see what the roomba sends. \item\end{DoxyCompactList}\item 
+bool \hyperlink{class_arduino_roomba_aed598e25f1840e3bc173ca24dc4f2773}{bumpRight} (void)
+\begin{DoxyCompactList}\small\item\em Has the right bumper been pressed? \item\end{DoxyCompactList}\item 
+void \hyperlink{class_arduino_roomba_aadbbdc1dd1f0538e48bc21fa8d6467ae}{baud} (\hyperlink{namespaceroomba_const_ad1b59bdcff436a657b39206dffaf5caa}{roombaConst::Baud} baud)
+\begin{DoxyCompactList}\small\item\em Change the OI interface speed. Particularly important for NewSoftSerial usage. \item\end{DoxyCompactList}\item 
+void \hyperlink{class_arduino_roomba_ab3dc98fb859587d7a838e039f53fe07e}{control} ()
+\begin{DoxyCompactList}\small\item\em not quite sure why this is necessary \item\end{DoxyCompactList}\item 
 void \hyperlink{class_arduino_roomba_ac8fb620b0926e6faa570509834434ddf}{safeMode} ()
 \begin{DoxyCompactList}\small\item\em MODES. \item\end{DoxyCompactList}\item 
 void \hyperlink{class_arduino_roomba_ac4c6eb5bb47c95b7adf712926fa43edb}{fullMode} ()
 \item 
-void \hyperlink{class_arduino_roomba_a63640d010b0b37647f60040384bea428}{demo} (roombaConst::Demo demo)
+void \hyperlink{class_arduino_roomba_a63640d010b0b37647f60040384bea428}{demo} (\hyperlink{namespaceroomba_const_a9c428597049a5dbe1d4c0b7851bd73ea}{roombaConst::Demo} demo)
 \begin{DoxyCompactList}\small\item\em Demo Commands. \item\end{DoxyCompactList}\item 
 void \hyperlink{class_arduino_roomba_acb2d35018865cc262ab638436b084362}{cover} ()
 \item 
@@ -52,7 +75,7 @@ bool \hyperlink{class_arduino_roomba_a44be486f377bec58f83bfebc4791f298}{queryLis
 \item 
 void \hyperlink{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{stream} (const uint8\_\-t $\ast$packetIDs, int len)
 \item 
-void \hyperlink{class_arduino_roomba_a9563d94e22335c334cdc0791b4c5b1cf}{pauseResumeStream} (roombaConst::StreamCommand command)
+void \hyperlink{class_arduino_roomba_a9563d94e22335c334cdc0791b4c5b1cf}{pauseResumeStream} (\hyperlink{namespaceroomba_const_a4461c36ce27a19fdecb5edd81727a1ce}{roombaConst::StreamCommand} command)
 \item 
 void \hyperlink{class_arduino_roomba_a4d8122739d5e828f963f6e51ee4d101a}{script} (const uint8\_\-t $\ast$script, uint8\_\-t len)
 \begin{DoxyCompactList}\small\item\em Script Commands. \item\end{DoxyCompactList}\item 
@@ -66,26 +89,88 @@ void \hyperlink{class_arduino_roomba_a80daa425563387fab74ede7351981861}{waitDist
 \item 
 void \hyperlink{class_arduino_roomba_a5eecc857d2d010f7c3ebaa75044f6349}{waitAngle} (int16\_\-t degrees)
 \item 
-void \hyperlink{class_arduino_roomba_a2a4f3f9a99d4102efef762745631f156}{waitEvent} (roombaConst::EventType type)
+void \hyperlink{class_arduino_roomba_a2a4f3f9a99d4102efef762745631f156}{waitEvent} (\hyperlink{namespaceroomba_const_a045086cbabea77c6a97dbef2c28ac47c}{roombaConst::EventType} type)
 \item 
-bool \hyperlink{class_arduino_roomba_a31c65b37a69092d98e86fbb8641d4c67}{getData} (uint8\_\-t $\ast$dest, uint8\_\-t len)
+bool \hyperlink{class_arduino_roomba_aaecaeb0ba2c4603d3dd42bd72f8658d1}{getData} (char $\ast$dest, uint8\_\-t len)
 \begin{DoxyCompactList}\small\item\em Low level Helper Functions. \item\end{DoxyCompactList}\item 
-bool \hyperlink{class_arduino_roomba_ac534f7f31042a034873264b6c0ebf0ad}{pollSensors} (uint8\_\-t $\ast$dest, uint8\_\-t len)
-\begin{DoxyCompactList}\small\item\em NonOI support functions. \item\end{DoxyCompactList}\item 
-void \hyperlink{class_arduino_roomba_a03f560265530b2dde866f111c547a271}{reset} ()
-\item 
 void \hyperlink{class_arduino_roomba_a36910b1173f76e1d09e3e2769ae07e5e}{dock} ()
 \item 
 void \hyperlink{class_arduino_roomba_af912edc527c77a7785861c061405c971}{power} ()
 \end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int16\_\-t \hyperlink{class_arduino_roomba_af5babb87f8490752103ab4ce22a5a0f5}{\_\-velocityLimit}
+\item 
+int16\_\-t \hyperlink{class_arduino_roomba_a218508bb243811c9b366cb8cdd2cd04b}{\_\-radiusLimit}
+\begin{DoxyCompactList}\small\item\em Safety parameter to limit how tight we turn. \item\end{DoxyCompactList}\item 
+char \hyperlink{class_arduino_roomba_ad0429e4cb07918eb89532605d5062b03}{\_\-sensorbytes\_\-0} \mbox{[}26\mbox{]}
+\begin{DoxyCompactList}\small\item\em Roomba sensor bytes cached from last read. \item\end{DoxyCompactList}\item 
+char \hyperlink{class_arduino_roomba_a693f180d190aa31257d5bf5d1766aec1}{\_\-sensorbytes\_\-1} \mbox{[}10\mbox{]}
+\item 
+char \hyperlink{class_arduino_roomba_a4ea894f4c1b9c7d976b2fdd19482ae26}{\_\-sensorbytes\_\-2} \mbox{[}6\mbox{]}
+\item 
+char \hyperlink{class_arduino_roomba_a6942cabb372dfd593602d6c4762d88ec}{\_\-sensorbytes\_\-3} \mbox{[}10\mbox{]}
+\end{DoxyCompactItemize}
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\hypertarget{class_arduino_roomba_a42cc468013c3068764805c59b29e9ad1}{
-static const int {\bfseries read\_\-timeout} = 200}
-\label{class_arduino_roomba_a42cc468013c3068764805c59b29e9ad1}
-
+static const int \hyperlink{class_arduino_roomba_a8c8b81634e4b3549173cdb30db6ad70a}{\_\-readTimeout} = 200
 \end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_arduino_roomba_afd287b867c31071c4ae3409b4cf08c5e}{\_\-rxPin}
+\begin{DoxyCompactList}\small\item\em Pin assignment from Arduino to Roomba/Create. \item\end{DoxyCompactList}\item 
+int \hyperlink{class_arduino_roomba_af764f98573d1b77e200811c2d76eef3a}{\_\-txPin}
+\item 
+int \hyperlink{class_arduino_roomba_afe2d84d47467a3403e292a07d23c51b1}{\_\-ddPin}
+\item 
+NewSoftSerial $\ast$ \hyperlink{class_arduino_roomba_ae645170022a5949dcc5ecd4183e50c2a}{sci}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+Definition at line 98 of file ArduinoRoomba.h.
+
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{class_arduino_roomba_a1d2d90be27636ee06a71e3668b823963}{
+\index{ArduinoRoomba@{ArduinoRoomba}!ArduinoRoomba@{ArduinoRoomba}}
+\index{ArduinoRoomba@{ArduinoRoomba}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{ArduinoRoomba}]{\setlength{\rightskip}{0pt plus 5cm}ArduinoRoomba::ArduinoRoomba (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{rxPin, }
+\item[{uint8\_\-t}]{txPin, }
+\item[{uint8\_\-t}]{ddPin}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_a1d2d90be27636ee06a71e3668b823963}
+
+
+Unimplemented due to storage restrictions. 
+
+Constructor. You can have multiple simultaneous Roomba if that makes sense.
+
+The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API
+
+The Roomba and Create is equipped with a min-\/din serial port socket, while the Create is also equipped with a 25-\/pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.
+
+In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below. 
+
+setup instance variables to remember which pins used 
+
+
+
+Definition at line 50 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-ddPin, \_\-rxPin, \_\-txPin, and sci.
+
 
 
 \subsection{Member Function Documentation}
@@ -94,16 +179,36 @@ static const int {\bfseries read\_\-timeout} = 200}
 \index{baud@{baud}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{baud}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::baud (
 \begin{DoxyParamCaption}
-\item[{roombaConst::Baud}]{baud}
+\item[{{\bf roombaConst::Baud}}]{baud}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_aadbbdc1dd1f0538e48bc21fa8d6467ae}
-Changes the baud rate Baud is on of the Roomba::Baud enums \hypertarget{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}{
+
+
+Change the OI interface speed. Particularly important for NewSoftSerial usage. 
+
+Changes the baud rate Baud is on of the Roomba::Baud enums 
+
+OI specification says to wait 100ms before continuing 
+
+
+
+Definition at line 179 of file ArduinoRoomba.cpp.
+
+
+
+References roombaCmd::BAUD, and sci.
+
+
+
+Referenced by init().
+
+\hypertarget{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}{
 \index{ArduinoRoomba@{ArduinoRoomba}!baudCodeToBaudRate@{baudCodeToBaudRate}}
 \index{baudCodeToBaudRate@{baudCodeToBaudRate}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{baudCodeToBaudRate}]{\setlength{\rightskip}{0pt plus 5cm}uint32\_\-t ArduinoRoomba::baudCodeToBaudRate (
 \begin{DoxyParamCaption}
-\item[{roombaConst::Baud}]{baud}
+\item[{{\bf roombaConst::Baud}}]{baud}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_ab69e5496dcb1cb782f85fd61fb0e5e14}
@@ -115,6 +220,48 @@ Converts the specified baud code into a baud rate in bits per second
 \begin{DoxyReturn}{Returns}
 baud rate in bits per second 
 \end{DoxyReturn}
+\hypertarget{class_arduino_roomba_aed598e25f1840e3bc173ca24dc4f2773}{
+\index{ArduinoRoomba@{ArduinoRoomba}!bumpRight@{bumpRight}}
+\index{bumpRight@{bumpRight}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{bumpRight}]{\setlength{\rightskip}{0pt plus 5cm}bool ArduinoRoomba::bumpRight (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_aed598e25f1840e3bc173ca24dc4f2773}
+
+
+Has the right bumper been pressed? 
+
+
+
+Definition at line 320 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-sensorbytes\_\-1.
+
+\hypertarget{class_arduino_roomba_ab3dc98fb859587d7a838e039f53fe07e}{
+\index{ArduinoRoomba@{ArduinoRoomba}!control@{control}}
+\index{control@{control}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{control}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::control (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_ab3dc98fb859587d7a838e039f53fe07e}
+
+
+not quite sure why this is necessary 
+
+
+
+Definition at line 186 of file ArduinoRoomba.cpp.
+
+
+
+References roombaCmd::CONTROL, and sci.
+
 \hypertarget{class_arduino_roomba_acb2d35018865cc262ab638436b084362}{
 \index{ArduinoRoomba@{ArduinoRoomba}!cover@{cover}}
 \index{cover@{cover}!ArduinoRoomba@{ArduinoRoomba}}
@@ -138,7 +285,7 @@ Starts the Cover and Dock demo Changes mode to Passive \hypertarget{class_arduin
 \index{demo@{demo}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{demo}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::demo (
 \begin{DoxyParamCaption}
-\item[{roombaConst::Demo}]{demo}
+\item[{{\bf roombaConst::Demo}}]{demo}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_a63640d010b0b37647f60040384bea428}
@@ -151,6 +298,14 @@ Starts the requirested built-\/in demo
 \mbox{\tt in}  & {\em demo} & The demo number. One of Roomba::Demo \\
 \hline
 \end{DoxyParams}
+
+
+Definition at line 211 of file ArduinoRoomba.cpp.
+
+
+
+References roombaCmd::DEMO, and sci.
+
 \hypertarget{class_arduino_roomba_af9adb4ea958dc11adcdbb89c394f0ccc}{
 \index{ArduinoRoomba@{ArduinoRoomba}!digitalOut@{digitalOut}}
 \index{digitalOut@{digitalOut}!ArduinoRoomba@{ArduinoRoomba}}
@@ -217,20 +372,28 @@ Starts the Roomba driving with a specified velocity for each wheel Create only. 
 \index{fullMode@{fullMode}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{fullMode}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::fullMode (
 \begin{DoxyParamCaption}
-{}
+\item[{void}]{}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_ac4c6eb5bb47c95b7adf712926fa43edb}
-Sets the OI to Full mode. In Full mode, the cliff and wheel drop detectors do not stop the motors: you are responsible \hypertarget{class_arduino_roomba_a31c65b37a69092d98e86fbb8641d4c67}{
+Sets the OI to Full mode. In Full mode, the cliff and wheel drop detectors do not stop the motors: you are responsible 
+
+Definition at line 196 of file ArduinoRoomba.cpp.
+
+
+
+References roombaCmd::FULL, and sci.
+
+\hypertarget{class_arduino_roomba_aaecaeb0ba2c4603d3dd42bd72f8658d1}{
 \index{ArduinoRoomba@{ArduinoRoomba}!getData@{getData}}
 \index{getData@{getData}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{getData}]{\setlength{\rightskip}{0pt plus 5cm}bool ArduinoRoomba::getData (
 \begin{DoxyParamCaption}
-\item[{uint8\_\-t $\ast$}]{dest, }
+\item[{char $\ast$}]{dest, }
 \item[{uint8\_\-t}]{len}
 \end{DoxyParamCaption}
 )}}
-\label{class_arduino_roomba_a31c65b37a69092d98e86fbb8641d4c67}
+\label{class_arduino_roomba_aaecaeb0ba2c4603d3dd42bd72f8658d1}
 
 
 Low level Helper Functions. 
@@ -243,8 +406,117 @@ Low level funciton to read len bytes of data from the Roomba Blocks untill all l
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if all len bytes were successfully read. Returns false in the case of a timeout on reading any byte. 
+true if all len bytes were successfully read. Returns false in the case of a timeout on reading any byte.
 \end{DoxyReturn}
+Reads at most len bytes and stores them to dest If successful, returns true. If there is a timeout, returns false Blocks until all bytes are read Caller must ensure there is sufficient space in dest 
+
+Definition at line 226 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-readTimeout, and sci.
+
+\hypertarget{class_arduino_roomba_a75096725ea2a9849a541f953b12c7a22}{
+\index{ArduinoRoomba@{ArduinoRoomba}!getSensorData@{getSensorData}}
+\index{getSensorData@{getSensorData}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{getSensorData}]{\setlength{\rightskip}{0pt plus 5cm}int ArduinoRoomba::getSensorData (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{sensorCode, }
+\item[{uint8\_\-t}]{index}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_a75096725ea2a9849a541f953b12c7a22}
+
+
+Getting data directly by index. 
+
+
+
+Definition at line 131 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-sensorbytes\_\-0, \_\-sensorbytes\_\-1, \_\-sensorbytes\_\-2, and \_\-sensorbytes\_\-3.
+
+\hypertarget{class_arduino_roomba_a89d39a2383fa4b668b2090a6184b70d7}{
+\index{ArduinoRoomba@{ArduinoRoomba}!getSensorDirect@{getSensorDirect}}
+\index{getSensorDirect@{getSensorDirect}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{getSensorDirect}]{\setlength{\rightskip}{0pt plus 5cm}uint8\_\-t ArduinoRoomba::getSensorDirect (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{packetCode}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_a89d39a2383fa4b668b2090a6184b70d7}
+
+
+Access sensor data directly. 
+
+
+
+needed if we're going multiple packets 
+
+
+
+Definition at line 139 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-readTimeout, and sci.
+
+\hypertarget{class_arduino_roomba_a7e24f9f126babedce4a00f4b925b9821}{
+\index{ArduinoRoomba@{ArduinoRoomba}!grabSerial@{grabSerial}}
+\index{grabSerial@{grabSerial}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{grabSerial}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::grabSerial (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_a7e24f9f126babedce4a00f4b925b9821}
+
+
+Debug routine to just see what the roomba sends. 
+
+
+
+Roomba/Create is at 56K baud by default 
+
+
+
+Definition at line 72 of file ArduinoRoomba.cpp.
+
+
+
+References sci.
+
+\hypertarget{class_arduino_roomba_aadba64a13567fb15be83d7b610944bfc}{
+\index{ArduinoRoomba@{ArduinoRoomba}!init@{init}}
+\index{init@{init}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{init}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::init (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_aadba64a13567fb15be83d7b610944bfc}
+Calls the various start and other OI commands to setup the interface. Calls wake. 
+
+Roomba/Create is at 56K baud by default
+
+Wait one second for the startup message to go blasting through if it does
+
+Wake up if off
+
+Tell it to prepare to receive commands
+
+Now we must slow down or the UNO can't keep up 
+
+
+
+Definition at line 109 of file ArduinoRoomba.cpp.
+
+
+
+References baud(), roombaConst::Baud38400, sci, and start().
+
 \hypertarget{class_arduino_roomba_a03c310c1247df2636d236bb633529fc3}{
 \index{ArduinoRoomba@{ArduinoRoomba}!leds@{leds}}
 \index{leds@{leds}!ArduinoRoomba@{ArduinoRoomba}}
@@ -284,7 +556,7 @@ Sets the low side drivers on or off. On the Romba, these control the 3 motors.
 \index{pauseResumeStream@{pauseResumeStream}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{pauseResumeStream}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::pauseResumeStream (
 \begin{DoxyParamCaption}
-\item[{roombaConst::StreamCommand}]{command}
+\item[{{\bf roombaConst::StreamCommand}}]{command}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_a9563d94e22335c334cdc0791b4c5b1cf}
@@ -345,11 +617,19 @@ true when a complete stream has been read, and the checksum is correct. The sens
 \index{power@{power}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{power}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::power (
 \begin{DoxyParamCaption}
-{}
+\item[{void}]{}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_af912edc527c77a7785861c061405c971}
-Puts a Roomba in sleep mode. Roomba only, no equivalent for Create. \hypertarget{class_arduino_roomba_a5be9ba9927edecc77905c92771d7a483}{
+Puts a Roomba in sleep mode. Roomba only, no equivalent for Create. 
+
+Definition at line 201 of file ArduinoRoomba.cpp.
+
+
+
+References roombaCmd::POWER, and sci.
+
+\hypertarget{class_arduino_roomba_a5be9ba9927edecc77905c92771d7a483}{
 \index{ArduinoRoomba@{ArduinoRoomba}!pwmLowSideDrivers@{pwmLowSideDrivers}}
 \index{pwmLowSideDrivers@{pwmLowSideDrivers}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{pwmLowSideDrivers}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::pwmLowSideDrivers (
@@ -409,7 +689,7 @@ Resets the Roomba. It will emit its startup message Caution, this may take sever
 \index{safeMode@{safeMode}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{safeMode}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::safeMode (
 \begin{DoxyParamCaption}
-{}
+\item[{void}]{}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_ac8fb620b0926e6faa570509834434ddf}
@@ -417,7 +697,15 @@ Resets the Roomba. It will emit its startup message Caution, this may take sever
 
 MODES. 
 
-Sets the OI to Safe mode. In Safe mode, the cliff and wheel drop detectors work to prevent Roomba driving off a cliff \hypertarget{class_arduino_roomba_a4d8122739d5e828f963f6e51ee4d101a}{
+Sets the OI to Safe mode. In Safe mode, the cliff and wheel drop detectors work to prevent Roomba driving off a cliff 
+
+Definition at line 191 of file ArduinoRoomba.cpp.
+
+
+
+References roombaCmd::SAFE, and sci.
+
+\hypertarget{class_arduino_roomba_a4d8122739d5e828f963f6e51ee4d101a}{
 \index{ArduinoRoomba@{ArduinoRoomba}!script@{script}}
 \index{script@{script}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{script}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::script (
@@ -438,6 +726,27 @@ Defines a command script which can later be executed with \hyperlink{class_ardui
 \mbox{\tt in}  & {\em len} & Length of the script in bytes. \\
 \hline
 \end{DoxyParams}
+\hypertarget{class_arduino_roomba_a197b59263c28d18d9cb237d43b8cbfbb}{
+\index{ArduinoRoomba@{ArduinoRoomba}!sendint16@{sendint16}}
+\index{sendint16@{sendint16}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{sendint16}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::sendint16 (
+\begin{DoxyParamCaption}
+\item[{int16\_\-t}]{outint}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_a197b59263c28d18d9cb237d43b8cbfbb}
+
+
+Send a 16-\/bit integer over the SCI. 
+
+Send an int, useful if the int is more than 8 bits. 
+
+Definition at line 102 of file ArduinoRoomba.cpp.
+
+
+
+References sci.
+
 \hypertarget{class_arduino_roomba_a268d068b9c0253f237165de1bbbc11df}{
 \index{ArduinoRoomba@{ArduinoRoomba}!sendIR@{sendIR}}
 \index{sendIR@{sendIR}!ArduinoRoomba@{ArduinoRoomba}}
@@ -524,26 +833,40 @@ Defines a song which can later be played with \hyperlink{class_arduino_roomba_a8
 \index{spot@{spot}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{spot}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::spot (
 \begin{DoxyParamCaption}
-{}
+\item[{void}]{}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_ad4cee03aee250ec956a178e0ca95b297}
-Starts the Spot Cover demo Changes mode to Passive \hypertarget{class_arduino_roomba_a6d5b8f94e27b55bd3a4e63590cf336e0}{
+Starts the Spot Cover demo Changes mode to Passive 
+
+Definition at line 206 of file ArduinoRoomba.cpp.
+
+
+
+References sci, and roombaCmd::SPOT.
+
+\hypertarget{class_arduino_roomba_a6d5b8f94e27b55bd3a4e63590cf336e0}{
 \index{ArduinoRoomba@{ArduinoRoomba}!start@{start}}
 \index{start@{start}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{start}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::start (
 \begin{DoxyParamCaption}
-{}
+\item[{void}]{}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_a6d5b8f94e27b55bd3a4e63590cf336e0}
-Starts the Open Interface and sets the mode to Passive. You must send this before sending any other commands. Initialises the serial port to the baud rate given in the constructor
+Starts the Open Interface and sets the mode to Passive. You must send this before sending any other commands. Initialises the serial port to the baud rate given in the constructor 
 
-The iRobot Roomba and Create platforms support a serial port through which you can control and interrogate the device. The protocol implemented here conforms to the Open Interface protocol described in the iRobot Open Interface Command Reference. Not all commands are supported on both platforms. Differences are noted in the API
+Definition at line 172 of file ArduinoRoomba.cpp.
 
-The Roomba and Create is equipped with a min-\/din serial port socket, while the Create is also equipped with a 25-\/pin D connector called the Cargo Bay Connector. The pins on the Cargo Bay Connector include the serial port, battery, digital inputs and outputs, and an analog input.
 
-In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its instance methods to send commmands and receive sensor messages. You can also request continuous streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its serial port from time to time as described below. \hypertarget{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{
+
+References sci, and roombaCmd::START.
+
+
+
+Referenced by init().
+
+\hypertarget{class_arduino_roomba_a687c72eb69928dba45aa53aa39af2f1f}{
 \index{ArduinoRoomba@{ArduinoRoomba}!stream@{stream}}
 \index{stream@{stream}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{stream}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::stream (
@@ -560,6 +883,41 @@ Requests that a stream of sensor data packets be sent by the Roomba. See the Ope
 \mbox{\tt in}  & {\em len} & Number of IDs in packetIDs \\
 \hline
 \end{DoxyParams}
+\hypertarget{class_arduino_roomba_ad8e8719dd8ad39d5901a0420843fdd59}{
+\index{ArduinoRoomba@{ArduinoRoomba}!updateSensors@{updateSensors}}
+\index{updateSensors@{updateSensors}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{updateSensors}]{\setlength{\rightskip}{0pt plus 5cm}int8\_\-t ArduinoRoomba::updateSensors (
+\begin{DoxyParamCaption}
+\item[{uint8\_\-t}]{sensorCode}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_ad8e8719dd8ad39d5901a0420843fdd59}
+
+
+Update the Sensor cache. 
+
+Grab data off the port. We also return how many bytes we read. 
+
+is this a pointer assignment or a copy? I hate c++.
+
+Unimplemented due to storage restrictions
+
+something is wrong, we should never end up here perhaps an exception? Too expensive.
+
+scoping for exit code
+
+needed if we're going multiple packets
+
+Hopefully all went well! 
+
+
+
+Definition at line 243 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-readTimeout, \_\-sensorbytes\_\-0, \_\-sensorbytes\_\-1, \_\-sensorbytes\_\-2, \_\-sensorbytes\_\-3, sci, and roombaCmd::SENSORS.
+
 \hypertarget{class_arduino_roomba_a5eecc857d2d010f7c3ebaa75044f6349}{
 \index{ArduinoRoomba@{ArduinoRoomba}!waitAngle@{waitAngle}}
 \index{waitAngle@{waitAngle}!ArduinoRoomba@{ArduinoRoomba}}
@@ -593,7 +951,7 @@ Causes Roomba to wait until it has travelled the distance specified. Roomba will
 \index{waitEvent@{waitEvent}!ArduinoRoomba@{ArduinoRoomba}}
 \subsubsection[{waitEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::waitEvent (
 \begin{DoxyParamCaption}
-\item[{roombaConst::EventType}]{type}
+\item[{{\bf roombaConst::EventType}}]{type}
 \end{DoxyParamCaption}
 )}}
 \label{class_arduino_roomba_a2a4f3f9a99d4102efef762745631f156}
@@ -620,6 +978,177 @@ Tells the Roomba to wait for a specified time. This command is intended for use 
 \mbox{\tt in}  & {\em ticks} & The number of ticks to wait. Each tick is 15ms \\
 \hline
 \end{DoxyParams}
+\hypertarget{class_arduino_roomba_a10f21f4adec3dda853deeab78d31aa5e}{
+\index{ArduinoRoomba@{ArduinoRoomba}!wake@{wake}}
+\index{wake@{wake}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{wake}]{\setlength{\rightskip}{0pt plus 5cm}void ArduinoRoomba::wake (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}
+\label{class_arduino_roomba_a10f21f4adec3dda853deeab78d31aa5e}
+Kick the thing awake. Mostly relevant on things using SCI. 
+
+The wake code is only needed on the SCI interface, really This will take it out of standby Harmess on a robot that is awake 
+
+
+
+Definition at line 158 of file ArduinoRoomba.cpp.
+
+
+
+References \_\-ddPin.
+
+
+
+\subsection{Member Data Documentation}
+\hypertarget{class_arduino_roomba_afe2d84d47467a3403e292a07d23c51b1}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-ddPin@{\_\-ddPin}}
+\index{\_\-ddPin@{\_\-ddPin}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-ddPin}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ArduinoRoomba::\_\-ddPin}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{class_arduino_roomba_afe2d84d47467a3403e292a07d23c51b1}
+
+
+Definition at line 421 of file ArduinoRoomba.h.
+
+
+
+Referenced by ArduinoRoomba(), and wake().
+
+\hypertarget{class_arduino_roomba_a218508bb243811c9b366cb8cdd2cd04b}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-radiusLimit@{\_\-radiusLimit}}
+\index{\_\-radiusLimit@{\_\-radiusLimit}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-radiusLimit}]{\setlength{\rightskip}{0pt plus 5cm}int16\_\-t {\bf ArduinoRoomba::\_\-radiusLimit}}}
+\label{class_arduino_roomba_a218508bb243811c9b366cb8cdd2cd04b}
+
+
+Safety parameter to limit how tight we turn. 
+
+
+
+Definition at line 116 of file ArduinoRoomba.h.
+
+\hypertarget{class_arduino_roomba_a8c8b81634e4b3549173cdb30db6ad70a}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-readTimeout@{\_\-readTimeout}}
+\index{\_\-readTimeout@{\_\-readTimeout}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-readTimeout}]{\setlength{\rightskip}{0pt plus 5cm}const int {\bf ArduinoRoomba::\_\-readTimeout} = 200\hspace{0.3cm}{\ttfamily  \mbox{[}static\mbox{]}}}}
+\label{class_arduino_roomba_a8c8b81634e4b3549173cdb30db6ad70a}
+
+
+Definition at line 106 of file ArduinoRoomba.h.
+
+
+
+Referenced by getData(), getSensorDirect(), and updateSensors().
+
+\hypertarget{class_arduino_roomba_afd287b867c31071c4ae3409b4cf08c5e}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-rxPin@{\_\-rxPin}}
+\index{\_\-rxPin@{\_\-rxPin}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-rxPin}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ArduinoRoomba::\_\-rxPin}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{class_arduino_roomba_afd287b867c31071c4ae3409b4cf08c5e}
+
+
+Pin assignment from Arduino to Roomba/Create. 
+
+
+
+Definition at line 419 of file ArduinoRoomba.h.
+
+
+
+Referenced by ArduinoRoomba().
+
+\hypertarget{class_arduino_roomba_ad0429e4cb07918eb89532605d5062b03}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-sensorbytes\_\-0@{\_\-sensorbytes\_\-0}}
+\index{\_\-sensorbytes\_\-0@{\_\-sensorbytes\_\-0}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-sensorbytes\_\-0}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf ArduinoRoomba::\_\-sensorbytes\_\-0}\mbox{[}26\mbox{]}}}
+\label{class_arduino_roomba_ad0429e4cb07918eb89532605d5062b03}
+
+
+Roomba sensor bytes cached from last read. 
+
+
+
+Definition at line 120 of file ArduinoRoomba.h.
+
+
+
+Referenced by getSensorData(), and updateSensors().
+
+\hypertarget{class_arduino_roomba_a693f180d190aa31257d5bf5d1766aec1}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-sensorbytes\_\-1@{\_\-sensorbytes\_\-1}}
+\index{\_\-sensorbytes\_\-1@{\_\-sensorbytes\_\-1}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-sensorbytes\_\-1}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf ArduinoRoomba::\_\-sensorbytes\_\-1}\mbox{[}10\mbox{]}}}
+\label{class_arduino_roomba_a693f180d190aa31257d5bf5d1766aec1}
+
+
+Definition at line 121 of file ArduinoRoomba.h.
+
+
+
+Referenced by bumpRight(), getSensorData(), and updateSensors().
+
+\hypertarget{class_arduino_roomba_a4ea894f4c1b9c7d976b2fdd19482ae26}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-sensorbytes\_\-2@{\_\-sensorbytes\_\-2}}
+\index{\_\-sensorbytes\_\-2@{\_\-sensorbytes\_\-2}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-sensorbytes\_\-2}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf ArduinoRoomba::\_\-sensorbytes\_\-2}\mbox{[}6\mbox{]}}}
+\label{class_arduino_roomba_a4ea894f4c1b9c7d976b2fdd19482ae26}
+
+
+Definition at line 122 of file ArduinoRoomba.h.
+
+
+
+Referenced by getSensorData(), and updateSensors().
+
+\hypertarget{class_arduino_roomba_a6942cabb372dfd593602d6c4762d88ec}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-sensorbytes\_\-3@{\_\-sensorbytes\_\-3}}
+\index{\_\-sensorbytes\_\-3@{\_\-sensorbytes\_\-3}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-sensorbytes\_\-3}]{\setlength{\rightskip}{0pt plus 5cm}char {\bf ArduinoRoomba::\_\-sensorbytes\_\-3}\mbox{[}10\mbox{]}}}
+\label{class_arduino_roomba_a6942cabb372dfd593602d6c4762d88ec}
+
+
+Definition at line 123 of file ArduinoRoomba.h.
+
+
+
+Referenced by getSensorData(), and updateSensors().
+
+\hypertarget{class_arduino_roomba_af764f98573d1b77e200811c2d76eef3a}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-txPin@{\_\-txPin}}
+\index{\_\-txPin@{\_\-txPin}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-txPin}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ArduinoRoomba::\_\-txPin}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{class_arduino_roomba_af764f98573d1b77e200811c2d76eef3a}
+
+
+Definition at line 420 of file ArduinoRoomba.h.
+
+
+
+Referenced by ArduinoRoomba().
+
+\hypertarget{class_arduino_roomba_af5babb87f8490752103ab4ce22a5a0f5}{
+\index{ArduinoRoomba@{ArduinoRoomba}!\_\-velocityLimit@{\_\-velocityLimit}}
+\index{\_\-velocityLimit@{\_\-velocityLimit}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{\_\-velocityLimit}]{\setlength{\rightskip}{0pt plus 5cm}int16\_\-t {\bf ArduinoRoomba::\_\-velocityLimit}}}
+\label{class_arduino_roomba_af5babb87f8490752103ab4ce22a5a0f5}
+Safety parameter to ensure that we don't tell it to go racing off 
+
+Definition at line 113 of file ArduinoRoomba.h.
+
+\hypertarget{class_arduino_roomba_ae645170022a5949dcc5ecd4183e50c2a}{
+\index{ArduinoRoomba@{ArduinoRoomba}!sci@{sci}}
+\index{sci@{sci}!ArduinoRoomba@{ArduinoRoomba}}
+\subsubsection[{sci}]{\setlength{\rightskip}{0pt plus 5cm}NewSoftSerial$\ast$ {\bf ArduinoRoomba::sci}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{class_arduino_roomba_ae645170022a5949dcc5ecd4183e50c2a}
+Software serial interface USART is used for Arduino debugging serial console 
+
+Definition at line 429 of file ArduinoRoomba.h.
+
+
+
+Referenced by ArduinoRoomba(), baud(), control(), demo(), fullMode(), getData(), getSensorDirect(), grabSerial(), init(), power(), safeMode(), sendint16(), spot(), start(), and updateSensors().
+
 
 
 The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}

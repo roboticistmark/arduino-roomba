@@ -10,81 +10,81 @@
 #ifndef CONNECTORS_H_
 #define CONNECTORS_H_
 
-namespace CreateConnector {
+namespace createConnector {
 /// Pinouts on Create DB-25
 typedef enum {
-	RXD = 1,
 	/// 0-5V serial input to Create
-	TXD = 2,
+	RXD = 1,
 	/// 0-5V serial output from Create
-	PowerControlToggle = 3,
+	TXD = 2,
 	/// Turns Create on or off on a low-to-high transition
-	AnalogInput = 4,
+	PowerControlToggle = 3,
 	/// 0-5V analog input to Create
+	AnalogInput = 4,
+	/// 0-5V digital input to Create
 	DigitalInput1 = 5,
 	/// 0-5V digital input to Create
 	DigitalInput3 = 6,
-	/// 0-5V digital input to Create
-	DigitalOutput1 = 7,
 	/// 0-5V, 20ma digital output from Create
-	Switched5V = 8,
+	DigitalOutput1 = 7,
 	/// Provides a regulated 5V 100mA supply and analog
 	///   reference voltage when Create is switched on
-	Vpwr = 9,
+	Switched5V = 8,
 	/// Create battery voltage (unregulated), 0.5A
+	Vpwr = 9,
+	/// Provides battery power @ 1.5A when Create is powered on
 	SwitchedVpwr1 = 10,
 	/// Provides battery power @ 1.5A when Create is powered on
 	SwitchedVpwr2 = 11,
 	/// Provides battery power @ 1.5A when Create is powered on
 	SwitchedVpwr3 = 12,
-	/// Provides battery power @ 1.5A when Create is powered on
-	RobotCharging = 13,
 	/// When Create is charging, this pin is high (5V)
-	GND1 = 14,
+	RobotCharging = 13,
 	/// Create battery ground
-	DeviceDetectNBaudRateChangePin = 15,
+	GND1 = 14,
 	/// 0-5V digital input to Create which can also be used to
 	///   change the baud rate to 19200 (see below)
-	GND2 = 16,
+	DeviceDetectNBaudRateChangePin = 15,
 	/// Create battery ground
+	GND2 = 16,
+	/// 0-5V digital input to Create
 	DigitalInput0 = 17,
 	/// 0-5V digital input to Create
 	DigitalInput2 = 18,
-	/// 0-5V digital input to Create
+	/// 0-5V, 20mA digital output from Create
 	DigitalOutput0 = 19,
 	/// 0-5V, 20mA digital output from Create
 	DigitalOutput2 = 20,
-	/// 0-5V, 20mA digital output from Create
-	GND3 = 21,
 	/// Create battery ground
+	GND3 = 21,
+	/// 0.5A low side driver from Create
 	LowSideDriver0 = 22,
 	/// 0.5A low side driver from Create
 	LowSideDriver1 = 23,
-	/// 0.5A low side driver from Create
-	LowSideDriver2 = 24,
 	/// 1.5A low side driver from Create
-	GND4 = 25,
+	LowSideDriver2 = 24,
 	/// Create battery ground
-} CreateCargoBayPins;
+	GND4 = 25,
+} RoombaPin;
 }
 
-namespace RoombaConnector {
+namespace roombaConnector {
 typedef enum {
+	/// Create battery + (unregulated)
 	Vpwr1 = 1,
-	// Create battery + (unregulated)
+	/// Create battery + (unregulated)
 	Vpwr2 = 2,
-	// Create battery + (unregulated)
+	/// 0-5V Serial input to Create
 	RXD = 3,
-	// 0-5V Serial input to Create
+	/// 0-5V Serial output from Create
 	TXD = 4,
-	// 0-5V Serial output from Create
+	/// Baud Rate Change
 	BRC = 5,
-	// Baud Rate Change
+	/// Create battery ground
 	GND1 = 6,
-	// Create battery ground
+	/// Create battery ground
 	GND2 = 7,
-	// Create battery ground
-} RoombaMiniDIN;
+} RoombaPin;
 }
 
 
