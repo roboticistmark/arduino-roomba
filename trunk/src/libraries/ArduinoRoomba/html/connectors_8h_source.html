@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<title>connectors.h Source File</title>
+<title>ArduinoRoomba: connectors.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/search.js"></script>
@@ -14,9 +14,21 @@
 var searchBox = new SearchBox("searchBox", "search",false,'Search');
 --></script>
 <div id="top">
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td style="padding-left: 0.5em;">
+   <div id="projectname">ArduinoRoomba&#160;<span id="projectnumber">V.01</span></div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li id="searchli">
@@ -40,6 +52,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 <div class="header">
@@ -47,7 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h1>connectors.h</h1>  </div>
 </div>
 <div class="contents">
-<div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a href="connectors_8h.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
 <a name="l00002"></a>00002 <span class="comment"> * connectors.h</span>
 <a name="l00003"></a>00003 <span class="comment"> *  $HeadURL: https://arduino-roomba.googlecode.com/svn/trunk/src/libraries/ArduinoRoomba/connectors.h $</span>
 <a name="l00004"></a>00004 <span class="comment"> *  $Id: connectors.h 15 2011-04-02 23:14:50Z joe.foley@gmail.com $</span>
@@ -59,53 +72,46 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00010"></a>00010 <span class="preprocessor">#ifndef CONNECTORS_H_</span>
 <a name="l00011"></a>00011 <span class="preprocessor"></span><span class="preprocessor">#define CONNECTORS_H_</span>
 <a name="l00012"></a>00012 <span class="preprocessor"></span>
-<a name="l00013"></a>00013 <span class="keyword">namespace </span>CreateConnector {
-<a name="l00015"></a>00015 <span class="keyword">typedef</span> <span class="keyword">enum</span> {
-<a name="l00016"></a>00016         RXD = 1,
-<a name="l00018"></a>00018         TXD = 2,
-<a name="l00020"></a>00020         PowerControlToggle = 3,
-<a name="l00022"></a>00022         AnalogInput = 4,
-<a name="l00024"></a>00024         DigitalInput1 = 5,
-<a name="l00026"></a>00026         DigitalInput3 = 6,
-<a name="l00028"></a>00028         DigitalOutput1 = 7,
-<a name="l00030"></a>00030         Switched5V = 8,
-<a name="l00033"></a>00033         Vpwr = 9,
-<a name="l00035"></a>00035         SwitchedVpwr1 = 10,
-<a name="l00037"></a>00037         SwitchedVpwr2 = 11,
-<a name="l00039"></a>00039         SwitchedVpwr3 = 12,
-<a name="l00041"></a>00041         RobotCharging = 13,
-<a name="l00043"></a>00043         GND1 = 14,
-<a name="l00045"></a>00045         DeviceDetectNBaudRateChangePin = 15,
-<a name="l00048"></a>00048         GND2 = 16,
-<a name="l00050"></a>00050         DigitalInput0 = 17,
-<a name="l00052"></a>00052         DigitalInput2 = 18,
-<a name="l00054"></a>00054         DigitalOutput0 = 19,
-<a name="l00056"></a>00056         DigitalOutput2 = 20,
-<a name="l00058"></a>00058         GND3 = 21,
-<a name="l00060"></a>00060         LowSideDriver0 = 22,
-<a name="l00062"></a>00062         LowSideDriver1 = 23,
-<a name="l00064"></a>00064         LowSideDriver2 = 24,
-<a name="l00066"></a>00066         GND4 = 25,
-<a name="l00068"></a>00068 } CreateCargoBayPins;
+<a name="l00013"></a><a class="code" href="namespace_create_connector.html">00013</a> <span class="keyword">namespace </span>CreateConnector {
+<a name="l00015"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497b">00015</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {
+<a name="l00017"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baa3d0d4f9410cfff29723897edf4e3bb9">00017</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baa3d0d4f9410cfff29723897edf4e3bb9" title="0-5V serial input to Create">RXD</a> = 1,
+<a name="l00019"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba5ce152de0d58080e191a33d854bd3ee6">00019</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba5ce152de0d58080e191a33d854bd3ee6" title="0-5V serial output from Create">TXD</a> = 2,
+<a name="l00021"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba615e1db7d5a48c12c3c40f8f3765f5f5">00021</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba615e1db7d5a48c12c3c40f8f3765f5f5" title="Turns Create on or off on a low-to-high transition.">PowerControlToggle</a> = 3,
+<a name="l00023"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba471287d9ad3bde13da0eea1df0e48e3e">00023</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba471287d9ad3bde13da0eea1df0e48e3e" title="0-5V analog input to Create">AnalogInput</a> = 4,
+<a name="l00025"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baeac955763da50976ac61ee0791af820a">00025</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baeac955763da50976ac61ee0791af820a" title="0-5V digital input to Create">DigitalInput1</a> = 5,
+<a name="l00027"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baefd2ec5fa629ab1d9fbd02a100158574">00027</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baefd2ec5fa629ab1d9fbd02a100158574" title="0-5V digital input to Create">DigitalInput3</a> = 6,
+<a name="l00029"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba56e1f3da35b82f14bf4fca98bb9889ac">00029</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba56e1f3da35b82f14bf4fca98bb9889ac" title="0-5V, 20ma digital output from Create">DigitalOutput1</a> = 7,
+<a name="l00032"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba0b065f2a3358924b6985a3d7d63ec09c">00032</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba0b065f2a3358924b6985a3d7d63ec09c">Switched5V</a> = 8,
+<a name="l00034"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bae2e378950ea2830b76a736d16a5e5b04">00034</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bae2e378950ea2830b76a736d16a5e5b04" title="Create battery voltage (unregulated), 0.5A.">Vpwr</a> = 9,
+<a name="l00036"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bab23fafc50505e6a29fe6ca7f3a48a7d7">00036</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bab23fafc50505e6a29fe6ca7f3a48a7d7" title="Provides battery power @ 1.5A when Create is powered on.">SwitchedVpwr1</a> = 10,
+<a name="l00038"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baa04859f01b41b4e4d055c0523c47fd80">00038</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baa04859f01b41b4e4d055c0523c47fd80" title="Provides battery power @ 1.5A when Create is powered on.">SwitchedVpwr2</a> = 11,
+<a name="l00040"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba9ea069fb6db87795b6d91e40abc3ed37">00040</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba9ea069fb6db87795b6d91e40abc3ed37" title="Provides battery power @ 1.5A when Create is powered on.">SwitchedVpwr3</a> = 12,
+<a name="l00042"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baf5bf3559859ef354b8c0fdb5b8f1a4fa">00042</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baf5bf3559859ef354b8c0fdb5b8f1a4fa" title="When Create is charging, this pin is high (5V)">RobotCharging</a> = 13,
+<a name="l00044"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba210553bb5ed667795c1278c1020f4329">00044</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba210553bb5ed667795c1278c1020f4329" title="Create battery ground.">GND1</a> = 14,
+<a name="l00047"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba0d651c1898aa85657976e4a0971bea7c">00047</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba0d651c1898aa85657976e4a0971bea7c">DeviceDetectNBaudRateChangePin</a> = 15,
+<a name="l00049"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baa0efedf653068f879e8c4568564ab9db">00049</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497baa0efedf653068f879e8c4568564ab9db" title="Create battery ground.">GND2</a> = 16,
+<a name="l00051"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba9c70707579d753968571e7b947cc692a">00051</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba9c70707579d753968571e7b947cc692a" title="0-5V digital input to Create">DigitalInput0</a> = 17,
+<a name="l00053"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bafc6e5d4248d96e4e42fc2ccdd1173b25">00053</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bafc6e5d4248d96e4e42fc2ccdd1173b25" title="0-5V digital input to Create">DigitalInput2</a> = 18,
+<a name="l00055"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba53da304b78c7ef5d42e718f1af4ae348">00055</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba53da304b78c7ef5d42e718f1af4ae348" title="0-5V, 20mA digital output from Create">DigitalOutput0</a> = 19,
+<a name="l00057"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bad269ced3b3d78229877af49952a2eafc">00057</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bad269ced3b3d78229877af49952a2eafc" title="0-5V, 20mA digital output from Create">DigitalOutput2</a> = 20,
+<a name="l00059"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bab38af0569ea5024126a3e1eb0ba9e156">00059</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bab38af0569ea5024126a3e1eb0ba9e156" title="Create battery ground.">GND3</a> = 21,
+<a name="l00061"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba3c05f95682f74daee960f92dffae1229">00061</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba3c05f95682f74daee960f92dffae1229" title="0.5A low side driver from Create">LowSideDriver0</a> = 22,
+<a name="l00063"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba51a7fbdd27bd65591327a6b5e15b6cf4">00063</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba51a7fbdd27bd65591327a6b5e15b6cf4" title="0.5A low side driver from Create">LowSideDriver1</a> = 23,
+<a name="l00065"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba168644e5a57efa0c400bf7c3f8ba7bcd">00065</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497ba168644e5a57efa0c400bf7c3f8ba7bcd" title="1.5A low side driver from Create">LowSideDriver2</a> = 24,
+<a name="l00067"></a><a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bac0305049997055dba771a2c294cad844">00067</a>         <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497bac0305049997055dba771a2c294cad844" title="Create battery ground.">GND4</a> = 25,
+<a name="l00068"></a>00068 } <a class="code" href="namespace_create_connector.html#ad500c975c407a88006288363345a497b" title="Pinouts on Create DB-25.">RoombaPin</a>;
 <a name="l00069"></a>00069 }
 <a name="l00070"></a>00070 
-<a name="l00071"></a>00071 <span class="keyword">namespace </span>RoombaConnector {
-<a name="l00072"></a>00072 <span class="keyword">typedef</span> <span class="keyword">enum</span> {
-<a name="l00073"></a>00073         Vpwr1 = 1,
-<a name="l00074"></a>00074         <span class="comment">// Create battery + (unregulated)</span>
-<a name="l00075"></a>00075         Vpwr2 = 2,
-<a name="l00076"></a>00076         <span class="comment">// Create battery + (unregulated)</span>
-<a name="l00077"></a>00077         RXD = 3,
-<a name="l00078"></a>00078         <span class="comment">// 0-5V Serial input to Create</span>
-<a name="l00079"></a>00079         TXD = 4,
-<a name="l00080"></a>00080         <span class="comment">// 0-5V Serial output from Create</span>
-<a name="l00081"></a>00081         BRC = 5,
-<a name="l00082"></a>00082         <span class="comment">// Baud Rate Change</span>
-<a name="l00083"></a>00083         GND1 = 6,
-<a name="l00084"></a>00084         <span class="comment">// Create battery ground</span>
-<a name="l00085"></a>00085         GND2 = 7,
-<a name="l00086"></a>00086         <span class="comment">// Create battery ground</span>
-<a name="l00087"></a>00087 } RoombaMiniDIN;
+<a name="l00071"></a><a class="code" href="namespace_roomba_connector.html">00071</a> <span class="keyword">namespace </span>RoombaConnector {
+<a name="l00072"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27b">00072</a> <span class="keyword">typedef</span> <span class="keyword">enum</span> {
+<a name="l00074"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba96e5fff2e45775f68e502d40a8bfc06e">00074</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba96e5fff2e45775f68e502d40a8bfc06e" title="Create battery + (unregulated)">Vpwr1</a> = 1,
+<a name="l00076"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27bae0d268f3e7c9f7c4d49e7d49fa8c4f01">00076</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27bae0d268f3e7c9f7c4d49e7d49fa8c4f01" title="Create battery + (unregulated)">Vpwr2</a> = 2,
+<a name="l00078"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba190c9c251c09340139141d16bee66536">00078</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba190c9c251c09340139141d16bee66536" title="0-5V Serial input to Create">RXD</a> = 3,
+<a name="l00080"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba83e1a4c018d5c41f8d39114cbef43771">00080</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba83e1a4c018d5c41f8d39114cbef43771" title="0-5V Serial output from Create">TXD</a> = 4,
+<a name="l00082"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba94dd0f57a872b29d06513e982fbace30">00082</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba94dd0f57a872b29d06513e982fbace30" title="Baud Rate Change.">BRC</a> = 5,
+<a name="l00084"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba869d9d4946668f62b44504a77ab8a0c3">00084</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba869d9d4946668f62b44504a77ab8a0c3" title="Create battery ground.">GND1</a> = 6,
+<a name="l00086"></a><a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba79e5478c10cc7aa3bc721a018a704ae5">00086</a>         <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27ba79e5478c10cc7aa3bc721a018a704ae5" title="Create battery ground.">GND2</a> = 7,
+<a name="l00087"></a>00087 } <a class="code" href="namespace_roomba_connector.html#aef83b540d018715df15688a9de84d27b">RoombaPin</a>;
 <a name="l00088"></a>00088 }
 <a name="l00089"></a>00089 
 <a name="l00090"></a>00090 
@@ -118,7 +124,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(6)"><span class="SelectionMark">&#160;</span>Enumerations</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(7)"><span class="SelectionMark">&#160;</span>Enumerator</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -127,7 +133,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
-<hr class="footer"/><address class="footer"><small>Generated on Sun Apr 3 2011 01:16:28 by&#160;
+<hr class="footer"/><address class="footer"><small>Generated on Thu Apr 21 2011 17:59:30 for ArduinoRoomba by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.3 </small></address>
 </body>
