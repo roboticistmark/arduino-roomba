@@ -3,10 +3,11 @@
 #include<ArduinoRoomba.h>
 #include<virtualfunctionfix.h>
 
-/// ArduinoRoomb(rx,tx,dd)
+// ArduinoRoomb(rx,tx,dd)
+/// Default arduino pin configuration, RX on pin 3, TX on pin 4, DD on pin 5
 ArduinoRoomba roomba(3,4,5);
 void setup() {
-	Serial.begin(57600);
+	Serial.begin(roombaConst::SerialFast);
   // initialize the digital pin as an output.
   // Pin 13 has an LED connected on most Arduino boards:
 

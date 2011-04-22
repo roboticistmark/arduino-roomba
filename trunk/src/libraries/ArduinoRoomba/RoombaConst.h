@@ -7,6 +7,8 @@
 
 #ifndef ROOMBACONST_H_
 #define ROOMBACONST_H_
+
+/// Various enum constants for masking OI commands and interpreting sensor information
 namespace roombaMask {
 //! \enum Masks for LEDs on top of create and roomba
 enum {
@@ -84,9 +86,10 @@ enum {
 };
 }
 
+/// Constants used to send and intepret results from the OpenInterface
 namespace roombaConst {
 /// \enum Baud
-/// Demo types to pass to Roomba::baud()
+/// Types to pass to Roomba::baud()
 typedef enum
 {
 	Baud300    = 0,
@@ -102,6 +105,15 @@ typedef enum
 	Baud57600  = 10,
 	Baud115200 = 11,
 } Baud;
+
+/// \enum SerialSpeed
+/// Useful baud speeds for various conditions
+typedef enum
+{
+	SerialFast = 57600,
+	SerialSlow = 28800,
+	SoftSerialUno = 38400,
+} SerialSpeed;
 
 /// \enum Demo
 /// Demo types to pass to Roomba::demo()
@@ -271,6 +283,7 @@ typedef enum
 } Sensor;
 }
 
+/// This enum is a translation table of lilypond notation to roomba note commands
 namespace roombaNotes {
 	/// we use some of the lilypond notation
 	enum {
@@ -289,6 +302,7 @@ namespace roombaNotes {
 
 }
 
+/// This enum is a symbol table of OpenInterface commands
 namespace roombaCmd {
 	enum {
 		START = 128,

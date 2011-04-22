@@ -10,6 +10,7 @@
 #ifndef CONNECTORS_H_
 #define CONNECTORS_H_
 
+/// Reference enum of what the various pins on a create Connector do.  Not often used.
 namespace createConnector {
 /// Pinouts on Create DB-25
 typedef enum {
@@ -68,6 +69,7 @@ typedef enum {
 } RoombaPin;
 }
 
+/// Reference enum of what the various pins on a roomba SCI Connector do.  Not often used.
 namespace roombaConnector {
 typedef enum {
 	/// Create battery + (unregulated)
