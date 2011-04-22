@@ -121,14 +121,20 @@ public:
     char _sensorbytes_1[10];
     char _sensorbytes_2[6];
     char _sensorbytes_3[10];
-    /// Unimplemented due to storage restrictions
+    // Unimplemented due to storage restrictions
     //char _sensorbytes_4[14];
     //char _sensorbytes_5[12];
     //char _sensorbytes_6[52];
 
 
-    /// Constructor. You can have multiple simultaneous Roomba if that makes sense.
-    ArduinoRoomba(uint8_t rx, uint8_t tx, uint8_t dd);
+    /**
+     * Constructor. You can have multiple simultaneous Roomba if that makes sense.
+     *
+     * \param[in] rxPin Arduino pin we receive commands from roomba/create
+     * \param[in] txPin Arduino pin we send our commands to roomba/create
+     * \param[in] ddPin Arduino pin to DeviceDetect(DD) and Baud rate change
+     */
+    ArduinoRoomba(uint8_t rxPin, uint8_t txPin, uint8_t ddPin);
 
 
     /// NonOI support functions
