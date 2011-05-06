@@ -22,7 +22,7 @@
 #include "WProgram.h"
 #include "ArduinoRoomba.h"
 #include "NewSoftSerial.h"
-#include "PString.h"
+//#include "PString.h"
 
 //namespace roombaMask { }
 //namespace roombaConst { }
@@ -68,7 +68,7 @@ ArduinoRoomba::ArduinoRoomba(uint8_t rxPin, uint8_t txPin, uint8_t ddPin)
 	// sciSerial has already setup rx and tx pins
 	pinMode(ddPin, OUTPUT);
 }
-
+/*
 void ArduinoRoomba::grabSerial()
 {
 	// Just listen on the serial port
@@ -94,9 +94,8 @@ void ArduinoRoomba::grabSerial()
 		}
 
 	}
-
-
 }
+*/
 
 /// Send an int, useful if the int is more than 8 bits
 void ArduinoRoomba::sendint16(int16_t outint)
@@ -317,11 +316,42 @@ int8_t ArduinoRoomba::updateSensors(uint8_t sensorCode) {
 }
 */
 
-bool ArduinoRoomba::bumpRight(void) {
-  if(this->_sensorbytes_1[0] & 0x01){
-    return true;
-  }
-  return false;
+
+bool ArduinoRoomba::bumpLeft(void) {
+	return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::bump_left);
+	//return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & 0x01);
 }
 
+bool ArduinoRoomba::bumpRight(void) {
+	return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::bump_right);
+	//return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & 0x02);
+}
+
+
+bool ArduinoRoomba::dropLeft(void) {
+  return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::drop_left);
+}
+bool ArduinoRoomba::dropRight(void) {
+  return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::drop_right);
+}
+bool ArduinoRoomba::dropCaster(void) {
+  return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::drop_caster);
+}
+
+bool ArduinoRoomba::cliffLeft(void) {
+  return(this->_sensorbytes_1[roombaConst::P1CliffLeft]);
+}
+bool ArduinoRoomba::cliffFrontLeft(void) {
+  return(this->_sensorbytes_1[roombaConst::P1CliffFrontLeft]);
+}
+bool ArduinoRoomba::cliffFrontRight(void) {
+  return(this->_sensorbytes_1[roombaConst::P1CliffFrontRight]);
+}
+bool ArduinoRoomba::cliffRight(void) {
+  return(this->_sensorbytes_1[roombaConst::P1CliffRight]);
+}
+
+bool ArduinoRoomba::button(roombaMask::button_mask mymask) {
+	  return(this->_sensorbytes_1[roombaConst::P1Buttons] & mymask);
+}
 
