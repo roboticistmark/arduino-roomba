@@ -29,9 +29,9 @@
 #ifndef ArduinoRoomba_h
 #define ArduinoRoomba_h
 
-#include "WProgram.h"
+//#include "WProgram.h"
 #include "NewSoftSerial.h"
-#include "virtualfunctionfix.h"
+//#include "virtualfunctionfix.h"
 /////////////////////////////////////////////////////////////////////
 /// \class ArduinoRoomba ArduinoRoomba.h <ArduinoRoomba.h>
 ///
@@ -197,6 +197,20 @@ public:
 
     /// Has the right bumper been pressed?
     bool bumpRight(void);
+
+    /// Has the left bumper been pressed?
+    bool bumpLeft(void);
+
+    /// Wheel drops
+    bool dropRight(void);
+    bool dropLeft(void);
+    bool dropCaster(void);
+
+    /// Cliff sensors
+    bool cliffLeft(void);
+    bool cliffFrontLeft(void);
+    bool cliffRight(void);
+    bool cliffFrontRight(void);
 
     ///////////////////////////////////////////
     ////  Open Interface API
@@ -417,7 +431,7 @@ public:
     /// Roomba only, no equivalent for Create.
     void power();
 
-
+    bool button(roombaMask::button_mask mymask);
 	
 
 private:
