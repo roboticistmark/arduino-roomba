@@ -125,6 +125,7 @@ void ArduinoRoomba::init()
 	/// Now we must slow down or the UNO can't keep up
 	this->baud(roombaConst::Baud38400);
 	this->sci->begin(38400);
+
 }
 
 int ArduinoRoomba::getSensorData(uint8_t sensorCode, uint8_t index)
@@ -327,7 +328,6 @@ bool ArduinoRoomba::bumpRight(void) {
 	//return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & 0x02);
 }
 
-
 bool ArduinoRoomba::dropLeft(void) {
   return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::drop_left);
 }
@@ -351,7 +351,14 @@ bool ArduinoRoomba::cliffRight(void) {
   return(this->_sensorbytes_1[roombaConst::P1CliffRight]);
 }
 
-bool ArduinoRoomba::button(roombaMask::button_mask mymask) {
-	  return(this->_sensorbytes_1[roombaConst::P1Buttons] & mymask);
+uint8_t ArduinoRoomba::button(void) {
+	return(this->getSensorDirect(roombaConst::SensorButtons));
 }
 
+bool ArduinoRoomba::chargingAvailable(void) {
+	return(this->getSensorDirect(roombaConst::SensorChargingSourcesAvailable) > 0);
+}
+
+uint8_t ArduinoRoomba::chargingState(void) {
+	return(this->getSensorDirect(roombaConst::SensorChargingState));
+}

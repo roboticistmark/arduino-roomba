@@ -80,10 +80,10 @@ namespace roombaMask {
 	};
 
 	/// Masks for charging sources sensor packet ID 34
-	enum {
+	typedef enum {
 		internal_charger = 0x1,
 		home_base = 0x2,
-	};
+	} charger;
 
 } // end roombaMask
 
