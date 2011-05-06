@@ -30,19 +30,19 @@ void setup() {
 #define sensor3thresh 510
 
 void updatedistSensors(){
- int sensor1 = analogRead(A0);  //sensor in front to the left
- int sensor2 = analogRead(A1);  //sensor in front to the right
- int sensor3 = analogRead(A2);  //sensor in the back
+	 int sensor1 = analogRead(A0);  //sensor in front to the left
+	 int sensor2 = analogRead(A1);  //sensor in front to the right
+	 int sensor3 = analogRead(A2);  //sensor in the back
 
- Serial.print("sensor1=[");
- Serial.print(sensor1);
- Serial.print("]");
- Serial.print("sensor2=[");
- Serial.print(sensor2);
- Serial.print("]");
- Serial.print("sensor3=[");
- Serial.print(sensor3);
- Serial.println("]");
+	 Serial.print("sensor1=[");
+	 Serial.print(sensor1);
+	 Serial.print("]");
+	 Serial.print("sensor2=[");
+	 Serial.print(sensor2);
+	 Serial.print("]");
+	 Serial.print("sensor3=[");
+	 Serial.print(sensor3);
+	 Serial.println("]");
 }
 
 void loop() {
@@ -59,6 +59,19 @@ void loop() {
 	if (roomba.cliffFrontLeft()) { Serial.print("cliffFrontLeft ");}
 	if (roomba.cliffFrontRight()) { Serial.print("cliffFrontRight ");}
 	if (roomba.cliffRight()) { Serial.print("cliffRight ");}
+	if (roomba.chargingAvailable()) {
+		Serial.print("charger ");
+		roomba.start();
+		while(1) {
+			Serial.print("Charge:");
+			Serial.println(roomba.chargingState(), HEX);
+			Serial.print("Buttons:");
+			Serial.println(roomba.button(), HEX);
+			if (roomba.button() & roombaMask::button_play) break;
+			delay(500);
+		}
+	}
+
 	Serial.println();
 	updatedistSensors();
 	delay(100);

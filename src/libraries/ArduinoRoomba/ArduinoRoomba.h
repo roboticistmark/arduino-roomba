@@ -221,7 +221,7 @@ public:
     /// Baud is on of the Roomba::Baud enums
     void baud(roombaConst::Baud baud);
 
-    /// not quite sure why this is necessary
+    /// not quite sure what it is for
     void control();
 
     /// MODES
@@ -431,8 +431,14 @@ public:
     /// Roomba only, no equivalent for Create.
     void power();
 
-    bool button(roombaMask::button_mask mymask);
-	
+    /// find out which buttons
+    uint8_t button(void);
+
+    // Is there a charger?
+    bool chargingAvailable(void);
+
+    // Charger state
+    uint8_t chargingState(void);
 
 private:
     /// Pin assignment from Arduino to Roomba/Create
