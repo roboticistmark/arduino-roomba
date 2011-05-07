@@ -443,6 +443,11 @@ public:
     // Open Interface mode
     uint8_t OImode(void);
 
+    // Useful movement
+    void spinLeft();
+    void spinRight();
+    void stopMoving();
+
 private:
     /// Pin assignment from Arduino to Roomba/Create
     int _rxPin;
