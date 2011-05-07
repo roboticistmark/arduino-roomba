@@ -91,16 +91,20 @@ void setup() {
 
   // serial port for debugging
   Serial.begin(57600);
-  Serial.print("Robi Robot Initializing.");
   Serial.println("$Id: RobbiRobot.pde 420 2011-03-27 14:15:14Z foley $");
+  Serial.print("Robi Robot Initializing.");
+  boolean setup = false;
   //--- Set the digital pins as outputs
   pinMode(ledPin, OUTPUT);	
   //--- Turn on/off LED to indicate init function
-  roomba.init();
-  //roomba.fullMode();  // ignore cliff sensors
-  roomba.safeMode();  // try not to fall off table, unfortunately this means
+  while(! setup) {
+	  roomba.init();
+	  //roomba.fullMode();  // ignore cliff sensors
+	  roomba.safeMode();  // try not to fall off table, unfortunately this means
                     // that it will shut down when it hits and edge
-  Serial.print(".");
+	  if (roomba.OImode() == roombaConst::ModeSafe) {setup = true;}
+	  Serial.print(".");
+  }
   Serial.println(".done.");
   // Green, we're ready to go!
   BlinkM_setRGB(blinkm_addr, 0x00, 0xff, 0x00);
@@ -193,13 +197,31 @@ void bumpertest() {
   }
 }
 
+void checkNcharge() {
+	if (roomba.chargingAvailable()) {
+		Serial.print("charger ");
+		roomba.start();
+		while(1) {
+			Serial.print("Charge:");
+			Serial.println(roomba.chargingState(), HEX);
+			Serial.print("Buttons:");
+			Serial.println(roomba.button(), HEX);
+			if (roomba.button() & roombaMask::button_play) break;
+			delay(500);
+		}
+	}
+
+
+}
+
 boolean debounce = true;
 //--- Loop Code
 void loop() {
   //--- Turn on/off LED to indicate sensor function
   roomba.updateSensors(1);
   updatedistSensors();
-    
+  checkNcharge();
+
   //--- begin of blinkM loop
   //  bri_val = analogRead(bri_pot_pin);    // read the brightness pot
   // hue_val = analogRead(hue_pot_pin);    // read the hue pot
@@ -212,7 +234,7 @@ void loop() {
 
   Serial.print("(state ");
   Serial.print(state);
-  Serial.println(")");
+  Serial.print(")");
   if (state == 0){    // nothing is happening
       debounce = true;
       //roomba.stopMoving();
@@ -230,12 +252,6 @@ void loop() {
     // Presence should still be set at this point, now we move
     // Check RobbieRobot.h for what these mean
     BlinkM_stopScript(blinkm_addr);  // turn off startup script
-
-    Serial.print("p & b: ");
-    Serial.print(presence);
-    Serial.print(",");
-    Serial.print(debounce, DEC);
-    Serial.println();
 
   if (debounce) {
     debounce = false;
@@ -265,7 +281,9 @@ void loop() {
       debounce = true;
     }
   }
-  delay(100);  // wait a bit because we don't need to go fast
+  Serial.print("mode ");
+  Serial.println(roomba.OImode(), DEC);
+  delay(200);  // wait a bit because we don't need to go fast
   //Serial.print("Distance:");
   //Serial.println(roomba.getDistance());
 }

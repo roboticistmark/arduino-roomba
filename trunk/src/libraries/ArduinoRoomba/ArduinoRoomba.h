@@ -440,6 +440,9 @@ public:
     // Charger state
     uint8_t chargingState(void);
 
+    // Open Interface mode
+    uint8_t OImode(void);
+
 private:
     /// Pin assignment from Arduino to Roomba/Create
     int _rxPin;
