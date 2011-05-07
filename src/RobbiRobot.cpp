@@ -85,9 +85,9 @@ void blink(int blinks)  {
 
 //--- Setup Code
 void setup() {
-  BlinkM_begin();
-  BlinkM_stopScript(blinkm_addr);  // turn off startup script
-  BlinkM_setRGB(blinkm_addr, 0xff, 0x00, 0x00);
+  //BlinkM_begin();
+  //BlinkM_stopScript(blinkm_addr);  // turn off startup script
+  //BlinkM_setRGB(blinkm_addr, 0xff, 0x00, 0x00);
 
   // serial port for debugging
   Serial.begin(57600);
@@ -99,18 +99,19 @@ void setup() {
   //--- Turn on/off LED to indicate init function
   while(! setup) {
 	  roomba.init();
-	  //roomba.fullMode();  // ignore cliff sensors
-	  roomba.safeMode();  // try not to fall off table, unfortunately this means
+	  roomba.fullMode();  // ignore cliff sensors
+	  if (roomba.OImode() == roombaConst::ModeFull) {setup = true;}
+	  //roomba.safeMode();  // try not to fall off table, unfortunately this means
                     // that it will shut down when it hits and edge
-	  if (roomba.OImode() == roombaConst::ModeSafe) {setup = true;}
+	  //if (roomba.OImode() == roombaConst::ModeSafe) {setup = true;}
 	  Serial.print(".");
   }
   Serial.println(".done.");
   // Green, we're ready to go!
-  BlinkM_setRGB(blinkm_addr, 0x00, 0xff, 0x00);
+  //BlinkM_setRGB(blinkm_addr, 0x00, 0xff, 0x00);
     //-- Put the LED's back to cycling on hues
   //  BlinkM_stopScript(blinkm_addr);  // turn off startup script
-  BlinkM_playScript(blinkm_addr,11,0,0);
+  //BlinkM_playScript(blinkm_addr,11,0,0);
 
 }
 
@@ -118,29 +119,61 @@ void bounceCliff() {
  // cliff sensors give a true if they can see the floor
  // if we see a 0, then it can't see the floor
   Serial.print("Cliff sensors(L,LF,R,RF):");
-  int cl = roomba.cliffLeft();
-  int cfl = roomba.cliffFrontLeft();
-  int cr = roomba.cliffRight();
-  int cfr = roomba.cliffFrontRight();
+  boolean cl = roomba.cliffLeft();
+  boolean cfl = roomba.cliffFrontLeft();
+  boolean cr = roomba.cliffRight();
+  boolean cfr = roomba.cliffFrontRight();
+  boolean bl = roomba.bumpLeft();
+  boolean br = roomba.bumpRight();
   Serial.print(cl);
   Serial.print(cfl);
   Serial.print(cr);
   Serial.print(cfr);
-  Serial.println();
-  boolean cliffright = cr && cfr;
-  boolean cliffleft = cl && cfl;  
-  if (cliffright && cliffleft) {
+
+  boolean dl = roomba.dropLeft();
+  boolean dr = roomba.dropRight();
+  boolean dc = roomba.dropCaster();
+
+  if (bl) {
+	  Serial.println("(LeftBump)");
+  }
+  if (br) {
+	  Serial.println("(RightBump)");
+  }
+  boolean avoidleft = cl|| bl || dl;
+  boolean avoidright = cr || br || dr;
+  boolean avoidfront = cfr || dc;
+
+
+  if (avoidleft && avoidright) {
      Serial.print("I've fallen off the table, help me!"); 
-    //roomba.stopMoving();
+    roomba.stopMoving();
   }
   else {
-     if(cliffleft) {
-       Serial.print("Cliff on my left, turning right.");
-        //roomba.spinRight(); // Spins the left wheel so the robot turns
+     if(avoidleft) {
+       Serial.print("Problem on my left, turning right.");
+	    roomba.drive(-100, 0x8000); // Tells the robot to go forvard
+	    delay(500);
+        roomba.spinRight(); // Spins the left wheel so the robot turns
+        delay(600);
+        roomba.stopMoving();
      }     
-     if(cliffright) {
-       Serial.print("Cliff on my right, turning left.");
-       //roomba.spinLeft(); // Spins the left wheel so the robot turns
+     if(avoidright) {
+       Serial.print("Problem on my right, turning left.");
+	    roomba.drive(-100, 0x8000); // Tells the robot to go forvard
+	    delay(500);
+       roomba.spinLeft(); // Spins the left wheel so the robot turns
+       delay(600);
+       roomba.stopMoving();
+     }
+     if(avoidfront) {
+         Serial.print("Problem in front, turning around.");
+ 	    roomba.drive(-100, 0x8000); // Tells the robot to go forvard
+ 	    delay(500);
+         roomba.spinRight(); // Spins the left wheel so the robot turns
+         delay(1000);
+         roomba.stopMoving();
+
      }
   }
 }
@@ -184,17 +217,6 @@ void bounceCliff() {
 }
 
 void bumpertest() {
-  if(roomba.bumpLeft()) {
-    Serial.println("LeftBump");
-    //roomba.turnRScript();
-    //roomba.runScript();
-
-  }
-  if(roomba.bumpRight()) {
-    Serial.println("RightBump");
-    //roomba.turnLScript();
-    //roomba.runScript();
-  }
 }
 
 void checkNcharge() {
@@ -229,7 +251,6 @@ void loop() {
   // set blinkms with hue & bri, saturation is max
   // BlinkM_fadeToHSB( blinkm_addr, hue_val, 255, bri_val );
   bounceCliff();
-  bumpertest();
   delay(100);  // wait a bit because we don't need to go fast
 
   Serial.print("(state ");
@@ -239,7 +260,7 @@ void loop() {
       debounce = true;
       //roomba.stopMoving();
       //  BlinkM_stopScript(blinkm_addr);  // turn off startup script
-      BlinkM_playScript(blinkm_addr,11,0,0);
+      //BlinkM_playScript(blinkm_addr,11,0,0);
 
       Serial.println("stoppar");
 
@@ -251,34 +272,34 @@ void loop() {
   if (state == 1){
     // Presence should still be set at this point, now we move
     // Check RobbieRobot.h for what these mean
-    BlinkM_stopScript(blinkm_addr);  // turn off startup script
+    //BlinkM_stopScript(blinkm_addr);  // turn off startup script
 
   if (debounce) {
     debounce = false;
     switch(presence) {
   case RIGHT_SENSOR:
-    BlinkM_setRGB(blinkm_addr, 0x90, 0x90, 0x00);
+    //BlinkM_setRGB(blinkm_addr, 0x90, 0x90, 0x00);
     Serial.println("Something to my right.  Turning left!");
     roomba.spinLeft();
     delay(1000);
-    roomba.drive(400, 0x8000); // Tells the robot to go forvard
+    roomba.drive(200, 0x8000); // Tells the robot to go forvard
 
     //roomba.turnLScript();
     //roomba.runScript();
     break;
   case LEFT_SENSOR:
-    BlinkM_setRGB(blinkm_addr, 0x00, 0x90, 0x90);
+    ///BlinkM_setRGB(blinkm_addr, 0x00, 0x90, 0x90);
     Serial.println("Something to my left.  Turning right!");
     roomba.spinRight();
     delay(1000);
-    roomba.drive(400, 0x8000); // Tells the robot to go forvard
+    roomba.drive(200, 0x8000); // Tells the robot to go forvard
 
     //roomba.runScript();
     break;
   case REAR_SENSOR:
-    BlinkM_setRGB(blinkm_addr, 0x90, 0x00, 0x90);
+    //BlinkM_setRGB(blinkm_addr, 0x90, 0x00, 0x90);
     Serial.println("Something behind me.  Running away!");
-    roomba.drive(400, 0x8000); // Tells the robot to go forvard
+    roomba.drive(200, 0x8000); // Tells the robot to go forvard
     //delay(3000); /// Puts on delay to increase the forward distance, the higher the number gets the further away he drives from you. 5000 is about 1 meter
     break;
     }
@@ -292,9 +313,15 @@ void loop() {
   /// If an error condition dumped us into passive, go back to safe mode
   if (roomba.OImode() == roombaConst::ModePassive) {
 	  // go back to previous mode
-	  roomba.safeMode();
+	  /*
+	  roomba.start();
+	  roomba.fullMode();
+	    roomba.drive(-100, 0x8000); // Tells the robot to go forvard
+	    delay(500);
+	*/
+	    roomba.safeMode();
   }
-  delay(200);  // wait a bit because we don't need to go fast
+  //delay(200);  // wait a bit because we don't need to go fast
   //Serial.print("Distance:");
   //Serial.println(roomba.getDistance());
 }
