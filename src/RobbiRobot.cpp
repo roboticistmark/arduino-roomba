@@ -24,7 +24,7 @@
  * 
  * Currently it reads from one sensor and I created a "switch" that
  * tells it to mowe when it detects someone and stop when it does not
- * Now it just drives straigt when it "sees" something currently one
+ * Now it just drives straight when it "sees" something currently one
  * blinkM led is working and blinks fadely and random. For now thats
  * the only thing ve want it to do.
  *
@@ -33,9 +33,14 @@
  *   http://svn.chrisgilmer.net/viewvc.cgi/project/anomalyrobotics/arduino/roomba/roomba.pde?view=markup
  */
 
+#include <WProgram.h>
+#include <stdlib.h>
+#include<ArduinoRoomba.h>
+#include<virtualfunctionfix.h>
+
 //--- Include All Libraries
 #include <NewSoftSerial.h> // Needed since it is referenced by RoombaSerial
-#include <RoombaArduino.h>
+#include <ArduinoRoomba.h>
 
 // Header file sets things up
 #include "RobbiRobot.h"
@@ -57,7 +62,7 @@ const int ledPin = 13;
 
 	
 //--- Add the Roomba object
-RoombaArduino roomba(rxPin,txPin,ddPin);
+ArduinoRoomba roomba(rxPin,txPin,ddPin);
 
 //--- Finite State machine
 int presence = 0;  //
@@ -80,21 +85,20 @@ void blink(int blinks)  {
 
 //--- Setup Code
 void setup() {
-  delay(500); // delay to let things settle down
   BlinkM_begin();
   BlinkM_stopScript(blinkm_addr);  // turn off startup script
   BlinkM_setRGB(blinkm_addr, 0xff, 0x00, 0x00);
 
   // serial port for debugging
-  Serial.begin(9600);
+  Serial.begin(57600);
   Serial.print("Robi Robot Initializing.");
   Serial.println("$Id: RobbiRobot.pde 420 2011-03-27 14:15:14Z foley $");
   //--- Set the digital pins as outputs
   pinMode(ledPin, OUTPUT);	
   //--- Turn on/off LED to indicate init function
   roomba.init();
-  roomba.full();  // ignore cliff sensors
-  //roomba.safe();  // try not to fall off table, unfortunately this means
+  //roomba.fullMode();  // ignore cliff sensors
+  roomba.safeMode();  // try not to fall off table, unfortunately this means
                     // that it will shut down when it hits and edge
   Serial.print(".");
   Serial.println(".done.");
@@ -123,23 +127,16 @@ void bounceCliff() {
   boolean cliffleft = cl && cfl;  
   if (cliffright && cliffleft) {
      Serial.print("I've fallen off the table, help me!"); 
-    roomba.stopMoving();
+    //roomba.stopMoving();
   }
   else {
      if(cliffleft) {
        Serial.print("Cliff on my left, turning right.");
-        roomba.spinRight(); // Spins the left wheel so the robot turns
-       delay(1000); // Puts on a delay to get bigger turning angle, 
-   //the higher the number gets the bigger the turning angel gets, 500 is about 45°
-   // this is ok here because falling off is very bad, so we can wait
-
+        //roomba.spinRight(); // Spins the left wheel so the robot turns
      }     
      if(cliffright) {
        Serial.print("Cliff on my right, turning left.");
-       roomba.spinLeft(); // Spins the left wheel so the robot turns
-       delay(1000); // Puts on a delay to get bigger turning angle, 
-   //the higher the number gets the bigger the turning angel gets, 500 is about 45°
-   // this is ok here because falling off is very bad, so we can wait
+       //roomba.spinLeft(); // Spins the left wheel so the robot turns
      }
   }
 }
@@ -183,32 +180,22 @@ void bounceCliff() {
 }
 
 void bumpertest() {
-  if(roomba.bumpleft()) {
+  if(roomba.bumpLeft()) {
     Serial.println("LeftBump");
-    roomba.turnRScript();
-    roomba.runScript();
-    //delay(1200);
-    //roomba.drive(400, 0x8000); // Tells the robot to go forvard
-    //delay(2000); //
-    //roomba.stopMoving();    
-  }
-  if(roomba.bumpright()) {
-    Serial.println("RightBump");
-    roomba.turnLScript();
-    roomba.runScript();
+    //roomba.turnRScript();
+    //roomba.runScript();
 
-    //delay(1200);
-    //roomba.drive(400, 0x8000); // Tells the robot to go forvard
-    //delay(2000); //
-    //roomba.stopMoving();
+  }
+  if(roomba.bumpRight()) {
+    Serial.println("RightBump");
+    //roomba.turnLScript();
+    //roomba.runScript();
   }
 }
 
 boolean debounce = 0;	
 //--- Loop Code
 void loop() {
-  
-  
   //--- Turn on/off LED to indicate sensor function
   roomba.updateSensors(1);
   updatedistSensors();
@@ -216,15 +203,16 @@ void loop() {
   //--- begin of blinkM loop
   //  bri_val = analogRead(bri_pot_pin);    // read the brightness pot
   // hue_val = analogRead(hue_pot_pin);    // read the hue pot
-  
-  
  
   // set blinkms with hue & bri, saturation is max
   // BlinkM_fadeToHSB( blinkm_addr, hue_val, 255, bri_val );
-  //  bounceCliff();
-    bumpertest();
-  
-  Serial.print("state");
+  bounceCliff();
+  bumpertest();
+  delay(100);  // wait a bit because we don't need to go fast
+}
+
+/*
+Serial.print("state");
   Serial.print(state);
   if (state == 0){    // nothing is happening
       debounce = true;
@@ -275,3 +263,22 @@ void loop() {
   //Serial.print("Distance:");
   //Serial.println(roomba.getDistance());
 }
+*/
+
+
+int main(void)
+{
+	init();
+
+	setup();
+
+	for (;;)
+		loop();
+
+	// IMPORTANT!!!!!!!!!!
+	// The Arduino main() must NEVER NEVER NEVER return
+	return 0;
+}
+
+
+
