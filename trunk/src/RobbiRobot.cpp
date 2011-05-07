@@ -193,7 +193,7 @@ void bumpertest() {
   }
 }
 
-boolean debounce = 0;	
+boolean debounce = true;
 //--- Loop Code
 void loop() {
   //--- Turn on/off LED to indicate sensor function
@@ -209,14 +209,13 @@ void loop() {
   bounceCliff();
   bumpertest();
   delay(100);  // wait a bit because we don't need to go fast
-}
 
-/*
-Serial.print("state");
+  Serial.print("(state ");
   Serial.print(state);
+  Serial.println(")");
   if (state == 0){    // nothing is happening
       debounce = true;
-      roomba.stopMoving();
+      //roomba.stopMoving();
       //  BlinkM_stopScript(blinkm_addr);  // turn off startup script
       BlinkM_playScript(blinkm_addr,11,0,0);
 
@@ -232,20 +231,26 @@ Serial.print("state");
     // Check RobbieRobot.h for what these mean
     BlinkM_stopScript(blinkm_addr);  // turn off startup script
 
+    Serial.print("p & b: ");
+    Serial.print(presence);
+    Serial.print(",");
+    Serial.print(debounce, DEC);
+    Serial.println();
+
   if (debounce) {
     debounce = false;
     switch(presence) {
   case RIGHT_SENSOR:
     BlinkM_setRGB(blinkm_addr, 0x90, 0x90, 0x00);
     Serial.println("Something to my right.  Turning left!");
-    roomba.turnLScript();
-    roomba.runScript();
+    //roomba.turnLScript();
+    //roomba.runScript();
     break;
   case LEFT_SENSOR:
     BlinkM_setRGB(blinkm_addr, 0x00, 0x90, 0x90);
     Serial.println("Something to my left.  Turning right!");
-    roomba.turnLScript();
-    roomba.runScript();
+    //roomba.turnLScript();
+    //roomba.runScript();
     break;
   case REAR_SENSOR:
     BlinkM_setRGB(blinkm_addr, 0x90, 0x00, 0x90);
@@ -253,17 +258,17 @@ Serial.print("state");
     roomba.drive(400, 0x8000); // Tells the robot to go forvard
     //delay(3000); /// Puts on delay to increase the forward distance, the higher the number gets the further away he drives from you. 5000 is about 1 meter
     break;
-  }
-  if (presence == 0) {
-      state = 0;
     }
   }
+  if (presence == ALL_CLEAR) {
+      state = 0;
+      debounce = true;
+    }
   }
   delay(100);  // wait a bit because we don't need to go fast
   //Serial.print("Distance:");
   //Serial.println(roomba.getDistance());
 }
-*/
 
 
 int main(void)
