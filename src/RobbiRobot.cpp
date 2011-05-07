@@ -259,13 +259,20 @@ void loop() {
   case RIGHT_SENSOR:
     BlinkM_setRGB(blinkm_addr, 0x90, 0x90, 0x00);
     Serial.println("Something to my right.  Turning left!");
+    roomba.spinLeft();
+    delay(1000);
+    roomba.drive(400, 0x8000); // Tells the robot to go forvard
+
     //roomba.turnLScript();
     //roomba.runScript();
     break;
   case LEFT_SENSOR:
     BlinkM_setRGB(blinkm_addr, 0x00, 0x90, 0x90);
     Serial.println("Something to my left.  Turning right!");
-    //roomba.turnLScript();
+    roomba.spinRight();
+    delay(1000);
+    roomba.drive(400, 0x8000); // Tells the robot to go forvard
+
     //roomba.runScript();
     break;
   case REAR_SENSOR:
@@ -281,8 +288,12 @@ void loop() {
       debounce = true;
     }
   }
-  Serial.print("mode ");
-  Serial.println(roomba.OImode(), DEC);
+
+  /// If an error condition dumped us into passive, go back to safe mode
+  if (roomba.OImode() == roombaConst::ModePassive) {
+	  // go back to previous mode
+	  roomba.safeMode();
+  }
   delay(200);  // wait a bit because we don't need to go fast
   //Serial.print("Distance:");
   //Serial.println(roomba.getDistance());

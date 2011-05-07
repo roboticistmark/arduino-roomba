@@ -409,3 +409,26 @@ void ArduinoRoomba::drive(int16_t velocity, int16_t radius) {
 
 }
 
+
+void ArduinoRoomba::spinLeft(void) {
+
+  int velocity = 200;
+  int radius = 1;
+  this->drive(velocity, radius);
+	}
+
+void ArduinoRoomba::spinRight(void) {
+
+  int velocity = 200;
+  int radius = -1;
+  this->drive(velocity, radius);
+}
+
+void ArduinoRoomba::stopMoving(void) {
+
+  int velocity = 0;
+  int radius = 0;
+  this->drive(velocity, radius);
+}
+
+
