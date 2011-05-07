@@ -349,8 +349,13 @@ bool ArduinoRoomba::chargingAvailable(void) {
 	return(this->getSensorDirect(roombaConst::SensorChargingSourcesAvailable) > 0);
 }
 
+
 uint8_t ArduinoRoomba::chargingState(void) {
 	return(this->getSensorDirect(roombaConst::SensorChargingState));
+}
+
+uint8_t ArduinoRoomba::OImode(void) {
+	return(this->getSensorDirect(roombaConst::SensorOIMode));
 }
 
 void ArduinoRoomba::drive(int16_t velocity, int16_t radius) {
@@ -396,5 +401,11 @@ void ArduinoRoomba::drive(int16_t velocity, int16_t radius) {
 	r_byte_low = radius & 0xFF;
 	r_byte_high = radius >> 8;
 	}
+	this->sci->print(roombaCmd::DRIVE, BYTE);   // DRIVE
+	  this->sci->print(v_byte_high, BYTE);
+	  this->sci->print(v_byte_low,  BYTE);
+	  this->sci->print(r_byte_high, BYTE);
+	  this->sci->print(r_byte_low,  BYTE);
+
 }
 
