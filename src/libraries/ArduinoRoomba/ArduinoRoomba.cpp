@@ -47,7 +47,9 @@
 /// streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its
 /// serial port from time to time as described below.
 
-ArduinoRoomba::ArduinoRoomba(uint8_t rxPin, uint8_t txPin, uint8_t ddPin)
+ArduinoRoomba::ArduinoRoomba(uint8_t rxPin, uint8_t txPin, uint8_t ddPin):
+_velocityLimit(500),
+_radiusLimit(2000)
 {
 #if defined(UBRR1H)
 	/// if defined, we have a hardware Serial1
@@ -309,23 +311,11 @@ int8_t ArduinoRoomba::updateSensors(uint8_t sensorCode) {
   }
 }
 
-/*void ArduinoRoomba::updateSensors(uint8_t sensorCode) {
-  //this->sci.print(roombaCmd::SENSORS, BYTE);
-  this->sci->print(142, BYTE);
-  this->sci->print(sensorCode, BYTE);  // sensor packet 1, 10 bytes
-  this->getData(this->sensorbytes_1, 10);
-}
-*/
-
-
 bool ArduinoRoomba::bumpLeft(void) {
 	return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::bump_left);
-	//return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & 0x01);
 }
-
 bool ArduinoRoomba::bumpRight(void) {
 	return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & roombaMask::bump_right);
-	//return(this->_sensorbytes_1[roombaConst::P1BumpsAndWheelDrops] & 0x02);
 }
 
 bool ArduinoRoomba::dropLeft(void) {
@@ -362,3 +352,49 @@ bool ArduinoRoomba::chargingAvailable(void) {
 uint8_t ArduinoRoomba::chargingState(void) {
 	return(this->getSensorDirect(roombaConst::SensorChargingState));
 }
+
+void ArduinoRoomba::drive(int16_t velocity, int16_t radius) {
+
+	//--- The high and low bytes sent to the roomba
+	uint8_t v_byte_high;
+	uint8_t v_byte_low;
+	uint8_t r_byte_high;
+	uint8_t r_byte_low;
+
+	//--- Safe the velocity values and convert them
+	if(velocity >= this->_velocityLimit) {
+		velocity = this->_velocityLimit;
+	} else if(velocity <= -this->_velocityLimit) {
+		  velocity = -this->_velocityLimit;
+	}
+	v_byte_low = velocity & 0xFF;
+	v_byte_high = velocity >> 8;
+
+	//--- Safe the radius values and convert them
+	// Forward case
+	if(radius == 32768 || radius == -32768) {
+		r_byte_high = 128;
+		r_byte_low = 0;
+	}
+	// Counter-clockwise
+	else if(radius == 1) {
+		r_byte_high = 0;
+		r_byte_low = 1;
+	}
+	// Clockwise
+	else if(radius == -1) {
+		r_byte_high = 255;
+		r_byte_low = 255;
+	}
+	// General data
+	else {
+		if(radius >= this->_radiusLimit) {
+			radius = this->_radiusLimit;
+		} else if(radius <= -this->_radiusLimit) {
+			radius = -this->_radiusLimit;
+		}
+	r_byte_low = radius & 0xFF;
+	r_byte_high = radius >> 8;
+	}
+}
+
