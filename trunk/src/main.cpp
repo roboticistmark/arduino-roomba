@@ -23,15 +23,23 @@
 // ArduinoRoomba(rx,tx,dd)
 /// Default arduino pin configuration, RX on pin 3, TX on pin 4, DD on pin 5
 
+const int ledpin = 13;
+
 void setup() {
 	// put something that gets run at the beginnning
+	pinMode(ledpin, OUTPUT);
 }
 
 void loop() {
 	// put something that gets run multiple times
-
+	// this should make a quick non-blocking blink
+	if(0 == millis() % 1000 ) {
+		digitalWrite(ledpin, HIGH);
+	}
+	if(500 == millis() % 1000) {
+		digitalWrite(ledpin, HIGH);
+	}
 }
-
 int main(void)
 {
 	init();
