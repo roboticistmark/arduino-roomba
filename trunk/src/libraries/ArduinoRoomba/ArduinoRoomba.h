@@ -47,6 +47,12 @@
 /// pins on the Cargo Bay Connector include the serial port, battery, digital inputs and
 /// outputs, and an analog input.
 ///
+/// RX should be connected to Roomba TXD
+/// TX should be connected to Roomba RXD
+/// If you are using a normal roomba via the cable and not a Create, then you
+/// also need to connect this:
+/// DD connected to Roomba DD
+///
 /// In order to communicate with a Roomba, you must create an instance of the Roomba class and then call its
 /// instance methods to send commmands and receive sensor messages. You can also request continuous
 /// streams of sensor data to be sent by the Roomba. The Roomba also emits messages on its

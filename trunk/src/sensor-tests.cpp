@@ -1,8 +1,22 @@
 /*
+ * $HeadURL$
+ * $Id$
  * sensor-tests.cpp
+ *  Quick test to see what the sensors on the Roomba/Create are saying
+ *
+ * BUILD PROFILES:
+ *   This file is enabled if you use the SensorTest build profile
+ *
+ *   The build profiles are found by right-clicking on the project > Build Configurations > Set Active
+ *   You can enable/disable files from a build by right clicking on the file > Resource Configruations > Exclude from Build
+ *   The output .hex file will be put into a new folder with the same name as the Build Configuration
+ *   Don't forget to update the AVR settings under Project > Properties > AVR
+ *   	You will need the right architecture (ATMega 328P for an UNO at 16000000hz) and
+ *   	the right serial port under the programmer
  *
  *  Created on: May 6, 2011
  *      Author: foley
+ *
  */
 
 #include <WProgram.h>

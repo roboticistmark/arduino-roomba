@@ -1,11 +1,9 @@
-/* 
- * Include file for Robbie Robot
+/*  Include file for Robbie Robot
  * Useful constants go here
  *
  */
 #ifndef RobbieRobot_h
 #define RobbieRobot_h
-	
 
 //---begin of BlinkM global code
 //#include "BlinkM_funcs.h"
