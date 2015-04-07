@@ -1,0 +1,3 @@
+Arduino C++ library for interfacing an Arduino through NewSoftSerial to the iRobot Create/Roomba Open Interface API.  The hardware serial ports are used for feedback to the Arduino Serial Monitor, improving testing capabilities.
+The API may also work with Arduino Mega, though that USART interface is not as well tested.
+The API is implemented using Eclipse C++, and can be used as a platform/template for other Arduino projects.  (includes Arduino Core 0022)
